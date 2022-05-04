@@ -40,6 +40,10 @@
     </context-param>
 
     <servlet>
+        <servlet-name>com.example.mydemofullweb.HelloApplication</servlet-name>
+    </servlet>
+
+    <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -53,5 +57,13 @@
         <!--        <url-pattern>*.xhtml</url-pattern> &lt;!&ndash; also prevents access to JSF pages source &ndash;&gt;-->
         <!--        so we use restriction rules instead -->
     </servlet-mapping>
+
+<!-- otherwise rest api is at  /faces/api/ i.e. -->
+<!--    http://localhost:8080/mydemofullweb-1.0-SNAPSHOT/faces/api/hello-world -->
+    <servlet-mapping>
+        <servlet-name>com.example.mydemofullweb.HelloApplication</servlet-name>
+        <url-pattern>/api/*</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
