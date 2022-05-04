@@ -56,6 +56,9 @@
 
 
 <!--    I was thinking this is important but it seems not to make any difference -->
+    <!--    this is not really necessary, see
+    https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest/deployment.html#deployment.servlet.3
+      but provides a way say to override @ApplicationPath("/api")-->
 
 <!--&lt;!&ndash; otherwise rest api is at  /faces/api/ i.e. &ndash;&gt;-->
 <!--&lt;!&ndash;    http://localhost:8080/mydemofullweb-1.0-SNAPSHOT/faces/api/hello-world &ndash;&gt;-->
