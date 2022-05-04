@@ -36,11 +36,14 @@
                             <h:outputLabel value="Hello, world"/>
                         </h1>
                         <br/>
+<!--                         we use '/' for a reason - to get links w/o '/faces/' -->
+<!--                        <a href="/hello-servlet">Hello Servlet</a> works, but we lose app path -->
                         <p>
-                            <a href="hello-servlet">Hello Servlet</a>
+<!--                            equivalent of : FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();-->
+                            <a href="#{request.contextPath}/hello-servlet">Hello Servlet</a>
                         </p>
                         <p>
-                            <a href="api/hello-world">Hello Rest Service</a>
+                            <a href="#{request.contextPath}/api/hello-world">Hello Rest Service</a>
                         </p>
                     </td>
                 </tr>
