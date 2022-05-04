@@ -6,36 +6,55 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:gc="http://xmlns.jcp.org/jsf/composite/components">
-<h:head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>
-        JSF - Hello World
-    </title>
-</h:head>
-<h:body>
-    <f:view>
-        <table cellpadding="0" width="100%">
-            <tr>
-                <td style="vertical-align: top;">
-                    <gc:appLogo/>
-                </td>
-            </tr>
-            <tr>
-                <td>
+<body>
 
-                    <h1>
-                        <h:outputLabel value="Hello, world"/>
-                    </h1>
-                    <br/>
-                    <p>
-                        <a href="hello-servlet">Hello Servlet</a>
-                    </p>
-                    <p>
-                        <a href="api/hello-world">Hello Rest Service</a>
-                    </p>
-                </td>
-            </tr>
-        </table>
-    </f:view>
-</h:body>
+
+<ui:composition template="/template.xhtml">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <!--        <f:viewParam name="#{UtilityBean.documentParamName}"-->
+            <!--                     value="#{documentPageBean.documentNameViaUrlParameter}"/>-->
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="title">JSF - Hello World</ui:define>
+    <!--<ui:define name="title">Editing: #{documentPageBean.documentName}</ui:define>-->
+
+    <ui:define name="body">
+        <f:view>
+            <table cellpadding="0" width="100%">
+                <tr>
+                    <td style="vertical-align: top;">
+                        <gc:appLogo/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+
+                        <h1>
+                            <h:outputLabel value="Hello, world"/>
+                        </h1>
+                        <br/>
+                        <p>
+                            <a href="hello-servlet">Hello Servlet</a>
+                        </p>
+                        <p>
+                            <a href="api/hello-world">Hello Rest Service</a>
+                        </p>
+                    </td>
+                </tr>
+            </table>
+        </f:view>
+
+
+    </ui:define>
+
+    This text will not be displayed.
+</ui:composition>
+
+This text below will also not be displayed.
+
+</body>
 </html>
+
