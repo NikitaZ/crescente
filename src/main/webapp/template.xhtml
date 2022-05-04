@@ -10,7 +10,7 @@
 <h:head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>
-        Puzzle Admin:
+        Sample Application:
         <ui:insert name="title">Default Title</ui:insert>
     </title>
     <link rel="shortcut icon" href="#{resource['images/favicon.png']}"/>
@@ -28,13 +28,13 @@
 
 <h:body>
 
-    <h:panelGroup rendered="#{not request.isUserInRole('**')}">
-        <h:form id="formNotAuhenticated">
-            <ui:insert name="body">Unspecified body</ui:insert>
-        </h:form>
-    </h:panelGroup>
+<!--    <h:panelGroup rendered="#{not request.isUserInRole('**')}">-->
+<!--        <h:form id="formNotAuhenticated">-->
+<!--            <ui:insert name="body">Unspecified body</ui:insert>-->
+<!--        </h:form>-->
+<!--    </h:panelGroup>-->
 
-    <h:panelGroup rendered="#{request.isUserInRole('**')}">
+<!--    <h:panelGroup rendered="#{request.isUserInRole('**')}">-->
     <div class="app-container #{ServiceBean.development ? 'statusLineDevelopment' : ''}">
         <div class="app-content">
             <table cellpadding="0" width="100%">
@@ -90,6 +90,11 @@
                                 </tr>
                                 <tr>
                                     <td colspan="2">
+                                        <h6> ss by #{ServiceBean.authors}</h6>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
                                         <ui:insert name="debugMessages">
                                             <!-- default implementation (show basic perf data like total page load size) -->
 <!--                                            <gc:outputDebug/>-->
@@ -112,7 +117,7 @@
             </p>
         </div>
     </div>
-    </h:panelGroup>
+<!--    </h:panelGroup>-->
 </h:body>
 </html>
   
