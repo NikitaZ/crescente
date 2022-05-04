@@ -1,0 +1,7 @@
+# joe's backups
+*~
+
+.DS_Store
+target
+tmp
+.idea/libraries
