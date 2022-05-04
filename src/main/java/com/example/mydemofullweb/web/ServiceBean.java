@@ -27,4 +27,8 @@ public class ServiceBean {
     public String getAuthors() {
         return "Alexander Ioffe and Nikita Zinoviev";
     }
+
+    public String helloMessage() {
+        return "Hello out there!";
+    }
 }

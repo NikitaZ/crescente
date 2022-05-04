@@ -22,32 +22,19 @@
     <!--<ui:define name="title">Editing: #{documentPageBean.documentName}</ui:define>-->
 
     <ui:define name="body">
-            <table cellpadding="0" width="100%">
-                <tr>
-                    <td style="vertical-align: top;">
-                        <gc:appLogo/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-
-                        <h1>
-                            <h:outputLabel value="Hello, world"/>
-                        </h1>
-                        <br/>
+        <br/>
 <!--                         we use '/' for a reason - to get links w/o '/faces/' -->
 <!--                        <a href="/hello-servlet">Hello Servlet</a> works, but we lose app path -->
-                        <p>
+        <p>
 <!--                            equivalent of : FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();-->
-                            <a href="#{request.contextPath}/hello-servlet">Hello Servlet</a>
-                        </p>
-                        <p>
-                            <a href="#{request.contextPath}/api/hello-world">Hello Rest Service</a>
-                        </p>
-                        <h6>by #{ServiceBean.authors}</h6>
-                    </td>
-                </tr>
-            </table>
+            <a href="#{request.contextPath}/hello-servlet">Hello Servlet</a>
+        </p>
+        <p>
+            <a href="#{request.contextPath}/api/hello-world">Hello Rest Service</a>
+        </p>
+        <h3>
+            <h:outputLabel value="#{ServiceBean.helloMessage()}"/>
+        </h3>
     </ui:define>
 
     This text will not be displayed.
