@@ -23,4 +23,8 @@ public class ServiceBean {
     public boolean getDevelopment() {
         return FacesContext.getCurrentInstance().getApplication().getProjectStage() == ProjectStage.Development;
     }
+
+    public String getAuthors() {
+        return "Alexander Ioffe and Nikita Zinoviev";
+    }
 }
