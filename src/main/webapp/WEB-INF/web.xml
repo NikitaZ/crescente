@@ -67,5 +67,16 @@
 <!--        <url-pattern>/api/*</url-pattern>-->
 <!--    </servlet-mapping>-->
 
+    <welcome-file-list>
+        <welcome-file>faces/About.xhtml</welcome-file>
+        <!-- take a look at this file :), it seems to forward to faces/Documents.xhtml via html headers -->
+        <!--        <welcome-file>index.html</welcome-file>-->
+        <!--        <welcome-file>/</welcome-file>-->
+    </welcome-file-list>
+
+    <session-config>
+        <!--        two days    -->
+        <session-timeout>5760</session-timeout>
+    </session-config>
 
 </web-app>
