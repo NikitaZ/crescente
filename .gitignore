@@ -6,3 +6,5 @@ target
 tmp
 .idea/artifacts
 .idea/libraries
+.idea/workspace.xml
+.idea/uiDesigner.xml
