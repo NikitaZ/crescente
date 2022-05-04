@@ -6,7 +6,24 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:gc="http://xmlns.jcp.org/jsf/composite/components">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>
+        JSF - Hello World
+    </title>
+</h:head>
+<h:body>
+    <f:view>
+        <h1>
+            <h:outputLabel value="Hello, world"/>
+        </h1>
+        <br/>
+        <p>
+            <a href="hello-servlet">Hello Servlet</a>
+        </p>
+        <p>
+            <a href="api/hello-world">Hello Rest Service</a>
+        </p>
+    </f:view>
+</h:body>
 </html>
