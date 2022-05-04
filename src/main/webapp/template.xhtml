@@ -49,7 +49,8 @@
                             otherwise it is handled as clicking on the first button on the form (this button can do
                             something terrible like delete a user).
                         </ui:remove>
-                        <h:form id="form" onkeypress="return defaultEnterHandler(event);"> <!-- for easy ajax -->
+<!--                        <h:form id="form" onkeypress="return defaultEnterHandler(event);"> &lt;!&ndash; for easy ajax &ndash;&gt;-->
+                        <h:form id="form"> <!-- for easy ajax -->
                             <!--<ui:debug hotkey="i"/> -->
                             <!-- ctrl+shift+i - shows popup with some debug info, not very useful, but try it -->
 
@@ -66,14 +67,12 @@
                                 <!--</tr>-->
                                 <tr>
                                     <td colspan="2">
-                                        <h:panelGroup rendered="#{not notitle}">
-                                            <h1 style="word-break: break-all">
-                                                <ui:insert name="pagetitle">
-                                                    <ui:insert name="title">Unspecified title
-                                                    </ui:insert>
+                                        <h1 style="word-break: break-all">
+                                            <ui:insert name="pagetitle">
+                                                <ui:insert name="title">Unspecified title
                                                 </ui:insert>
-                                            </h1>
-                                        </h:panelGroup>
+                                            </ui:insert>
+                                        </h1>
                                     </td>
                                 </tr>
                                 <tr>
@@ -105,7 +104,7 @@
             </table>
         </div>
         <div class="app-footer">
-            <p>${versionString}</p>
+<!--            <p>${versionString}</p>-->
             <p>
                 Please send an email to
                 <a href="mailto:nikita.zinoviev@gmail.com">nikita.zinoviev@gmail.com</a>
