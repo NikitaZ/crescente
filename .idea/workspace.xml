@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b9d4c1b0-1449-4502-af6e-05c97470ae54" name="Changes" comment="Initial JSF support - mapped JSF Servlet in web.xml">
+    <list default="true" id="b9d4c1b0-1449-4502-af6e-05c97470ae54" name="Changes" comment="added faces-config.xml for the future (mainly rule navigation).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/About.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/About.xhtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.jsp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +134,7 @@
       <updated>1651661245538</updated>
       <workItem from="1651661246773" duration="103000" />
       <workItem from="1651661953736" duration="712000" />
-      <workItem from="1651663237114" duration="2027000" />
+      <workItem from="1651663237114" duration="2852000" />
     </task>
     <task id="LOCAL-00001" summary=".gitignore - ignore .idea/artifacts">
       <created>1651664486710</created>
@@ -151,7 +150,21 @@
       <option name="project" value="LOCAL" />
       <updated>1651664573924</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Now About.xhtml is equivalent to index.jsp - got rid of JSP!">
+      <created>1651665327772</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1651665327772</updated>
+    </task>
+    <task id="LOCAL-00004" summary="added faces-config.xml for the future (mainly rule navigation).">
+      <created>1651665503023</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1651665503023</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,7 +184,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value=".gitignore - ignore .idea/artifacts" />
     <MESSAGE value="Initial JSF support - mapped JSF Servlet in web.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial JSF support - mapped JSF Servlet in web.xml" />
+    <MESSAGE value="Now About.xhtml is equivalent to index.jsp - got rid of JSP!" />
+    <MESSAGE value="added faces-config.xml for the future (mainly rule navigation)." />
+    <option name="LAST_COMMIT_MESSAGE" value="added faces-config.xml for the future (mainly rule navigation)." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
