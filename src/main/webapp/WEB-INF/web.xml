@@ -3,9 +3,45 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
+    <display-name>Sample JSF application</display-name>
+
+    <context-param>
+        <param-name>jakarta.faces.STATE_SAVING_METHOD</param-name>
+        <param-value>client</param-value>
+<!--    consumes memory on the server -->
+<!--        <param-value>server</param-value>-->
+    </context-param>
+
+
+<!--  not crucial, but why won't we keep it ? -->
+    <context-param>
+        <param-name>jakarta.faces.DEFAULT_SUFFIX</param-name>
+        <param-value>.xhtml</param-value>
+    </context-param>
+<!--  not crucial, but why won't we keep it ? -->
+    <context-param>
+        <param-name>jakarta.faces.FACELETS_SKIP_COMMENTS</param-name>
+        <param-value>true</param-value>
+    </context-param>
+
+<!--    not needed now, but might be useful, we need to google it -->
+<!--    <context-param>-->
+<!--        <param-name>jakarta.faces.ENABLE_WEBSOCKET_ENDPOINT</param-name>-->
+<!--        <param-value>true</param-value>-->
+<!--    </context-param>-->
+
+<!--     Thats how Service bean works  -->
+    <context-param>
+        <param-name>jakarta.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+        <!--        <param-value>Production</param-value>-->
+<!--        I used pom file property on a maven profile to set it but not sure how that worked to change next line ... -->
+        <!--        <param-value>${jsfProjectStage}</param-value>-->
+    </context-param>
+
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
-        <servlet-class> jakarta.faces.webapp.FacesServlet </servlet-class>
+        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
