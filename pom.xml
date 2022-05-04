@@ -47,12 +47,13 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.glassfish.jersey.containers</groupId>
-            <artifactId>jersey-container-servlet</artifactId>
-            <version>3.0.3</version>
-            <scope>provided</scope>
-        </dependency>
+<!--        In case we need ResourceConfig class for rest applications -->
+<!--        <dependency>-->
+<!--            <groupId>org.glassfish.jersey.containers</groupId>-->
+<!--            <artifactId>jersey-container-servlet</artifactId>-->
+<!--            <version>3.0.3</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
 
     </dependencies>
 

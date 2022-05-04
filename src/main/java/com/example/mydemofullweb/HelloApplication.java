@@ -1,17 +1,22 @@
 package com.example.mydemofullweb;
 
 import jakarta.ws.rs.ApplicationPath;
-import org.glassfish.jersey.message.GZipEncoder;
 import jakarta.ws.rs.core.Application;
-import org.glassfish.jersey.server.ResourceConfig;
-import org.glassfish.jersey.server.filter.EncodingFilter;
-
-import java.util.logging.Logger;
 
 @ApplicationPath("/api")
 public class HelloApplication extends Application {
 
 }
+
+
+//import jakarta.ws.rs.ApplicationPath;
+//import jakarta.ws.rs.core.Application;
+//import org.glassfish.jersey.message.GZipEncoder;
+//import org.glassfish.jersey.server.ResourceConfig;
+//import org.glassfish.jersey.server.filter.EncodingFilter;
+//
+//import java.util.logging.Logger;
+//@ApplicationPath("/api")
 //public class HelloApplication extends ResourceConfig {
 //
 //    private static final Logger LOGGER = Logger.getLogger(HelloApplication.class.getName());

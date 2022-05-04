@@ -40,10 +40,6 @@
     </context-param>
 
     <servlet>
-        <servlet-name>com.example.mydemofullweb.HelloApplication</servlet-name>
-    </servlet>
-
-    <servlet>
         <servlet-name>Faces Servlet</servlet-name>
         <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
@@ -58,12 +54,18 @@
         <!--        so we use restriction rules instead -->
     </servlet-mapping>
 
-<!-- otherwise rest api is at  /faces/api/ i.e. -->
-<!--    http://localhost:8080/mydemofullweb-1.0-SNAPSHOT/faces/api/hello-world -->
-    <servlet-mapping>
-        <servlet-name>com.example.mydemofullweb.HelloApplication</servlet-name>
-        <url-pattern>/api/*</url-pattern>
-    </servlet-mapping>
+
+<!--    I was thinking this is important but it seems not to make any difference -->
+
+<!--&lt;!&ndash; otherwise rest api is at  /faces/api/ i.e. &ndash;&gt;-->
+<!--&lt;!&ndash;    http://localhost:8080/mydemofullweb-1.0-SNAPSHOT/faces/api/hello-world &ndash;&gt;-->
+<!--    <servlet>-->
+<!--        <servlet-name>com.example.mydemofullweb.HelloApplication</servlet-name>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>com.example.mydemofullweb.HelloApplication</servlet-name>-->
+<!--        <url-pattern>/api/*</url-pattern>-->
+<!--    </servlet-mapping>-->
 
 
 </web-app>
