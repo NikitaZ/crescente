@@ -40,7 +40,7 @@
             https://localhost:14081/admin/faces/Document.xhtml?#{UtilityBean.documentParamName}=aaaass
     -->
 
-<!--    Example, we don't need this -->
+<!--    Example, we don't need this, but example is good -->
 <!--    <navigation-rule>-->
 <!--        <from-view-id>/DocumentCreate.xhtml</from-view-id>-->
 <!--        <navigation-case>-->

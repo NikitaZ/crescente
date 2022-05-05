@@ -61,7 +61,7 @@ public class LoginPageBean implements Serializable {
         UserAccountSummary userAccount = serviceBean.getUserService().findByName(getUserName());
         if (userAccount != null) {
             userBean.loginUser(userAccount);
-            return "Documents";
+            return "Users";
         } else {
             return "Newcommer";
         }
