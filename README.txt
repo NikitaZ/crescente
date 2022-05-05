@@ -17,12 +17,27 @@ Now install h2.jar into glassfish via
 Restart glassfish.
 
 Run
-  glassfish6/bin/asadmin add-resources ../mydemofullweb/src/main/resources/app-server-resources.xml 
+  glassfish6/bin/asadmin add-resources ../src/main/resources/app-server-resources.xml 
 this will add connection pool and datasource.
 
 Ping the datasource (via Ping button at 'Edit JDBC Connection Pool' for mydemofullweb-h2-pool at admin console)
 If it succeeds the db file will be created at
 glassfish6/glassfish/domains/domain1/config/deploy/mydemofullweb.mv.db
+
+
+stop server, edit glassfish6/glassfish/domains/domain1/domain.xml
+at 
+  <configs>
+    <config name="server-config">
+      <system-property name="JMS_PROVIDER_PORT" description="Port Number that JMS Service will listen for remote clients connection." value="7676"></system-property>
+      <http-service>
+        <access-log></access-log>
+        <virtual-server network-listeners="http-listener-1,http-listener-2" id="server"></virtual-server>
+add 
+   default-web-module="mydemofullweb-1.0-SNAPSHOT"
+so it becomes   
+     <virtual-server default-web-module="mydemofullweb-1.0-SNAPSHOT" network-listeners="http-listener-1,http-listener-2" id="server"></virtual-server>
+
 
 
 In order to connect IDEA to DB: 

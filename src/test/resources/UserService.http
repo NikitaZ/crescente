@@ -1,3 +1,5 @@
+# see https://www.jetbrains.com/help/idea/http-client-in-product-code-editor.html#composing-http-requests
+
 GET http://localhost:8080/api/userService/listAll
 
 ###
