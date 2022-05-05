@@ -1,5 +1,7 @@
 package com.example.mydemofullweb.web;
 
+import com.example.mydemofullweb.data.services.UserManagerLocal;
+import jakarta.ejb.EJB;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.application.ProjectStage;
 import jakarta.faces.context.FacesContext;
@@ -14,7 +16,12 @@ import jakarta.inject.Named;
 @Named("ServiceBean")
 @ApplicationScoped
 public class ServiceBean {
+    @EJB
+    private UserManagerLocal userManager;
 
+    public UserManagerLocal getUserService() {
+        return userManager;
+    }
 //     this is a bit more performant than
 //    private UserService userManager = new UserServiceClient();
 //    @EJB
