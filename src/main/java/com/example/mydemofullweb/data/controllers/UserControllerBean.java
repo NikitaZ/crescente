@@ -15,7 +15,7 @@ import java.util.List;
 @Stateless
 public class UserControllerBean implements UserControllerLocal {
 
-    @PersistenceContext(name = "adminDB")
+    @PersistenceContext(name = "default")
     private EntityManager em;
 
     public UserAccount findByName(String name) {

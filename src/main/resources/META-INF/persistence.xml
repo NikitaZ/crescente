@@ -3,7 +3,20 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-    <persistence-unit name="default">
+    <persistence-unit name="default" transaction-type="JTA">
+<!--        do we need this ? -->
+<!--        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
+        <jta-data-source>jdbc/mydemofullweb</jta-data-source>
 
+        <properties>
+            <!--            chose one of the following:   -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+<!--            <property name="eclipselink.ddl-generation" value="create-tables"/>-->
+            <!--<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
+<!--            <property name="eclipselink.ddl-generation" value="none"/>-->
+            <property name="eclipselink.session-name" value="eclipselinkwls-mydemofullweb"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.cache.size.default" value="100"/>
+        </properties>
     </persistence-unit>
 </persistence>
