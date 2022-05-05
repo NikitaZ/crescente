@@ -51,7 +51,10 @@ In order to connect IDEA to DB:
    now under PUBLIC you should see tables and USERACCOUNT.
 
     As said in (https://blog.jetbrains.com/idea/2021/02/creating-a-simple-jakarta-persistence-application/)
-    its a good idea to
+    its a good idea to connect this datasource to our persistence unit by right-clicking on the 'default' persistence unit
+    in the Persistence tool window (View -> Tool Windows -> Persistence)
+    and clicking Assign Data Sources… then selecting our myDB database from the drop-down menu.
+    This step is required for the IntelliJ IDEA code completion
 
 Useful commands
 ---------------
