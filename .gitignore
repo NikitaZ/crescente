@@ -9,4 +9,5 @@ tmp
 .idea/workspace.xml
 .idea/uiDesigner.xml
 .idea/dataSources
+.idea/httpRequests
 glassfish6

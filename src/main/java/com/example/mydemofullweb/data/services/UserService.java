@@ -2,6 +2,7 @@ package com.example.mydemofullweb.data.services;
 
 import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
 import com.example.mydemofullweb.data.info.UserAccountSummary;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;
 import jakarta.ws.rs.GET;
@@ -13,10 +14,12 @@ import jakarta.ws.rs.QueryParam;
 
 import java.util.List;
 
+import static jakarta.ws.rs.core.MediaType.APPLICATION_FORM_URLENCODED;
 import static jakarta.ws.rs.core.MediaType.APPLICATION_JSON;
 
 public interface UserService {
     @POST
+//    @Consumes(APPLICATION_FORM_URLENCODED)
     @Produces(APPLICATION_JSON)
     @Path("createOrUpdate")
     UserAccountSummary createOrUpdate(@FormParam("name") String name, @FormParam("fullName") String fullName,
