@@ -1,8 +1,10 @@
 package com.example.mydemofullweb.data.info;
 
+import com.example.mydemofullweb.data.entity.NamedEntity;
+
 import java.io.Serializable;
 
-public class UserAccountSummary implements Serializable/*, NamedEntity*/ {
+public class UserAccountSummary implements Serializable, NamedEntity {
 
     private static final long serialVersionUID = 1L;
 

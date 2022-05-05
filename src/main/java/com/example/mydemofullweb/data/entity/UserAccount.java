@@ -13,6 +13,8 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
+import java.io.Serializable;
+
 /**
  * @author nikita.zinoviev@gmail.com
  */
@@ -22,7 +24,7 @@ import jakarta.persistence.UniqueConstraint;
 @NamedQueries({@NamedQuery(name = UserAccount.FIND_BY_NAME,
         query = "select user from UserAccount user where user.name = :" + UserAccount.PARAM_NAME),
         @NamedQuery(name = UserAccount.FIND_ALL, query = "SELECT u from UserAccount u ORDER BY u.name")})
-public class UserAccount /*implements Serializable, NamedEntity*/ {
+public class UserAccount implements Serializable, NamedEntity {
     private static final long serialVersionUID = 1L;
     private static final String QUERY_PREFIX = "admin.UserAccount.";
     public static final String PARAM_NAME = "name";
