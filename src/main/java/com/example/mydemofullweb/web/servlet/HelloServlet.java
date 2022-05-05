@@ -1,4 +1,4 @@
-package com.example.mydemofullweb;
+package com.example.mydemofullweb.web.servlet;
 
 import java.io.*;
 
