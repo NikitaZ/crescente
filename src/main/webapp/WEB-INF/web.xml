@@ -82,4 +82,73 @@
         <session-timeout>5760</session-timeout>
     </session-config>
 
+<!--    TODO-->
+
+    <!--    Prohibit access to /resources so that composite components code won't be accessible.-->
+<!--    <security-constraint>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name>resources</web-resource-name>-->
+<!--            <description>The resources directory</description>-->
+<!--            <url-pattern>/resources/*</url-pattern>-->
+<!--        </web-resource-collection>-->
+<!--        <auth-constraint/>-->
+<!--    </security-constraint>-->
+<!--    <security-constraint>-->
+<!--        <display-name>No access to Facelets source</display-name>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name>XHTML</web-resource-name>-->
+<!--            <url-pattern>*.xhtml</url-pattern>-->
+<!--        </web-resource-collection>-->
+<!--        <auth-constraint/>-->
+<!--    </security-constraint>-->
+
+    <!--    main security constraint which activates google login (openID authentication & authorisation) -->
+<!--    <security-constraint>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name>All Pages Secured</web-resource-name>-->
+<!--            <url-pattern>/faces/*</url-pattern>-->
+<!--        </web-resource-collection>-->
+<!--        <auth-constraint>-->
+<!--            &lt;!&ndash;            <role-name>all</role-name>&ndash;&gt;-->
+<!--            &lt;!&ndash;             * seems to mean no auth constraint only if no roles are defined,-->
+<!--             otherwise it means any role while ** means 'any role' in any case &ndash;&gt;-->
+<!--            <role-name>**</role-name> &lt;!&ndash; require user to be authenticated, a trick from JSF and JavaEE8 book &ndash;&gt;-->
+<!--        </auth-constraint>-->
+<!--    </security-constraint>-->
+
+    <!--    the landing page of redirectURI should be unsecured unless we end up with endless google authentication -->
+<!--    <security-constraint>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name>First Page</web-resource-name>-->
+<!--            <url-pattern>/faces/Documents.xhtml</url-pattern>-->
+<!--        </web-resource-collection>-->
+<!--        &lt;!&ndash;        wow! no auth-constraint means no authentication required, see-->
+<!--         https://docs.oracle.com/javaee/7/tutorial/security-webtier002.htm#GJJCG-->
+<!--          &ndash;&gt;-->
+<!--        &lt;!&ndash;        <auth-constraint>&ndash;&gt;-->
+<!--        &lt;!&ndash;   I thought          * seems to mean no auth constraint while ** means 'any role' &ndash;&gt;-->
+<!--        &lt;!&ndash;             no. when a role is defined it seems to work as **, i.e. requires authentication &ndash;&gt;-->
+<!--        &lt;!&ndash;            <role-name>*</role-name>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </auth-constraint>&ndash;&gt;-->
+<!--    </security-constraint>-->
+
+<!--    <security-constraint>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name>Admin Pages</web-resource-name>-->
+<!--            <url-pattern>/faces/Users.xhtml</url-pattern>-->
+<!--        </web-resource-collection>-->
+<!--        <auth-constraint>-->
+<!--            <role-name>admin</role-name>-->
+<!--        </auth-constraint>-->
+<!--    </security-constraint>-->
+<!--    &lt;!&ndash;  our usual three roles &ndash;&gt;-->
+<!--    <security-role>-->
+<!--        <role-name>admin</role-name>-->
+<!--    </security-role>-->
+<!--    <security-role>-->
+<!--        <role-name>test</role-name>-->
+<!--    </security-role>-->
+<!--    <security-role>-->
+<!--        <role-name>support</role-name>-->
+<!--    </security-role>-->
 </web-app>

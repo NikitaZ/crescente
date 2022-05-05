@@ -22,7 +22,7 @@
     <!--<ui:define name="title">Editing: #{documentPageBean.documentName}</ui:define>-->
 
     <ui:define name="body">
-        <br/>
+        <p class="docs-par">This is a simple app supporting users.</p>
 <!--                         we use '/' for a reason - to get links w/o '/faces/' -->
 <!--                        <a href="/hello-servlet">Hello Servlet</a> works, but we lose app path -->
         <p>
@@ -31,6 +31,11 @@
         </p>
         <p>
             <a href="#{request.contextPath}/api/hello-world">Hello Rest Service</a>
+        </p>
+
+        <p class="docs-par">
+            Mostly for debugging purposes one may take a look at list of <h:link
+                outcome="/Users">registered users</h:link>.
         </p>
         <h3>
             <h:outputLabel value="#{ServiceBean.helloMessage()}"/>

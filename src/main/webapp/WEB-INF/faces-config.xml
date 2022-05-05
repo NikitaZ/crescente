@@ -4,4 +4,83 @@
               xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                                   https://jakarta.ee/xml/ns/jakartaee/web-facesconfig_3_0.xsd">
 
+    <lifecycle>
+        <phase-listener>com.example.mydemofullweb.web.UserAuthenticationPhaseListener</phase-listener>
+    </lifecycle>
+
+    <navigation-rule>
+        <navigation-case>
+            <if>#{not userBean.loggedIn}</if>
+            <to-view-id>/Login.xhtml</to-view-id>
+            <redirect>      <!-- redirect is needed to prevent a glitch when only second press on 'login' button logs in. todo JSF bug? -->
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+
+    <!--    I guess most rules exist for redirect to happen in order to get proper URLs in browser with proper parameters set -->
+    <!-- it can be done directly in the action methods by returning, say
+        "otherview?faces-redirect=true"
+    UserEdit?, cf JSF 2.3 and JavaEE8 book, "Navigation"  -->
+
+    <!--    We may want to switch to client side state saving (but then we need to setup the security key,
+    so that it would be the same across instances of the cluster, cf. book. Also the book says that view scoped beans
+    are still saved on the server in the user session, but this may change in future JSF or we can use
+    OmniFaces @ViewScoped(saveInViewState=true) annotation instead of regular @ViewScoped,
+    also one can configure number of view states and view scoped beans per session (default is 15-25).
+    Also it suggests to refactor viewscoped beans into requestScoped with injected viewScoped to
+    have only absolutely necessary data in the view scope. ViewScoped is needed in case of dynamic UI,
+    i.e. which tree depends on the data we show, especially if AJAX is used.-->
+
+    <!--    the book proposes not to suffic JSF backing beans with *Bean, but with *Backing in case of
+    request/view/conversation/flow scopes, and *Manager in case of Session/Application scopes, I'd like to use
+    *Helper in the last cases - as *Bean is more or less meaning less. Currently we use *Bean, rename pending.-->
+
+    <!--    note: here view-param/name cannot be EL expression, i.e. #{UtilityBean.documentParamName}, it is used as is
+            and results in a link like
+            https://localhost:14081/admin/faces/Document.xhtml?#{UtilityBean.documentParamName}=aaaass
+    -->
+
+<!--    Example, we don't need this -->
+<!--    <navigation-rule>-->
+<!--        <from-view-id>/DocumentCreate.xhtml</from-view-id>-->
+<!--        <navigation-case>-->
+<!--            <from-outcome>Document</from-outcome>-->
+<!--            <to-view-id>/Document.xhtml</to-view-id>-->
+<!--            <redirect>-->
+<!--                <view-param>-->
+<!--                    <name>documentName</name>-->
+<!--                    <value>#{documentCreatePageBean.documentName}</value>-->
+<!--                </view-param>-->
+<!--            </redirect>-->
+<!--        </navigation-case>-->
+<!--    </navigation-rule>-->
+
+    <navigation-rule>
+        <!--        <from-view-id>/Login.xhtml</from-view-id>-->
+        <navigation-case>
+            <from-outcome>Newcommer</from-outcome>
+            <to-view-id>/UserEdit.xhtml</to-view-id>
+            <redirect>
+                <view-param>
+                    <name>userName</name>
+                    <value>#{loginPageBean.userName}</value>
+                </view-param>
+                <view-param>
+                    <name>logIntoOnSave</name>
+                    <value>#{true}</value>
+                </view-param>
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>logout</from-outcome>
+            <to-view-id>/Login.xhtml</to-view-id>
+            <redirect> <!-- redirect is needed to prevent a glitch when only second press on 'login' button logs in. todo JSF bug? -->
+            </redirect>
+        </navigation-case>
+    </navigation-rule>
+
 </faces-config>
