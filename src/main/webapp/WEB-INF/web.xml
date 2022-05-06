@@ -33,10 +33,10 @@
 <!--     Thats how Service bean works  -->
     <context-param>
         <param-name>jakarta.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
-        <!--        <param-value>Production</param-value>-->
-<!--        I used pom file property on a maven profile to set it but not sure how that worked to change next line ... -->
-        <!--        <param-value>${jsfProjectStage}</param-value>-->
+<!--        Set in the pom file - a property on a maven profile -->
+        <param-value>${jsfProjectStage}</param-value>
+<!--        <param-value>Development</param-value>-->
+<!--        <param-value>Production</param-value>-->
     </context-param>
 
     <servlet>

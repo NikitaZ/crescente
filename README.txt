@@ -88,10 +88,20 @@ server log is located at
   glassfish6/glassfish/domains/domain1/logs/server.log
 
 redeploy
-  glassfish6/bin/asadmin redeploy ../mydemofullweb/target/mydemofullweb-1.0-SNAPSHOT.war
+  glassfish6/bin/asadmin redeploy --name mydemofullweb-1.0-SNAPSHOT target/mydemofullweb-1.0-SNAPSHOT.war
+  or just use
+  glassfish6/bin/asadmin deploy --force=true target/mydemofullweb-1.0-SNAPSHOT.war
+  both seem to do the same as
+  glassfish6/bin/asadmin undeploy mydemofullweb-1.0-SNAPSHOT && glassfish6/bin/asadmin deploy --name mydemofullweb-1.0-SNAPSHOT target/mydemofullweb-1.0-SNAPSHOT.war
+
 
 undeploy
   glassfish6/bin/asadmin undeploy mydemofullweb-1.0-SNAPSHOT
 
 restart server
   glassfish6/bin/asadmin stop-domain && glassfish6/bin/asadmin start-domain
+
+easiest way to rebuild and deploy [development, is default] and [production]
+  mvn clean install && ./glassfish6/bin/asadmin deploy --force=true target/mydemofullweb-1.0-SNAPSHOT.war
+
+  mvn clean install -Pproduction && glassfish6/bin/asadmin undeploy mydemofullweb-1.0-SNAPSHOT ./glassfish6/bin/asadmin deploy --force=true target/mydemofullweb-1.0-SNAPSHOT.war
