@@ -125,4 +125,9 @@ easiest way to rebuild and deploy [development, is default] and [production]
 
   mvn clean install -Pproduction && ./glassfish6/bin/asadmin deploy --force=true target/mydemofullweb-1.0-SNAPSHOT.war
 
+
+If there are no users in the database, DatabaseSetup singleton EJB creates a user 'admin' with 'admin' password and administration rights,
+use it to create actual admin users, test them and then delete the 'admin' user. This is partly because it is hard to
+calculate password hash via the same algorithm outside the server, although if course, we need only to calculate it once.
+
 Q: should we use 'cargo' maven plugin to deploy application via maven? see tutorial examples (topmost pom file)

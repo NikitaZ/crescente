@@ -51,6 +51,9 @@ public class UserAccount implements Serializable, NamedEntity {
     private String colour;
 
     @Basic(optional = false)
+    private String passwordHash;
+
+    @Basic(optional = false)
     @Lob
     private String pictureURL;
 
@@ -104,6 +107,14 @@ public class UserAccount implements Serializable, NamedEntity {
 
     public void setPictureURL(String pictureURL) {
         this.pictureURL = pictureURL;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     @Override
