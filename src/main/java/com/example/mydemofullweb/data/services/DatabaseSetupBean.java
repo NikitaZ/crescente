@@ -21,7 +21,7 @@ import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 
 @Singleton
 @Startup
-public class DatabaseSetup {
+public class DatabaseSetupBean {
     // Used for direct database manipulations.
     @Resource(lookup="jdbc/mydemofullweb")
     private DataSource dataSource;
@@ -49,7 +49,7 @@ public class DatabaseSetup {
                 Map.entry("Pbkdf2PasswordHash.Algorithm", "PBKDF2WithHmacSHA512"),
                 Map.entry("Pbkdf2PasswordHash.SaltSizeBytes", "64")));
 
-//        Example.
+//        Left as example, we do not need raw db manipulation so far.
 //        executeUpdate(dataSource, "CREATE TABLE caller(name VARCHAR(64) PRIMARY KEY, password VARCHAR(255))");
 //        executeUpdate(dataSource, "CREATE TABLE caller_groups(caller_name VARCHAR(64), group_name VARCHAR(64))");
 //
@@ -58,8 +58,10 @@ public class DatabaseSetup {
 //        executeUpdate(dataSource, "INSERT INTO caller_groups VALUES('Joe', 'foo')");
 //        executeUpdate(dataSource, "INSERT INTO caller_groups VALUES('Joe', 'bar')");
 
-//        User user = em.find(User.class, new BigInteger("1"));
-//        if (user == null)
+        // If there are no users, create admin user.
+        // I don't want to introduce dependency on UserController here,
+        // although probably it doesn't matter.
+        if (em.createNamedQuery(UserAccount.FIND_ALL, UserAccount.class).getResultList().isEmpty())
         {
             UserAccount adminUser = new UserAccount("admin");
             adminUser.setPasswordHash(passwordHash.generate("admin".toCharArray()));
