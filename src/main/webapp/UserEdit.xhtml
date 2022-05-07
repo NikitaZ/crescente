@@ -37,8 +37,9 @@
             </f:facet>
             <h:outputLabel for="name" value="Name: "/>
             <h:panelGroup>
+<!-- it is too expensive to make it read-only -->
+<!--                readonly="#{userEditPageBean.editingOwnOpenIDProfile}"-->
                 <h:inputText id="name" value="#{userEditPageBean.userName}"
-                             readonly="#{userEditPageBean.editingOwnOpenIDProfile}"
                              size="80" maxlength="120"
                              required="true" requiredMessage=" enter a unique name!"/>
                 <h:message for="name" errorStyle="color: red"/>
