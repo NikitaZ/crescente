@@ -129,5 +129,16 @@ easiest way to rebuild and deploy [development, is default] and [production]
 If there are no users in the database, DatabaseSetup singleton EJB creates a user 'admin' with 'admin' password and administration rights,
 use it to create actual admin users, test them and then delete the 'admin' user. This is partly because it is hard to
 calculate password hash via the same algorithm outside the server, although if course, we need only to calculate it once.
+one password hash for 'admin' is
+PBKDF2WithHmacSHA512:3072:CCDMAnF2/zhBrkR+8KvRv56AP+ZmDCmXIUVGlP0mQyZjwy9lqIGZXkwq7dzCazchX9iuOIHdGfoxMkpraDKnKg==:+uXwQ4/zqSbs/QYJheYoTMfV68qCiKL2wlRKUZiieaU=
+
+How to connect to DB from the command line:
+  java -cp ./glassfish/modules/h2.jar org.h2.tools.Shell -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/mydemofullweb;AUTO_SERVER=TRUE" -user mydemofullweb -password mydemofullweb
+adding
+  -sql "alter table USERACCOUNT add PASSWORDHASH CHARACTER VARYING(1000000000);"
+executes SQL and exits.
+
+We cannot connect IDEA to production DB as it is run in embedded mode. But may be this is a good thing that we cannot.
+Also h2/bin/h2.sh starts admin console to which we can connect with a browser to it (at 8182?).
 
 Q: should we use 'cargo' maven plugin to deploy application via maven? see tutorial examples (topmost pom file)
