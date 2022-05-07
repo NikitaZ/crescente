@@ -15,14 +15,15 @@ import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 )
 @DatabaseIdentityStoreDefinition(
         dataSourceLookup = "jdbc/mydemofullweb",
-        callerQuery = "select password from useraccount where name = ?",
-        groupsQuery = "select name from securitygrouplink where useraccountname = ?",
+        callerQuery = "select PASSWORDHASH from USERACCOUNT where NAME = ?",
+        groupsQuery = "select GROUPNAME from SECURITYGROUPLINK where USERACCOUNTNAME = ?",
         hashAlgorithm = Pbkdf2PasswordHash.class,
         hashAlgorithmParameters = {
             "Pbkdf2PasswordHash.Iterations=3072",
             "Pbkdf2PasswordHash.Algorithm=PBKDF2WithHmacSHA512",
             "Pbkdf2PasswordHash.SaltSizeBytes=64"
         }
+//        ,        priority = 100
 )
 public class SecurityConfigurationBean {
 }
