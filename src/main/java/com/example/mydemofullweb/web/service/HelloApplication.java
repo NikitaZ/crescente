@@ -1,4 +1,4 @@
-package com.example.mydemofullweb;
+package com.example.mydemofullweb.web.service;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
