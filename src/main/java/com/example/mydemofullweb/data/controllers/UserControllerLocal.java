@@ -34,4 +34,6 @@ public interface UserControllerLocal {
     void addToSecurityRole(String userName, String role);
 
     Collection<String> findUserRoles(String userName);
+
+    void changePassword(String userName, String newPassword) throws UserNotFoundException;
 }

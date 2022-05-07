@@ -4,13 +4,17 @@ import com.example.mydemofullweb.data.entity.SecurityGroupLink;
 import com.example.mydemofullweb.data.entity.UserAccount;
 
 import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
+import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
+import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author nikita.zinoviev@gmail.com
@@ -20,6 +24,17 @@ public class UserControllerBean implements UserControllerLocal {
 
     @PersistenceContext(name = "default")
     private EntityManager em;
+
+    @Inject
+    private Pbkdf2PasswordHash passwordHashGenerator;
+
+
+    @PostConstruct
+    public void init() {
+        passwordHashGenerator.initialize(Map.ofEntries(Map.entry("Pbkdf2PasswordHash.Iterations", "3072"),
+                Map.entry("Pbkdf2PasswordHash.Algorithm", "PBKDF2WithHmacSHA512"),
+                Map.entry("Pbkdf2PasswordHash.SaltSizeBytes", "64")));
+    }
 
     public UserAccount findByName(String name) {
 
@@ -63,6 +78,12 @@ public class UserControllerBean implements UserControllerLocal {
                 String.class).setParameter(UserAccount.PARAM_NAME, userName).getResultList();
     }
 
+    @Override
+    public void changePassword(String userName, String newPassword) throws UserNotFoundException {
+        final String passwordHash = passwordHashGenerator.generate(newPassword.toCharArray());
+        UserAccount user = checkedFindByName(userName);
+        user.setPasswordHash(passwordHash);
+    }
 
 
     /**
@@ -85,6 +106,7 @@ public class UserControllerBean implements UserControllerLocal {
 
     public UserAccount create(String name) {
         UserAccount user = new UserAccount(name);
+        user.setPasswordHash(passwordHashGenerator.generate(name.toCharArray()));
         em.persist(user);
         return user;
     }

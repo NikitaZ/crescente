@@ -31,9 +31,10 @@
         <h:panelGroup rendered="#{userEditPageBean.editingOwnOpenIDProfile or request.isUserInRole('admin')}">
         <h:panelGrid columns="1">
             <f:facet name="caption">
-                <h:outputText value="Create new user or update existing one:"/>
+                <h:outputText value="Make changes to your profile:" rendered="#{userEditPageBean.editingOwnOpenIDProfile}"/>
+                <h:outputText value="Create new user or update existing one:"
+                              rendered="#{not userEditPageBean.editingOwnOpenIDProfile and request.isUserInRole('admin')}"/>
             </f:facet>
-<!--            todo make name uneditable if authenticated and equals principal name -->
             <h:outputLabel for="name" value="Name: "/>
             <h:panelGroup>
                 <h:inputText id="name" value="#{userEditPageBean.userName}"
@@ -86,6 +87,26 @@
                 <h:commandButton action="#{userEditPageBean.addToRole('admin')}" value="Make Admin" rendered="#{request.isUserInRole('admin')}"/>
                 <h:commandButton action="#{userEditPageBean.addToRole('researcher')}" value="Make Researcher" rendered="#{request.isUserInRole('admin')}"/>
                 <h:commandButton value="Refresh View" rendered="#{request.isUserInRole('admin')}"/> <!-- added for debugging -->
+            </h:panelGrid>
+
+            <h:panelGrid columns="1" rendered="#{userEditPageBean.editingOwnOpenIDProfile}">
+
+                <h:outputLabel for="password" value="New Password: "/>
+                <h:panelGroup>
+                    <h:inputSecret id="password" value="#{userEditPageBean.password}" size="80" maxlength="120"
+                                   />
+                    <h:message for="password" errorStyle="color: red"/>
+                </h:panelGroup>
+
+                <h:outputLabel for="passwordRepeated" value="Repeat New Password: "/>
+                <h:panelGroup>
+                    <h:inputSecret id="passwordRepeated" value="#{userEditPageBean.repeatedPassword}" size="80" maxlength="120"
+                                   />
+                    <h:message for="password" errorStyle="color: red"/>
+                </h:panelGroup>
+
+
+                <h:commandButton action="#{userEditPageBean.changePassword}" value="Change password"/>
             </h:panelGrid>
         </h:panelGrid>
         </h:panelGroup>

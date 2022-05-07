@@ -64,6 +64,11 @@ public class UserManagerBean implements UserManagerLocal {
     }
 
     @Override
+    public void changePassword(String userName, String newPassword) throws UserNotFoundException {
+        userController.changePassword(userName, newPassword);
+    }
+
+    @Override
     public UserAccountSummary createOrUpdate(String name, String fullName, String email, String colour, String pictureURL) {
         LOGGER.log(Level.INFO, "createOrUpdateUser: {0} fullName: {1}, e-mail: {2}, colour: {3}, pictureURL: {4}",
                 new Object[]{name, fullName, email, colour});

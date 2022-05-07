@@ -21,4 +21,6 @@ public interface UserManagerLocal extends UserService {
     void addToSecurityRole(String userName, String role);
 
     Collection<String> findUserRoles(String userName);
+
+    void changePassword(String userName, String newPassword) throws UserNotFoundException;
 }

@@ -9,6 +9,7 @@ import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.security.enterprise.SecurityContext;
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * @author nikita.zinoviev@gmail.com
@@ -28,6 +29,10 @@ public class UserEditPageBean implements Serializable {
     private transient String colour;
 
     private transient String pictureURL;
+
+    private transient String password;
+
+    private transient String repeatedPassword;
 
     private transient boolean logIntoOnSave;
 
@@ -91,6 +96,22 @@ public class UserEditPageBean implements Serializable {
 
     public String getUserNameViaParameter() {
         return null;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRepeatedPassword() {
+        return repeatedPassword;
+    }
+
+    public void setRepeatedPassword(String repeatedPassword) {
+        this.repeatedPassword = repeatedPassword;
     }
 
     // this method is always called unless above getter returns null (then it is just not called at all)!
@@ -179,4 +200,23 @@ public class UserEditPageBean implements Serializable {
     public void addToRole(String role) {
         serviceBean.getUserService().addToSecurityRole(getUserName(), role);
     }
+
+    public void changePassword() {
+        if (!Objects.equals(getPassword(), getRepeatedPassword())) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "The new passwords do not match.", null));
+        }
+        else if (getPassword() == null || getPassword().isBlank()) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "The new password cannot be empty or blank.", null));
+        } else {
+            try {
+                serviceBean.getUserService().changePassword(getUserName(), getPassword().trim());
+            } catch (UserNotFoundException e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Unable to change password for not yet saved new user.", null));
+            }
+        }
+    }
+
 }
