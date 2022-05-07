@@ -5,6 +5,8 @@ import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
 import com.example.mydemofullweb.data.info.UserAccountSummary;
 import jakarta.ejb.Local;
 
+import java.util.Collection;
+
 @Local
 public interface UserManagerLocal extends UserService {
     // these methods are for EJB layer only
@@ -13,4 +15,10 @@ public interface UserManagerLocal extends UserService {
     UserAccount checkedFindUserByName(String name) throws UserNotFoundException;
 
     UserAccountSummary checkedFindUserSummaryByName(String name) throws UserNotFoundException;
+
+    void revokeRights(String name);
+
+    void addToSecurityRole(String userName, String role);
+
+    Collection<String> findUserRoles(String userName);
 }

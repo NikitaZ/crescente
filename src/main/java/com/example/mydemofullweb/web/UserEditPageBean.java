@@ -172,5 +172,11 @@ public class UserEditPageBean implements Serializable {
         }
     }
 
+    public void revokeRights() {
+        serviceBean.getUserService().revokeRights(getUserName());
+    }
 
+    public void addToRole(String role) {
+        serviceBean.getUserService().addToSecurityRole(getUserName(), role);
+    }
 }

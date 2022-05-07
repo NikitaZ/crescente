@@ -1,5 +1,6 @@
 package com.example.mydemofullweb.data.controllers;
 
+import com.example.mydemofullweb.data.entity.SecurityGroupLink;
 import com.example.mydemofullweb.data.entity.UserAccount;
 
 import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
@@ -7,6 +8,8 @@ import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -37,6 +40,29 @@ public class UserControllerBean implements UserControllerLocal {
     public List<UserAccount> findAll() {
         return em.createNamedQuery(UserAccount.FIND_ALL, UserAccount.class).getResultList();
     }
+
+    @Override
+    public void revokeRights(String userName) {
+        em.createQuery("DELETE FROM SecurityGroupLink l WHERE l.userAccountName = :" + UserAccount.PARAM_NAME)
+                .setParameter(UserAccount.PARAM_NAME, userName).executeUpdate();
+    }
+
+    @Override
+    public void addToSecurityRole(String userName, String role) {
+        if (!findUserRoles(userName).contains(role)) {
+            SecurityGroupLink group = new SecurityGroupLink();
+            group.setUserAccountName(userName);
+            group.setGroupName(role);
+            em.persist(group);
+        }
+    }
+
+    @Override
+    public Collection<String> findUserRoles(String userName) {
+        return em.createQuery("SELECT l.groupName FROM SecurityGroupLink l WHERE l.userAccountName = :" + UserAccount.PARAM_NAME,
+                String.class).setParameter(UserAccount.PARAM_NAME, userName).getResultList();
+    }
+
 
 
     /**

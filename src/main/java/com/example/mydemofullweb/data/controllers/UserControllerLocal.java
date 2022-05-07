@@ -4,6 +4,7 @@ import com.example.mydemofullweb.data.entity.UserAccount;
 import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
 import jakarta.ejb.Local;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -27,4 +28,10 @@ public interface UserControllerLocal {
     void delete(String userName) throws UserNotFoundException;
 
     List<UserAccount> findAll();
+
+    void revokeRights(String name);
+
+    void addToSecurityRole(String userName, String role);
+
+    Collection<String> findUserRoles(String userName);
 }

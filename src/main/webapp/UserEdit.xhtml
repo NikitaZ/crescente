@@ -67,10 +67,16 @@
                 <h:message for="picture" errorStyle="color: red"/>
             </h:panelGroup>
 
+            <h:panelGroup rendered="#{request.isUserInRole('admin')}">
+                #{ServiceBean.userService.findUserRoles(userEditPageBean.userName)}
+            </h:panelGroup>
 
             <h:panelGrid columns="2">
                 <h:commandButton action="#{userEditPageBean.save}" value="Save"/>
                 <h:commandButton action="#{userEditPageBean.delete}" value="Delete" rendered="#{request.isUserInRole('admin')}"/>
+                <h:commandButton action="#{userEditPageBean.revokeRights}" value="Revoke Rights" rendered="#{request.isUserInRole('admin')}"/>
+                <h:commandButton action="#{userEditPageBean.addToRole('admin')}" value="Make Admin" rendered="#{request.isUserInRole('admin')}"/>
+                <h:commandButton action="#{userEditPageBean.addToRole('researcher')}" value="Make Researcher" rendered="#{request.isUserInRole('admin')}"/>
                 <h:commandButton value="Refresh View" rendered="#{request.isUserInRole('admin')}"/> <!-- added for debugging -->
             </h:panelGrid>
         </h:panelGrid>
