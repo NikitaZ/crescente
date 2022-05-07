@@ -23,7 +23,11 @@
             <p>You should be <h:link outcome="Login" title="Click to login" value="logged in"/> to access this page.</p>
         </h:panelGroup>
 
-        <h:panelGroup rendered="#{userBean.loggedIn}">
+        <h:panelGroup rendered="#{not securityHelperBean.hasAccessToView('Users')}">
+            <p>You should be granted  administrator rights to access this page.</p>
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{userBean.loggedIn and securityHelperBean.hasAccessToView('Users')}">
             <h:panelGrid columns="4">
                 <h:commandButton action="#{usersPageBean.refresh}" value="Refresh"/>
                 <h:link outcome="UserEdit" value="Create a new user"/>

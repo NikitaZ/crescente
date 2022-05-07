@@ -158,14 +158,18 @@ public class UserEditPageBean implements Serializable {
             UserAccountSummary user = serviceBean.getUserService().createOrUpdate(getUserName(), getFullName(), getEmail(), getColour(), getPictureURL());
             if (logIntoOnSave) {
                 userBean.loginUser(user);
-                return "Users";
+                return "About";
             }
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "You are not allowed to modify profiles of other users.", "Error during edit of user '" + userName + "'"));
         }
-
-        return "Users";
+        if (securityContext.isCallerInRole("admin")) {
+            return "Users";
+        }
+        else {
+            return "About";
+        }
     }
 
 
