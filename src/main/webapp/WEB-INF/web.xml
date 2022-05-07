@@ -83,28 +83,35 @@
         <session-timeout>5760</session-timeout>
     </session-config>
 
-<!--    TODO-->
+    <!--  Professional constraints:   prohibit access to: -->
+    <security-constraint>
+        <display-name>No access to /resources so that composite components code won't be accessible</display-name>
+        <web-resource-collection>
+            <web-resource-name>resources</web-resource-name>
+            <description>The resources directory</description>
+            <url-pattern>/resources/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
+    <security-constraint>
+        <display-name>No access to Facelets source</display-name>
+        <web-resource-collection>
+            <web-resource-name>XHTML</web-resource-name>
+            <url-pattern>*.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint/>
+    </security-constraint>
+    <security-constraint>
+        <display-name>But allow access to the JSF pages</display-name>
+        <web-resource-collection>
+            <web-resource-name>All Pages Secured</web-resource-name>
+            <url-pattern>/faces/*</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
 
-    <!--    Prohibit access to /resources so that composite components code won't be accessible.-->
-<!--    <security-constraint>-->
-<!--        <web-resource-collection>-->
-<!--            <web-resource-name>resources</web-resource-name>-->
-<!--            <description>The resources directory</description>-->
-<!--            <url-pattern>/resources/*</url-pattern>-->
-<!--        </web-resource-collection>-->
-<!--        <auth-constraint/>-->
-<!--    </security-constraint>-->
-<!--    <security-constraint>-->
-<!--        <display-name>No access to Facelets source</display-name>-->
-<!--        <web-resource-collection>-->
-<!--            <web-resource-name>XHTML</web-resource-name>-->
-<!--            <url-pattern>*.xhtml</url-pattern>-->
-<!--        </web-resource-collection>-->
-<!--        <auth-constraint/>-->
-<!--    </security-constraint>-->
-
-    <!--    main security constraint which activates google login (openID authentication & authorisation) -->
-<!--    <security-constraint>-->
+<!--   but it also makes pictures secured and we get wierd outcomes like picture in the face -->
+    <!--    main security constraint which activates authentication & authorisation -->
+    <!--    <security-constraint>-->
 <!--        <web-resource-collection>-->
 <!--            <web-resource-name>All Pages Secured</web-resource-name>-->
 <!--            <url-pattern>/faces/*</url-pattern>-->
@@ -118,38 +125,45 @@
 <!--    </security-constraint>-->
 
     <!--    the landing page of redirectURI should be unsecured unless we end up with endless google authentication -->
-<!--    <security-constraint>-->
-<!--        <web-resource-collection>-->
-<!--            <web-resource-name>First Page</web-resource-name>-->
-<!--            <url-pattern>/faces/Documents.xhtml</url-pattern>-->
-<!--        </web-resource-collection>-->
-<!--        &lt;!&ndash;        wow! no auth-constraint means no authentication required, see-->
-<!--         https://docs.oracle.com/javaee/7/tutorial/security-webtier002.htm#GJJCG-->
-<!--          &ndash;&gt;-->
-<!--        &lt;!&ndash;        <auth-constraint>&ndash;&gt;-->
-<!--        &lt;!&ndash;   I thought          * seems to mean no auth constraint while ** means 'any role' &ndash;&gt;-->
-<!--        &lt;!&ndash;             no. when a role is defined it seems to work as **, i.e. requires authentication &ndash;&gt;-->
-<!--        &lt;!&ndash;            <role-name>*</role-name>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </auth-constraint>&ndash;&gt;-->
-<!--    </security-constraint>-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>First Page</web-resource-name>
+            <url-pattern>/faces/Login.xhtml</url-pattern>
+        </web-resource-collection>
+        <!--        wow! no auth-constraint means no authentication required, see
+         https://docs.oracle.com/javaee/7/tutorial/security-webtier002.htm#GJJCG
+          -->
+        <!--        <auth-constraint>-->
+        <!--   I thought          * seems to mean no auth constraint while ** means 'any role' -->
+        <!--             no. when a role is defined it seems to work as **, i.e. requires authentication -->
+        <!--            <role-name>*</role-name>-->
+        <!--        </auth-constraint>-->
+    </security-constraint>
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Index redirect</web-resource-name>
+            <url-pattern>/index.html</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
 
-<!--    <security-constraint>-->
-<!--        <web-resource-collection>-->
-<!--            <web-resource-name>Admin Pages</web-resource-name>-->
-<!--            <url-pattern>/faces/Users.xhtml</url-pattern>-->
-<!--        </web-resource-collection>-->
-<!--        <auth-constraint>-->
-<!--            <role-name>admin</role-name>-->
-<!--        </auth-constraint>-->
-<!--    </security-constraint>-->
-<!--    &lt;!&ndash;  our usual three roles &ndash;&gt;-->
-<!--    <security-role>-->
-<!--        <role-name>admin</role-name>-->
-<!--    </security-role>-->
-<!--    <security-role>-->
-<!--        <role-name>test</role-name>-->
-<!--    </security-role>-->
-<!--    <security-role>-->
-<!--        <role-name>support</role-name>-->
-<!--    </security-role>-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Admin Pages</web-resource-name>
+            <url-pattern>/faces/Users.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!--  The three roles -->
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <role-name>researcher</role-name>
+    </security-role>
+    <security-role>
+        <role-name>support</role-name>
+    </security-role>
 </web-app>

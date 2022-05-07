@@ -17,9 +17,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.Serializable;
+import java.util.logging.Logger;
 
+import static jakarta.security.enterprise.AuthenticationStatus.NOT_DONE;
 import static jakarta.security.enterprise.AuthenticationStatus.SEND_CONTINUE;
 import static jakarta.security.enterprise.AuthenticationStatus.SEND_FAILURE;
+import static jakarta.security.enterprise.AuthenticationStatus.SUCCESS;
 import static jakarta.security.enterprise.authentication.mechanism.http.AuthenticationParameters.withParams;
 
 //import jakarta.annotation.ManagedBean;
@@ -31,6 +34,7 @@ import static jakarta.security.enterprise.authentication.mechanism.http.Authenti
 @RequestScoped
 //@ManagedBean("loginPageBean") // does not work instead of @Named at least in case of JSF version="2.2" in faces-config.xml
 public class LoginPageBean implements Serializable {
+    private static final Logger LOGGER = Logger.getLogger(LoginPageBean.class.getName());
 
     private static final long serialVersionUID = 1L;
 
@@ -97,12 +101,36 @@ public class LoginPageBean implements Serializable {
                 (HttpServletRequest) externalContext.getRequest(),
                 (HttpServletResponse) externalContext.getResponse(),
                 withParams().credential(credential));
+//                withParams().credential(credential).newAuthentication(true));
 
-        if (status.equals(SEND_CONTINUE)) {
-            facesContext.responseComplete();
+        if (status.equals(NOT_DONE)) {
+            facesContext.addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, "Something is wrong with authentication configuration or password is not set, please contact system administrator.", null));
+            // should never
+            LOGGER.warning("Got NOT_DONE auth result, should never happen.");
+            return null;
+        } else if (status.equals(SUCCESS)) {
+            // should never happen(?), unless it's newAuth. see comment above
+            // well it may happen if an already logged in user logs in.
+            LOGGER.warning("Got SUCCESS auth result, should never happen.");
+            if (!externalContext.getRequestPathInfo().contains("/Login.xhtml")) {
+                facesContext.responseComplete();
+                return null;
+            }
+        } else if (status.equals(SEND_CONTINUE)) {
+            if (!externalContext.getRequestPathInfo().contains("/Login.xhtml")) {
+                facesContext.responseComplete();
+                return null;
+            }
         } else if (status.equals(SEND_FAILURE)) {
             facesContext.addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_ERROR, "Authentication failed", null));
+            return null;
+        } else {
+            LOGGER.warning("Got " + status + "auth result, should never happen.");
+            facesContext.addMessage(null, new FacesMessage(
+                    FacesMessage.SEVERITY_ERROR, "Something is wrong with authentication configuration, please contact system administrator.", null));
+            return null;
         }
 
         // Now lets set some information about the user for out app.
@@ -111,7 +139,7 @@ public class LoginPageBean implements Serializable {
 
         if (userAccount != null) {
             userBean.loginUser(userAccount);
-            return "Users";
+            return "About";
         } else {
             return "Newcommer";
         }
