@@ -21,6 +21,14 @@
     <ui:define name="action">&nbsp;</ui:define>
     <ui:define name="status">&nbsp;</ui:define>
     <ui:define name="body">
+        <h:panelGroup rendered="#{not userEditPageBean.editingOwnOpenIDProfile and not request.isUserInRole('admin')}">
+                You are not an admin and are allowed to edit only your
+            <h:link outcome="UserEdit" value="own">
+                <f:param name="#{UtilityBean.userParamName}" value="#{request.userPrincipal.name}"/>
+            </h:link> profile.
+        </h:panelGroup>
+
+        <h:panelGroup rendered="#{userEditPageBean.editingOwnOpenIDProfile or request.isUserInRole('admin')}">
         <h:panelGrid columns="1">
             <f:facet name="caption">
                 <h:outputText value="Create new user or update existing one:"/>
@@ -80,7 +88,7 @@
                 <h:commandButton value="Refresh View" rendered="#{request.isUserInRole('admin')}"/> <!-- added for debugging -->
             </h:panelGrid>
         </h:panelGrid>
-
+        </h:panelGroup>
         <h:messages styleClass="errorMessage" showDetail="true"/>
     </ui:define>
 
