@@ -116,7 +116,7 @@ public class UserEditPageBean implements Serializable {
     }
 
     public boolean isEditingOwnOpenIDProfile() {
-        return false; //this.userName != null && this.userName.equals(securityContext.getCallerPrincipal().getName());
+        return this.userName != null && this.userName.equals(securityContext.getCallerPrincipal().getName());
     }
 
 //    private void initializeFromOpenID() {
@@ -154,8 +154,7 @@ public class UserEditPageBean implements Serializable {
     }
 
     public String save() {
-        // TODO!! fix it, it almost works
-        if (/*securityContext.isCallerInRole("admin")*/ true || isEditingOwnOpenIDProfile()) {
+        if (securityContext.isCallerInRole("admin") || isEditingOwnOpenIDProfile()) {
             UserAccountSummary user = serviceBean.getUserService().createOrUpdate(getUserName(), getFullName(), getEmail(), getColour(), getPictureURL());
             if (logIntoOnSave) {
                 userBean.loginUser(user);
