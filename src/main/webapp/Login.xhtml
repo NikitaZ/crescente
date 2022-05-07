@@ -33,6 +33,13 @@
                 <h:message for="name" errorStyle="color: red"/>
             </h:panelGroup>
 
+            <h:outputLabel for="password" value="Password: "/>
+            <h:panelGroup>
+                <h:inputSecret id="password" value="#{loginPageBean.password}" size="80" maxlength="120"
+                             required="true" requiredMessage="enter your password!"/>
+                <h:message for="password" errorStyle="color: red"/>
+            </h:panelGroup>
+
             <h:panelGrid columns="2">
                 <h:commandButton action="#{loginPageBean.login}" value="Login"/>
             </h:panelGrid>
