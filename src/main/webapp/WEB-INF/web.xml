@@ -102,27 +102,29 @@
         <auth-constraint/>
     </security-constraint>
     <security-constraint>
-        <display-name>But allow access to the JSF pages</display-name>
+        <display-name>But allow access to the images etc</display-name>
+        <web-resource-collection>
+            <web-resource-name>All Pages Secured</web-resource-name>
+            <url-pattern>/faces/jakarta.faces.resource/*</url-pattern>
+        </web-resource-collection>
+    </security-constraint>
+
+    <!--    main security constraint which activates authentication & authorisation -->
+    <!--    So that on all pages except login security principle would be set -->
+    <!--    but without above rule it also makes pictures secured
+            and we get wierd outcomes like picture in the face -->
+    <security-constraint>
         <web-resource-collection>
             <web-resource-name>All Pages Secured</web-resource-name>
             <url-pattern>/faces/*</url-pattern>
         </web-resource-collection>
+        <auth-constraint>
+            <!--            <role-name>all</role-name>-->
+            <!--             * seems to mean no auth constraint only if no roles are defined,
+             otherwise it means any role while ** means 'any role' in any case -->
+            <role-name>**</role-name> <!-- require user to be authenticated, a trick from JSF and JavaEE8 book -->
+        </auth-constraint>
     </security-constraint>
-
-<!--   but it also makes pictures secured and we get wierd outcomes like picture in the face -->
-    <!--    main security constraint which activates authentication & authorisation -->
-    <!--    <security-constraint>-->
-<!--        <web-resource-collection>-->
-<!--            <web-resource-name>All Pages Secured</web-resource-name>-->
-<!--            <url-pattern>/faces/*</url-pattern>-->
-<!--        </web-resource-collection>-->
-<!--        <auth-constraint>-->
-<!--            &lt;!&ndash;            <role-name>all</role-name>&ndash;&gt;-->
-<!--            &lt;!&ndash;             * seems to mean no auth constraint only if no roles are defined,-->
-<!--             otherwise it means any role while ** means 'any role' in any case &ndash;&gt;-->
-<!--            <role-name>**</role-name> &lt;!&ndash; require user to be authenticated, a trick from JSF and JavaEE8 book &ndash;&gt;-->
-<!--        </auth-constraint>-->
-<!--    </security-constraint>-->
 
     <!--    the landing page of redirectURI should be unsecured unless we end up with endless google authentication -->
     <security-constraint>
