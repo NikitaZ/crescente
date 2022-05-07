@@ -71,6 +71,25 @@ In order to connect IDEA to DB:
     and clicking Assign Data Sources… then selecting our myDB database from the drop-down menu.
     This step is required for the IntelliJ IDEA code completion
 
+SSH Tunnels:
+ssh -L 9999:localhost:4848 <user>@<prod_host> # access production admin via localhost:9999
+ssh -R 8888:localhost:8080 <user>@<prod_host> # publish local GF as prodhost:8888 - say for a demo
+the last needs /etc/ssh/sshd_config: GateWayForwarding = yes
+
+GF related system setup:
+sudo sysctl -w net.ipv4.ip_unprivileged_port_start=443
+
+GF:
+# increase default value (8192) to support long redirects (on long URLs)
+server-config.network-config.protocols.protocol.http-listener-1.http.header-buffer-length-bytes=16384
+
+server-config.network-config.protocols.protocol.ws-http-listener.http.compression=on
+server-config.network-config.protocols.protocol.ws-http-listener.http.compressable-mime-type=text/html,text/xml,text/plain,text/css,text/javascript,application/json
+
+# default web module
+server-config.http-service.virtual-server.server.default-web-module=admin-ear-1.0-SNAPSHOT#admin-war-1.0-SNAPSHOT.war
+
+
 Useful commands
 ---------------
 
@@ -105,3 +124,5 @@ easiest way to rebuild and deploy [development, is default] and [production]
   mvn clean install && ./glassfish6/bin/asadmin deploy --force=true target/mydemofullweb-1.0-SNAPSHOT.war
 
   mvn clean install -Pproduction && ./glassfish6/bin/asadmin deploy --force=true target/mydemofullweb-1.0-SNAPSHOT.war
+
+Q: should we use 'cargo' maven plugin to deploy application via maven? see tutorial examples (topmost pom file)

@@ -77,6 +77,7 @@
         <!--        <welcome-file>/</welcome-file>-->
     </welcome-file-list>
 
+<!--    default was 30 minutes ! -->
     <session-config>
         <!--        two days    -->
         <session-timeout>5760</session-timeout>
