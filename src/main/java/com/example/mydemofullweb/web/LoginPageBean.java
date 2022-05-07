@@ -111,17 +111,10 @@ public class LoginPageBean implements Serializable {
             return null;
         } else if (status.equals(SUCCESS)) {
             // should never happen(?), unless it's newAuth. see comment above
-            // well it may happen if an already logged in user logs in.
-            LOGGER.warning("Got SUCCESS auth result, should never happen.");
-            if (!externalContext.getRequestPathInfo().contains("/Login.xhtml")) {
-                facesContext.responseComplete();
-                return null;
-            }
+            // well, it may happen if an already logged in user logs in.
+            LOGGER.info("Got SUCCESS auth result.");
         } else if (status.equals(SEND_CONTINUE)) {
-            if (!externalContext.getRequestPathInfo().contains("/Login.xhtml")) {
-                facesContext.responseComplete();
-                return null;
-            }
+            facesContext.responseComplete();
         } else if (status.equals(SEND_FAILURE)) {
             facesContext.addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_ERROR, "Authentication failed", null));
