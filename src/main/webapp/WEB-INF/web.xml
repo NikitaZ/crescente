@@ -63,10 +63,10 @@
 <!--&lt;!&ndash; otherwise rest api is at  /faces/api/ i.e. &ndash;&gt;-->
 <!--&lt;!&ndash;    http://localhost:8080/crescente-1.0-SNAPSHOT/faces/api/hello-world &ndash;&gt;-->
 <!--    <servlet>-->
-<!--        <servlet-name>com.example.crescente.web.service.HelloApplication</servlet-name>-->
+<!--        <servlet-name>HelloApplication</servlet-name>-->
 <!--    </servlet>-->
 <!--    <servlet-mapping>-->
-<!--        <servlet-name>com.example.crescente.web.service.HelloApplication</servlet-name>-->
+<!--        <servlet-name>HelloApplication</servlet-name>-->
 <!--        <url-pattern>/api/*</url-pattern>-->
 <!--    </servlet-mapping>-->
 
