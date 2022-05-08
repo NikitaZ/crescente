@@ -6,7 +6,7 @@ git pull https://github.com/NikitaZ/crescente.git
 Then just
 git pull
 
-Use your github user (not e-mail) as the user and an access token (settings->developer settings) as a password.
+Use your GitHub user (not e-mail) as the user and an access token (settings->developer settings) as a password.
 see
 https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 
