@@ -97,12 +97,7 @@ public class UserEditPageBean implements Serializable {
     }
 
     public String getUserNameViaParameter() {
-        // this is the only way to save name between requests as the form field is read only in this case.
-        if (this.userName != null && this.userName.equals(securityContext.getCallerPrincipal().getName())) {
-            return userName;
-        } else {
-            return null;
-        }
+        return null;
     }
 
     public String getPassword() {
@@ -130,7 +125,7 @@ public class UserEditPageBean implements Serializable {
         UserAccountSummary user = serviceBean.getUserService().findByName(name);
         if (user == null) {
             setUserName(name);
-            if (isEditingOwnOpenIDProfile()) {
+            if (isReallyEditingOwnProfile()) {
 //                initializeFromOpenID();
             }
             return;
@@ -143,9 +138,12 @@ public class UserEditPageBean implements Serializable {
         setPictureURL(user.getPictureURL());
     }
 
-    public boolean isEditingOwnOpenIDProfile() {
-        return !UtilityBean.isRendering()
-                || this.userName != null && this.userName.equals(securityContext.getCallerPrincipal().getName());
+    public boolean isEditingOwnProfile() {
+        return !UtilityBean.isRendering() || isReallyEditingOwnProfile();
+    }
+
+    private boolean isReallyEditingOwnProfile() {
+        return Objects.equals(this.userName, securityContext.getCallerPrincipal().getName());
     }
 
 //    private void initializeFromOpenID() {
@@ -183,7 +181,7 @@ public class UserEditPageBean implements Serializable {
     }
 
     public String save() {
-        if (securityContext.isCallerInRole("admin") || isEditingOwnOpenIDProfile()) {
+        if (securityContext.isCallerInRole("admin") || isReallyEditingOwnProfile()) {
             UserAccountSummary user = serviceBean.getUserService().createOrUpdate(getUserName(), getFullName(), getEmail(), getColour(), getPictureURL());
             if (logIntoOnSave) {
                 userBean.loginUser(user);
@@ -210,20 +208,42 @@ public class UserEditPageBean implements Serializable {
     }
 
     public void changePassword() {
-        if (!Objects.equals(getPassword(), getRepeatedPassword())) {
+        if (!isReallyEditingOwnProfile()) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "You are not allowed to change passwords of other users.", "Error during edit of user '" + userName + "'"));
+        } else  if (!Objects.equals(getPassword(), getRepeatedPassword())) {
+            FacesContext.getCurrentInstance().addMessage("repeatPassword", new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "The new passwords do not match.", ""));
         }
         else if (getPassword() == null || getPassword().isBlank()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+            FacesContext.getCurrentInstance().addMessage("password", new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "The new password cannot be empty or blank.", ""));
         } else {
             try {
                 serviceBean.getUserService().changePassword(getUserName(), getPassword().trim());
+                FacesContext.getCurrentInstance().addMessage("changePassword", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "The password has been changed!", ""));
             } catch (UserNotFoundException e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Unable to change password for not yet saved new user.", ""));
             }
+        }
+    }
+
+    public void resetPassword() {
+        if (securityContext.isCallerInRole("admin")) {
+            try {
+                // reset password to user name
+                serviceBean.getUserService().changePassword(getUserName(), getUserName());
+                FacesContext.getCurrentInstance().addMessage("resetPassword", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "The password has been reset!", ""));
+            } catch (UserNotFoundException e) {
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Unable to reset password for the user.", ""));
+            }
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "You are not allowed to reset passwords of other users.", "Error during edit of user '" + userName + "'"));
         }
     }
 
