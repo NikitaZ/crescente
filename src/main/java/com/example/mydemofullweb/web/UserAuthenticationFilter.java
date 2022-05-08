@@ -1,4 +1,4 @@
-package com.example.mydemofullweb.web;
+package com.example.crescente.web;
 
 import jakarta.annotation.ManagedBean;
 import jakarta.inject.Inject;

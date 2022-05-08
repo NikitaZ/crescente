@@ -1,4 +1,4 @@
-package com.example.mydemofullweb.data.exceptions;
+package com.example.crescente.data.exceptions;
 
 public class UserNotFoundException extends Exception {
 

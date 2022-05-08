@@ -6,7 +6,7 @@
     <persistence-unit name="default" transaction-type="JTA">
 <!--        do we need this ? -->
 <!--        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
-        <jta-data-source>jdbc/mydemofullweb</jta-data-source>
+        <jta-data-source>jdbc/crescente</jta-data-source>
 
         <properties>
             <!--            chose one of the following:   -->
@@ -14,7 +14,7 @@
 <!--            <property name="eclipselink.ddl-generation" value="create-tables"/>-->
             <!--<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
 <!--            <property name="eclipselink.ddl-generation" value="none"/>-->
-            <property name="eclipselink.session-name" value="eclipselinkwls-mydemofullweb"/>
+            <property name="eclipselink.session-name" value="eclipselinkwls-crescente"/>
             <property name="eclipselink.logging.level" value="INFO"/>
             <property name="eclipselink.cache.size.default" value="100"/>
         </properties>

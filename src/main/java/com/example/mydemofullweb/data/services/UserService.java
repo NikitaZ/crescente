@@ -1,7 +1,7 @@
-package com.example.mydemofullweb.data.services;
+package com.example.crescente.data.services;
 
-import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
-import com.example.mydemofullweb.data.info.UserAccountSummary;
+import com.example.crescente.data.exceptions.UserNotFoundException;
+import com.example.crescente.data.info.UserAccountSummary;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.FormParam;

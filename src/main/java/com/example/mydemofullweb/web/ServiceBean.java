@@ -1,6 +1,6 @@
-package com.example.mydemofullweb.web;
+package com.example.crescente.web;
 
-import com.example.mydemofullweb.data.services.UserManagerLocal;
+import com.example.crescente.data.services.UserManagerLocal;
 import jakarta.ejb.EJB;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.application.ProjectStage;

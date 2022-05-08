@@ -4,11 +4,11 @@
         "http://glassfish.org/dtds/glassfish-resources_1_5.dtd">
 <resources>
 
-    <jdbc-resource enabled="true" jndi-name="jdbc/mydemofullweb" object-type="user"
-                   pool-name="mydemofullweb-h2-pool"/>
+    <jdbc-resource enabled="true" jndi-name="jdbc/crescente" object-type="user"
+                   pool-name="crescente-h2-pool"/>
 
 
-    <jdbc-connection-pool name="mydemofullweb-h2-pool"
+    <jdbc-connection-pool name="crescente-h2-pool"
                           transaction-isolation-level="read-committed"
                           allow-non-component-callers="false" associate-with-thread="false"
                           connection-creation-retry-attempts="0" connection-creation-retry-interval-in-seconds="10"
@@ -22,11 +22,11 @@
                           non-transactional-connections="false" pool-resize-quantity="2"
                           res-type="javax.sql.XADataSource" statement-timeout-in-seconds="-1" steady-pool-size="8"
                           validate-atmost-once-period-in-seconds="0" wrap-jdbc-objects="false">
-        <property name="user" value="mydemofullweb"/>
+        <property name="user" value="crescente"/>
         <property name="url"
-                  value="jdbc:h2:./deploy/mydemofullweb;AUTO_SERVER=TRUE;CACHE_SIZE=100000"/>
-        <property name="databaseName" value="mydemofullweb"/>
-        <property name="password" value="mydemofullweb"/>
+                  value="jdbc:h2:./deploy/crescente;AUTO_SERVER=TRUE;CACHE_SIZE=100000"/>
+        <property name="databaseName" value="crescente"/>
+        <property name="password" value="crescente"/>
     </jdbc-connection-pool>
 
 </resources>

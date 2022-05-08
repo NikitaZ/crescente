@@ -1,9 +1,9 @@
-package com.example.mydemofullweb.data.services;
+package com.example.crescente.data.services;
 
-import com.example.mydemofullweb.data.controllers.UserControllerLocal;
-import com.example.mydemofullweb.data.entity.UserAccount;
-import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
-import com.example.mydemofullweb.data.info.UserAccountSummary;
+import com.example.crescente.data.controllers.UserControllerLocal;
+import com.example.crescente.data.entity.UserAccount;
+import com.example.crescente.data.exceptions.UserNotFoundException;
+import com.example.crescente.data.info.UserAccountSummary;
 import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 

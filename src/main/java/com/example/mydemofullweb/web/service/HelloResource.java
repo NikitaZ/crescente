@@ -1,4 +1,4 @@
-package com.example.mydemofullweb.web.service;
+package com.example.crescente.web.service;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;

@@ -1,4 +1,4 @@
-package com.example.mydemofullweb.data.entity;
+package com.example.crescente.data.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

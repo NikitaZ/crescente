@@ -1,6 +1,6 @@
-package com.example.mydemofullweb.data.entity;
+package com.example.crescente.data.entity;
 
-import com.example.mydemofullweb.data.info.UserAccountSummary;
+import com.example.crescente.data.info.UserAccountSummary;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

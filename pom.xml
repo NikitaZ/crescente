@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>mydemofullweb</artifactId>
+    <artifactId>crescente</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>mydemofullweb</name>
+    <name>crescente</name>
     <packaging>war</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

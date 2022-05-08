@@ -1,4 +1,4 @@
-package com.example.mydemofullweb.data.services;
+package com.example.crescente.data.services;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,8 +7,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import com.example.mydemofullweb.data.entity.SecurityGroupLink;
-import com.example.mydemofullweb.data.entity.UserAccount;
+import com.example.crescente.data.entity.SecurityGroupLink;
+import com.example.crescente.data.entity.UserAccount;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import jakarta.annotation.Resource;
@@ -23,7 +23,7 @@ import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
 @Startup
 public class DatabaseSetupBean {
     // Used for direct database manipulations.
-    @Resource(lookup="jdbc/mydemofullweb")
+    @Resource(lookup="jdbc/crescente")
     private DataSource dataSource;
 
     /**

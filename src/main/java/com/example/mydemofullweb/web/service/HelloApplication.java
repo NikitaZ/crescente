@@ -1,4 +1,4 @@
-package com.example.mydemofullweb.web.service;
+package com.example.crescente.web.service;
 
 import jakarta.ws.rs.ApplicationPath;
 import jakarta.ws.rs.core.Application;
@@ -63,7 +63,7 @@ public class MyApplication extends ResourceConfig {
 ////        register(UserAuthenticationFilter.class);
 //
 //        LOGGER.info("Register packages");
-//        packages("com.example.mydemofullweb", "com.example.mydemofullweb.web", "com.example.mydemofullweb.web.service");
+//        packages("com.example.crescente", "com.example.crescente.web", "com.example.crescente.web.service");
 //
 //        LOGGER.info("Enabling GZip filter");
 //        EncodingFilter.enableFor(this, GZipEncoder.class);

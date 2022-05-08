@@ -1,9 +1,9 @@
-package com.example.mydemofullweb.web.service;
+package com.example.crescente.web.service;
 
-import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
-import com.example.mydemofullweb.data.info.UserAccountSummary;
-import com.example.mydemofullweb.data.services.UserManagerLocal;
-import com.example.mydemofullweb.data.services.UserService;
+import com.example.crescente.data.exceptions.UserNotFoundException;
+import com.example.crescente.data.info.UserAccountSummary;
+import com.example.crescente.data.services.UserManagerLocal;
+import com.example.crescente.data.services.UserService;
 import jakarta.annotation.ManagedBean;
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.Path;

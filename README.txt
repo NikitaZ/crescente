@@ -20,9 +20,9 @@ Run
   glassfish6/bin/asadmin add-resources ../src/main/resources/app-server-resources.xml 
 this will add connection pool and datasource.
 
-Ping the datasource (via Ping button at 'Edit JDBC Connection Pool' for mydemofullweb-h2-pool at admin console)
+Ping the datasource (via Ping button at 'Edit JDBC Connection Pool' for crescente-h2-pool at admin console)
 If it succeeds the db file will be created at
-glassfish6/glassfish/domains/domain1/config/deploy/mydemofullweb.mv.db
+glassfish6/glassfish/domains/domain1/config/deploy/crescente.mv.db
 
 
 stop server, edit glassfish6/glassfish/domains/domain1/domain.xml
@@ -34,9 +34,9 @@ at
         <access-log></access-log>
         <virtual-server network-listeners="http-listener-1,http-listener-2" id="server"></virtual-server>
 add 
-   default-web-module="mydemofullweb-1.0-SNAPSHOT"
+   default-web-module="crescente-1.0-SNAPSHOT"
 so it becomes   
-     <virtual-server default-web-module="mydemofullweb-1.0-SNAPSHOT" network-listeners="http-listener-1,http-listener-2" id="server"></virtual-server>
+     <virtual-server default-web-module="crescente-1.0-SNAPSHOT" network-listeners="http-listener-1,http-listener-2" id="server"></virtual-server>
 
 
 
@@ -44,15 +44,15 @@ In order to connect IDEA to DB:
    on the 'Database' tab of Idea add new data source:
       choose H2, "embedded" mode (by clicking on 'remote' in blue) and enter PATH:
    the path to the .mv.db file above, i.e. 
-      /Users/<name>/.../glassfish6/glassfish/domains/domain1/config/deploy/mydemofullweb.mv.db
+      /Users/<name>/.../glassfish6/glassfish/domains/domain1/config/deploy/crescente.mv.db
    So that URL becomes
-     jdbc:h2:/Users/.../glassfish6/glassfish/domains/domain1/config/deploy/mydemofullweb
+     jdbc:h2:/Users/.../glassfish6/glassfish/domains/domain1/config/deploy/crescente
 
    Do not click 'download missing driver files', use 'h2/bin/h2-2.1.212.jar' instead.
    (Idea now downloads 2.1.210 which doesn't seem to be fully compatible)
 
-   Use username and password from mydemofullweb/src/main/resources/app-server-resources.xml 
-   (both mydemofullweb for now)
+   Use username and password from crescente/src/main/resources/app-server-resources.xml
+   (both crescente for now)
 
    Click 'Test Connection' at the bottom, it should succeed and say:
         DBMS: H2 (ver. 2.1.212 (2022-04-09))
@@ -89,8 +89,8 @@ GF:
 ./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compressable-mime-type=text/html,text/xml,text/plain,text/css,text/javascript,application/json
 
 # default web module
-./bin/asadmin set server-config.http-service.virtual-server.server.default-web-module=mydemofullweb-1.0-SNAPSHOT
-# in case of a war in ear: mydemofullweb-ear-1.0-SNAPSHOT#mydemofullweb-1.0-SNAPSHOT.war
+./bin/asadmin set server-config.http-service.virtual-server.server.default-web-module=crescente-1.0-SNAPSHOT
+# in case of a war in ear: crescente-ear-1.0-SNAPSHOT#crescente-1.0-SNAPSHOT.war
 
 IMPT! diabled http2 for https
 ./bin/asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-2.http.http2-enabled=false
@@ -107,7 +107,7 @@ build via
 
   
 deploy (from glassfish6)
-  glassfish6/bin/asadmin deploy target/mydemofullweb-1.0-SNAPSHOT.war
+  glassfish6/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
 
 list installed applications (from glassfish6)
   glassfish6/bin/asadmin list-components
@@ -116,23 +116,23 @@ server log is located at
   glassfish6/glassfish/domains/domain1/logs/server.log
 
 redeploy
-  glassfish6/bin/asadmin redeploy --name mydemofullweb-1.0-SNAPSHOT target/mydemofullweb-1.0-SNAPSHOT.war
+  glassfish6/bin/asadmin redeploy --name crescente-1.0-SNAPSHOT target/crescente-1.0-SNAPSHOT.war
   or just use
-  glassfish6/bin/asadmin deploy --force=true target/mydemofullweb-1.0-SNAPSHOT.war
+  glassfish6/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
   both seem to do the same as
-  glassfish6/bin/asadmin undeploy mydemofullweb-1.0-SNAPSHOT && glassfish6/bin/asadmin deploy target/mydemofullweb-1.0-SNAPSHOT.war
+  glassfish6/bin/asadmin undeploy crescente-1.0-SNAPSHOT && glassfish6/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
 
 
 undeploy
-  glassfish6/bin/asadmin undeploy mydemofullweb-1.0-SNAPSHOT
+  glassfish6/bin/asadmin undeploy crescente-1.0-SNAPSHOT
 
 restart server
   glassfish6/bin/asadmin stop-domain && glassfish6/bin/asadmin start-domain
 
 easiest way to rebuild and deploy [development, is default] and [production]
-  mvn clean install && ./glassfish6/bin/asadmin deploy --force=true target/mydemofullweb-1.0-SNAPSHOT.war
+  mvn clean install && ./glassfish6/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
 
-  mvn clean install -Pproduction && ./glassfish6/bin/asadmin deploy --force=true target/mydemofullweb-1.0-SNAPSHOT.war
+  mvn clean install -Pproduction && ./glassfish6/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
 
 
 If there are no users in the database, DatabaseSetup singleton EJB creates a user 'admin' with 'admin' password and administration rights,
@@ -142,7 +142,7 @@ one password hash for 'admin' is
 PBKDF2WithHmacSHA512:3072:CCDMAnF2/zhBrkR+8KvRv56AP+ZmDCmXIUVGlP0mQyZjwy9lqIGZXkwq7dzCazchX9iuOIHdGfoxMkpraDKnKg==:+uXwQ4/zqSbs/QYJheYoTMfV68qCiKL2wlRKUZiieaU=
 
 How to connect to DB from the command line:
-  java -cp ./glassfish/modules/h2.jar org.h2.tools.Shell -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/mydemofullweb;AUTO_SERVER=TRUE" -user mydemofullweb -password mydemofullweb
+  java -cp ./glassfish/modules/h2.jar org.h2.tools.Shell -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente
 adding
   -sql "alter table USERACCOUNT add PASSWORDHASH CHARACTER VARYING(1000000000);"
 executes SQL and exits.

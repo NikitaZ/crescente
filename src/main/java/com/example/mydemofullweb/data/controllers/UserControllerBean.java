@@ -1,9 +1,9 @@
-package com.example.mydemofullweb.data.controllers;
+package com.example.crescente.data.controllers;
 
-import com.example.mydemofullweb.data.entity.SecurityGroupLink;
-import com.example.mydemofullweb.data.entity.UserAccount;
+import com.example.crescente.data.entity.SecurityGroupLink;
+import com.example.crescente.data.entity.UserAccount;
 
-import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
+import com.example.crescente.data.exceptions.UserNotFoundException;
 import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJBException;
 import jakarta.ejb.Stateless;

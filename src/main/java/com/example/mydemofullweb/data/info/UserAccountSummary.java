@@ -1,6 +1,6 @@
-package com.example.mydemofullweb.data.info;
+package com.example.crescente.data.info;
 
-import com.example.mydemofullweb.data.entity.NamedEntity;
+import com.example.crescente.data.entity.NamedEntity;
 
 import java.io.Serializable;
 

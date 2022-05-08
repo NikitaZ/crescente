@@ -1,7 +1,7 @@
-package com.example.mydemofullweb.web;
+package com.example.crescente.web;
 
-import com.example.mydemofullweb.data.exceptions.UserNotFoundException;
-import com.example.mydemofullweb.data.info.UserAccountSummary;
+import com.example.crescente.data.exceptions.UserNotFoundException;
+import com.example.crescente.data.info.UserAccountSummary;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;

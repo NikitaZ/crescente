@@ -61,12 +61,12 @@
       but provides a way say to override @ApplicationPath("/api")-->
 
 <!--&lt;!&ndash; otherwise rest api is at  /faces/api/ i.e. &ndash;&gt;-->
-<!--&lt;!&ndash;    http://localhost:8080/mydemofullweb-1.0-SNAPSHOT/faces/api/hello-world &ndash;&gt;-->
+<!--&lt;!&ndash;    http://localhost:8080/crescente-1.0-SNAPSHOT/faces/api/hello-world &ndash;&gt;-->
 <!--    <servlet>-->
-<!--        <servlet-name>com.example.mydemofullweb.web.service.HelloApplication</servlet-name>-->
+<!--        <servlet-name>com.example.crescente.web.service.HelloApplication</servlet-name>-->
 <!--    </servlet>-->
 <!--    <servlet-mapping>-->
-<!--        <servlet-name>com.example.mydemofullweb.web.service.HelloApplication</servlet-name>-->
+<!--        <servlet-name>com.example.crescente.web.service.HelloApplication</servlet-name>-->
 <!--        <url-pattern>/api/*</url-pattern>-->
 <!--    </servlet-mapping>-->
 

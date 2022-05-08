@@ -1,4 +1,4 @@
-package com.example.mydemofullweb.web;
+package com.example.crescente.web;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.faces.context.FacesContext;

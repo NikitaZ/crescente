@@ -1,7 +1,7 @@
-package com.example.mydemofullweb.web;
+package com.example.crescente.web;
 
 
-import com.example.mydemofullweb.data.info.UserAccountSummary;
+import com.example.crescente.data.info.UserAccountSummary;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;

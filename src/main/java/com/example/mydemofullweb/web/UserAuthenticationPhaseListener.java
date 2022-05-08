@@ -1,7 +1,7 @@
-package com.example.mydemofullweb.web;
+package com.example.crescente.web;
 
 
-import com.example.mydemofullweb.data.info.UserAccountSummary;
+import com.example.crescente.data.info.UserAccountSummary;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.PhaseEvent;

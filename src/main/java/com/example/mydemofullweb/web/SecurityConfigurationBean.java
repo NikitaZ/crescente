@@ -1,4 +1,4 @@
-package com.example.mydemofullweb.web;
+package com.example.crescente.web;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.security.enterprise.authentication.mechanism.http.CustomFormAuthenticationMechanismDefinition;
@@ -14,7 +14,7 @@ import jakarta.security.enterprise.identitystore.Pbkdf2PasswordHash;
         )
 )
 @DatabaseIdentityStoreDefinition(
-        dataSourceLookup = "jdbc/mydemofullweb",
+        dataSourceLookup = "jdbc/crescente",
         callerQuery = "select PASSWORDHASH from USERACCOUNT where NAME = ?",
         groupsQuery = "select GROUPNAME from SECURITYGROUPLINK where USERACCOUNTNAME = ?",
         hashAlgorithm = Pbkdf2PasswordHash.class,
