@@ -147,6 +147,13 @@ adding
   -sql "alter table USERACCOUNT add PASSWORDHASH CHARACTER VARYING(1000000000);"
 executes SQL and exits.
 
+  (These should never be needed normally:)
+To update a user password to 'admin' run
+  update USERACCOUNT set PASSWORDHASH='PBKDF2WithHmacSHA512:3072:CCDMAnF2/zhBrkR+8KvRv56AP+ZmDCmXIUVGlP0mQyZjwy9lqIGZXkwq7dzCazchX9iuOIHdGfoxMkpraDKnKg==:+uXwQ4/zqSbs/QYJheYoTMfV68qCiKL2wlRKUZiieaU=' where NAME='some user'
+To give admin rights to 'username' run
+INSERT INTO PUBLIC.SECURITYGROUPLINK (ID, GROUPNAME, USERACCOUNTNAME) VALUES (2, 'admin', 'username');
+
+
 We cannot connect IDEA to production DB as it is run in embedded mode. But may be this is a good thing that we cannot.
 Also h2/bin/h2.sh starts admin console to which we can connect with a browser to it (at 8182?).
 
