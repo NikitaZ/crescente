@@ -89,6 +89,13 @@ server-config.network-config.protocols.protocol.ws-http-listener.http.compressab
 # default web module
 server-config.http-service.virtual-server.server.default-web-module=admin-ear-1.0-SNAPSHOT#admin-war-1.0-SNAPSHOT.war
 
+IMPT! diabled http2
+
+./bin/asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-2.http.http2-enabled=false
+see
+https://github.com/payara/Payara/issues/2625
+and
+https://github.com/eclipse-ee4j/grizzly/issues/2111 which seems still open!
 
 Useful commands
 ---------------
