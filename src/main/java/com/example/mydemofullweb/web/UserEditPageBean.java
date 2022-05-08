@@ -212,16 +212,16 @@ public class UserEditPageBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "You are not allowed to change passwords of other users.", "Error during edit of user '" + userName + "'"));
         } else  if (!Objects.equals(getPassword(), getRepeatedPassword())) {
-            FacesContext.getCurrentInstance().addMessage("repeatPassword", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "The new passwords do not match.", ""));
         }
         else if (getPassword() == null || getPassword().isBlank()) {
-            FacesContext.getCurrentInstance().addMessage("password", new FacesMessage(FacesMessage.SEVERITY_ERROR,
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "The new password cannot be empty or blank.", ""));
         } else {
             try {
                 serviceBean.getUserService().changePassword(getUserName(), getPassword().trim());
-                FacesContext.getCurrentInstance().addMessage("changePassword", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "The password has been changed!", ""));
             } catch (UserNotFoundException e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
@@ -235,7 +235,7 @@ public class UserEditPageBean implements Serializable {
             try {
                 // reset password to user name
                 serviceBean.getUserService().changePassword(getUserName(), getUserName());
-                FacesContext.getCurrentInstance().addMessage("resetPassword", new FacesMessage(FacesMessage.SEVERITY_INFO,
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "The password has been reset!", ""));
             } catch (UserNotFoundException e) {
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,

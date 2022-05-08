@@ -88,33 +88,29 @@
                 <h:commandButton action="#{userEditPageBean.addToRole('admin')}" value="Make Admin" rendered="#{request.isUserInRole('admin')}"/>
                 <h:commandButton action="#{userEditPageBean.addToRole('researcher')}" value="Make Researcher" rendered="#{request.isUserInRole('admin')}"/>
                 <h:commandButton action="#{userEditPageBean.addToRole('support')}" value="Make Support" rendered="#{request.isUserInRole('admin')}"/>
-                <h:commandButton id="resetPassword" action="#{userEditPageBean.resetPassword}" value="Reset password" rendered="#{request.isUserInRole('admin')}"/>
-                <h:message for="resetPassword" infoStyle="color: black"/>
+                <h:commandButton action="#{userEditPageBean.resetPassword}" value="Reset password" rendered="#{request.isUserInRole('admin')}"/>
             </h:panelGrid>
 
             <h:panelGrid columns="1" rendered="#{userEditPageBean.editingOwnProfile}">
 
                 <h:outputLabel for="password" value="New Password: "/>
                 <h:panelGroup>
-                    <h:inputSecret id="password" value="#{userEditPageBean.password}" size="80" maxlength="120"
-                                   />
+                    <h:inputSecret id="password" value="#{userEditPageBean.password}" size="80" maxlength="120"/>
                     <h:message for="password" errorStyle="color: red"/>
                 </h:panelGroup>
 
                 <h:outputLabel for="passwordRepeated" value="Repeat New Password: "/>
                 <h:panelGroup>
-                    <h:inputSecret id="passwordRepeated" value="#{userEditPageBean.repeatedPassword}" size="80" maxlength="120"
-                                   />
+                    <h:inputSecret id="passwordRepeated" value="#{userEditPageBean.repeatedPassword}" size="80" maxlength="120"/>
                     <h:message for="passwordRepeated" errorStyle="color: red"/>
                 </h:panelGroup>
 
 
-                <h:commandButton id="changePassword" action="#{userEditPageBean.changePassword}" value="Change password"/>
-                <h:message for="changePassword" infoStyle="color: black"/>
+                <h:commandButton action="#{userEditPageBean.changePassword}" value="Change password"/>
             </h:panelGrid>
         </h:panelGrid>
         </h:panelGroup>
-        <h:messages styleClass="errorMessage" showDetail="true"/>
+        <h:messages errorClass="errorMessage" showDetail="true" infoStyle="color: black"/>
     </ui:define>
 
     This text will not be displayed.
