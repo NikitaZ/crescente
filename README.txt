@@ -71,6 +71,41 @@ In order to connect IDEA to DB:
     and clicking Assign Data Sources… then selecting our myDB database from the drop-down menu.
     This step is required for the IntelliJ IDEA code completion
 
+    Exporting database:
+     // uncompressed sql file
+     java -cp ./glassfish/modules/h2.jar org.h2.tools.Script -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.zip -compression zip
+     // compressed sql file
+     java -cp ./glassfish/modules/h2.jar org.h2.tools.Script -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.zip -options compression zip
+
+     Quote: The SCRIPT command locks objects while it is running. Admin rights are required to execute this command.
+
+    Importing database:
+
+    // or compressed
+    java org.h2.tools.RunScript -url jdbc:h2:~/test -user sa -script test.zip -options compression zip
+
+     or via h2 Shell, etc
+        RUNSCRIPT FROM 'backup.sql'
+     wow! even this is possible:
+        RUNSCRIPT FROM 'classpath:/com/acme/test.sql'
+
+
+
+    The is also BACKUP command and RESTORE command as well as Backup/Restore tools, tools can work only offline, but
+    BACKUP maybe performed online.
+            BACKUP TO 'backup.zip'
+    produces a zip with crescente.mv.db inside.
+    Quote: "The resulting backup is transactionally consistent, meaning the consistency and atomicity rules apply".
+    See
+        https://www.h2database.com/html/tutorial.html#upgrade_backup_restore
+    and
+        https://www.h2database.com/html/commands.html#backup
+    Quote:
+        BACKUP TO fileNameString
+        Backs up the database files to a .zip file. Objects are not locked, but the backup is transactionally consistent
+        because the transaction log is also copied. Admin rights are required to execute this command.
+
+
 SSH Tunnels:
 ssh -L 9999:localhost:4848 <user>@<prod_host> # access production admin via localhost:9999
 ssh -R 8888:localhost:8080 <user>@<prod_host> # publish local GF as prodhost:8888 - say for a demo
