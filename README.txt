@@ -1,3 +1,15 @@
+To clone this project use
+git clone https://github.com/NikitaZ/crescente.git
+
+To update it use (once)
+git pull https://github.com/NikitaZ/crescente.git
+Then just
+git pull
+
+Use your github user (not e-mail) as the user and an access token (settings->developer settings) as a password.
+see
+https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+
 download glassfish zip from glassfish.org
 unzip it at some location, in will unpack to glassfish6 directory
   unzip ./glassfish-6.2.5.zip
