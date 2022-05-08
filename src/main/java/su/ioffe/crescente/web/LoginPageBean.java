@@ -1,6 +1,7 @@
 package su.ioffe.crescente.web;
 
 
+import jakarta.servlet.ServletException;
 import su.ioffe.crescente.data.info.UserAccountSummary;
 import jakarta.enterprise.context.RequestScoped;
 import jakarta.faces.application.FacesMessage;
@@ -17,6 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.Serializable;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import static jakarta.security.enterprise.AuthenticationStatus.NOT_DONE;
@@ -96,13 +98,22 @@ public class LoginPageBean implements Serializable {
     }
 
     public String login() {
+        if (securityContext.getCallerPrincipal() != null &&
+                !securityContext.getCallerPrincipal().getName().equals(getUserName())) {
+            externalContext.invalidateSession();
+            try {
+                ((HttpServletRequest) externalContext.getRequest()).logout();
+            } catch (ServletException e) {
+                LOGGER.log(Level.SEVERE, "Not cool...", e);
+            }
+            return null;
+        }
         Credential credential = new UsernamePasswordCredential(getUserName(), new Password(getPassword()));
         AuthenticationStatus status = securityContext.authenticate(
                 (HttpServletRequest) externalContext.getRequest(),
                 (HttpServletResponse) externalContext.getResponse(),
                 withParams().credential(credential));
 //                withParams().credential(credential).newAuthentication(true));
-
         if (status.equals(NOT_DONE)) {
             facesContext.addMessage(null, new FacesMessage(
                     FacesMessage.SEVERITY_ERROR, "Something is wrong with authentication configuration or password is not set, please contact system administrator.", null));
