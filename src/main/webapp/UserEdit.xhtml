@@ -88,6 +88,7 @@
                 <h:commandButton action="#{userEditPageBean.addToRole('admin')}" value="Make Admin" rendered="#{request.isUserInRole('admin')}"/>
                 <h:commandButton action="#{userEditPageBean.addToRole('researcher')}" value="Make Researcher" rendered="#{request.isUserInRole('admin')}"/>
                 <h:commandButton action="#{userEditPageBean.addToRole('support')}" value="Make Support" rendered="#{request.isUserInRole('admin')}"/>
+                <h:commandButton value="Refresh View" rendered="#{request.isUserInRole('admin')}"/> <!-- added for debugging -->
                 <h:commandButton action="#{userEditPageBean.resetPassword}" value="Reset password" rendered="#{request.isUserInRole('admin')}"/>
             </h:panelGrid>
 
