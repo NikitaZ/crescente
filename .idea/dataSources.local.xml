@@ -17,5 +17,21 @@
       </schema-mapping>
       <legacy-introspector>true</legacy-introspector>
     </data-source>
+    <data-source name="crescente db" uuid="1e7b65e9-024a-4f6e-99b9-a1507553b4a4">
+      <database-info product="H2" version="2.1.212 (2022-04-09)" jdbc-version="4.2" driver-name="H2 JDBC Driver" driver-version="2.1.212 (2022-04-09)" dbms="H2" exact-version="2.1.212" exact-driver-version="2.1">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>crescente</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="database" negative="1">
+            <node kind="schema" negative="1" />
+          </node>
+        </introspection-scope>
+      </schema-mapping>
+      <legacy-introspector>true</legacy-introspector>
+    </data-source>
   </component>
 </project>
