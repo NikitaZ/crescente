@@ -80,17 +80,19 @@ GF related system setup:
 sudo sysctl -w net.ipv4.ip_unprivileged_port_start=443
 
 GF:
+(the config is in glassfish6/glassfish/domains/domain1/config/domain.xml)
 # increase default value (8192) to support long redirects (on long URLs)
-server-config.network-config.protocols.protocol.http-listener-1.http.header-buffer-length-bytes=16384
+./bin/asadmin set server-config.network-config.protocols.protocol.http-listener-1.http.header-buffer-length-bytes=16384
+./bin/asadmin set server-config.network-config.protocols.protocol.http-listener-2.http.header-buffer-length-bytes=16384
 
-server-config.network-config.protocols.protocol.ws-http-listener.http.compression=on
-server-config.network-config.protocols.protocol.ws-http-listener.http.compressable-mime-type=text/html,text/xml,text/plain,text/css,text/javascript,application/json
+./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compression=on
+./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compressable-mime-type=text/html,text/xml,text/plain,text/css,text/javascript,application/json
 
 # default web module
-server-config.http-service.virtual-server.server.default-web-module=admin-ear-1.0-SNAPSHOT#admin-war-1.0-SNAPSHOT.war
+./bin/asadmin set server-config.http-service.virtual-server.server.default-web-module=mydemofullweb-1.0-SNAPSHOT
+# in case of a war in ear: mydemofullweb-ear-1.0-SNAPSHOT#mydemofullweb-1.0-SNAPSHOT.war
 
-IMPT! diabled http2
-
+IMPT! diabled http2 for https
 ./bin/asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-2.http.http2-enabled=false
 see
 https://github.com/payara/Payara/issues/2625
