@@ -206,3 +206,22 @@ We cannot connect IDEA to production DB as it is run in embedded mode. But may b
 Also h2/bin/h2.sh starts admin console to which we can connect with a browser to it (at 8182?).
 
 Q: should we use 'cargo' maven plugin to deploy application via maven? see tutorial examples (topmost pom file)
+
+
+
+Books:
+- this one has been republished recently with Jakarta EE 10 in mind!
+Some comments refer to this book as "JSF and Java EE8" book.
+
+The Definitive Guide to Jakarta Faces in Jakarta EE 10: Building Java-Based Enterprise Web Applications
+cover
+Author(s): Bauke Scholtz, Arjan Tijms
+
+Next one looks promising, haven't looked at it yet.
+- Definitive Guide to Security in Jakarta EE - Securing Java-based Enterprise Applications with Jakarta Security, Authorization, Authentication and More
+cover
+Author(s): Arjan Tijms, Teo Bais, Werner Keil
+Publisher: Springer, Year: 2022
+
+I also love "Mastering EJB 3(?)" book but its last edition has been
+published quite a long time ago.
