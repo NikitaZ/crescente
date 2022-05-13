@@ -18,17 +18,11 @@
         </f:metadata>
     </ui:define>
 
-    <ui:define name="title">JSF - Hello World</ui:define>
+    <ui:define name="title">Input analysis report</ui:define>
     <!--<ui:define name="title">Editing: #{documentPageBean.documentName}</ui:define>-->
 
     <ui:define name="body">
-        <p class="docs-par">This is a simple app supporting users.</p>
-        <p class="docs-par">
-            You can change you password or
-            <h:link outcome="UserEdit" value="edit your profile here">
-                <f:param name="#{UtilityBean.userParamName}" value="#{request.userPrincipal.name}"/>
-            </h:link>.
-        </p>
+        <p class="docs-par">Ipnut analysis data of your patient</p>
 <!--                         we use '/' for a reason - to get links w/o '/faces/' -->
 <!--                        <a href="/hello-servlet">Hello Servlet</a> works, but we lose app path -->
         <p>
@@ -38,14 +32,47 @@
         <p>
             <a href="#{request.contextPath}/api/hello-world">Hello Rest Service</a>
         </p>
-        <p>
-            <h:link outcome="Questionnaire" value="Questionnaire"/>
-        </p>
 
-        <h3>
-            <h:outputLabel value="#{ServiceBean.helloMessage()}"/>
-        </h3>
+        <table cellpadding="3">
+            <tr>
+                <td><label for="nickname">Nickname:</label></td>
+                <td><input type="text" name="nickname" id="nickname"/></td>
+            </tr>
+            <tr>
+                <td><label for="nickname"><label for="birthdate">Birth Date:</label></label></td>
+                <td><input type="text" name="birthdate" id="birthdate"/></td>
+            </tr>
 
+            <tr>
+                <td colspan="2" align="center">ANALYSIS DATA:</td>
+            </tr>
+
+            <tr>
+                <td><label for="lh">LH (mIU/ml):</label></td>
+                <td><input type="text" name="lh" id="lh"/></td>
+            </tr>
+
+            <tr>
+                <td><label for="fsh">FSH (mIU/ml):</label></td>
+                <td><input type="text" name="fsh" id="fsh"/></td>
+            </tr>
+
+            <tr>
+                <td><label for="testosteron">Testosteron (nmol/l):</label></td>
+                <td><input type="text" name="testosteron" id="testosteron"/></td>
+            </tr>
+
+            <tr>
+                <td><label for="inh">Inhibin B (pg/ml):</label></td>
+                <td><input type="text" name="inh" id="inh"/></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="button" value="Calculate" onclick="calc()" id="startButton"/>
+                </td>
+            </tr>
+        </table>
 
         <h:messages styleClass="errorMessage" showDetail="true"/>
     </ui:define>
