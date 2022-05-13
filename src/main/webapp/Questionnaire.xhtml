@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:gc="http://xmlns.jcp.org/jsf/composite/components">
+<body>
+
+
+<ui:composition template="/template.xhtml">
+
+    <ui:define name="metadata">
+        <f:metadata>
+            <!--        <f:viewParam name="#{UtilityBean.documentParamName}"-->
+            <!--                     value="#{documentPageBean.documentNameViaUrlParameter}"/>-->
+        </f:metadata>
+    </ui:define>
+
+    <ui:define name="title">Input analysis report</ui:define>
+    <!--<ui:define name="title">Editing: #{documentPageBean.documentName}</ui:define>-->
+
+    <ui:define name="body">
+        <p class="docs-par">Ipnut analysis data of your patient</p>
+<!--                         we use '/' for a reason - to get links w/o '/faces/' -->
+<!--                        <a href="/hello-servlet">Hello Servlet</a> works, but we lose app path -->
+        <p>
+<!--                            equivalent of : FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();-->
+            <a href="#{request.contextPath}/hello-servlet">Hello Servlet</a>
+        </p>
+        <p>
+            <a href="#{request.contextPath}/api/hello-world">Hello Rest Service</a>
+        </p>
+
+        <table>
+            <tr>
+                <td><label for="nickname">Nickname:</label></td>
+                <td><input type="text" name="nickname" id="nickname"/></td>
+            </tr>
+            <tr>
+                <td><label for="nickname"><label for="birthdate">Birth Date:</label></label></td>
+                <td><input type="text" name="birthdate" id="birthdate"/></td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">ANALYSIS DATA:</td>
+            </tr>
+
+            <tr>
+                <td><label for="lh">LH (mIU/ml):</label></td>
+                <td><input type="text" name="lh" id="lh"/></td>
+            </tr>
+
+            <tr>
+                <td><label for="fsh">FSH (mIU/ml):</label></td>
+                <td><input type="text" name="fsh" id="fsh"/></td>
+            </tr>
+
+            <tr>
+                <td><label for="testosteron">Testosteron (nmol/l):</label></td>
+                <td><input type="text" name="testosteron" id="testosteron"/></td>
+            </tr>
+
+            <tr>
+                <td><label for="inh">Inhibin B (pg/ml):</label></td>
+                <td><input type="text" name="inh" id="inh"/></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input type="button" value="Calculate" onclick="calc()" id="startButton">
+                </td>
+            </tr>
+        </table>
+
+        <h:messages styleClass="errorMessage" showDetail="true"/>
+    </ui:define>
+
+    This text will not be displayed.
+</ui:composition>
+
+This text below will also not be displayed.
+
+</body>
+</html>
+
