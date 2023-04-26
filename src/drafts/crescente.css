@@ -1,0 +1,173 @@
+body {
+  font-family: Arial, Verdana,  sans-serif; /* Семейство шрифтов */
+  font-size: 11pt; /* Размер основного шрифта в пунктах  */
+  background-color: #f0f0f0; /* Цвет фона веб-страницы */
+  color: #333; /* Цвет основного текста */
+}
+
+#inputArea {
+  height: 470px;
+  width: 440px;
+  border-radius: 20px;
+  background-color: #CDE5E5;
+  position: relative;
+  top: 30px;
+  left: 30px;
+}
+
+label {
+    width: 110px; /* Ширина */
+    text-align: left; /* Выравниваем по правому краю */
+    float: left; /* Выстраиваем элементы рядом */
+    margin-left: 15px; /* Расстояние от текста до текстового поля */
+    margin-right: 10px; /* Расстояние от текста до текстового поля */
+    line-height: 30px; /* Выравниваем по высоте */
+}
+
+label.after {
+    width: 70px; /* Ширина */
+    position: relative;
+/*    left: 120px;*/
+    right: -100px;
+    top: -14px;
+    text-align: right; /* Выравниваем по правому краю */
+    }
+
+#childArea {
+  height: 30px;
+  width: 500px;
+  position: relative;
+  top: 30px;
+  left: 50px;
+}
+
+#childNickInput {
+  position: relative;
+  top: 5px;
+  left: 20px;
+  width: 170px;
+}
+
+#dateArea {
+  height: 65px;
+  width: 500px;
+  position: relative;
+  top: 50px;
+  left: 50px;
+}
+
+#birthdayInput {
+  position: relative;
+  top: 5px;
+  left: 20px;
+  width: 170px;
+}
+
+#analysisDateInput {
+  position: relative;
+  top: 7px;
+  left: 20px;
+  width: 170px;
+}
+
+#labelForDataArea {
+  position: relative;
+  top: 85px;
+  left: 60px;
+}
+
+#dataArea {
+  border-radius: 20px;
+  background-color: #EFEFEF;
+  height: 140px;
+  width: 340px;
+  position: relative;
+  top: 95px;
+  left: 50px;
+}
+
+#lgp {
+  position: relative;
+  top: 5px;
+  left: 0px;
+}
+
+#fsgp {
+  position: relative;
+  top: -12px;
+  left: 0px;
+}
+
+#tstp {
+  position: relative;
+  top: -27px;
+  left: 0px;
+}
+#ingp {
+  position: relative;
+  top: -44px;
+  left: 0px;
+}
+
+input {
+    border: 1px solid #cccccc;
+  border-radius: 20px;
+}
+
+#lgInput {
+  position: relative;
+  top: 10px;
+  left: 20px;
+  width: 170px;
+}
+
+#fsgInput {
+  position: relative;
+  top: 10px;
+  left: 20px;
+  width: 170px;
+}
+
+#tstInput {
+  position: relative;
+  top: 10px;
+  left: 20px;
+  width: 170px;
+}
+
+#ingInput {
+  position: relative;
+  top: 10px;
+  left: 20px;
+  width: 170px;
+}
+
+#buttonsArea {
+  position: relative;
+  top: 125px;
+  left: 0px;
+}
+
+#submitButton {
+  position: relative;
+  top: 15px;
+  left: -175px;
+  background-color: #3CBC8D;
+  color: #EFEFEF;
+}
+
+#clearButton {
+  position: relative;
+  top: -15px;
+  left: 18px;
+  background-color: #EFEFEF;
+}
+
+.button {
+  width: 140px;
+  height: 30px;
+  border-radius: 30px;
+}
+
+
+
