@@ -6,6 +6,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:gc="http://xmlns.jcp.org/jsf/composite/components">
+
+<title>Ввод результатов анализов</title>
+<link rel="stylesheet" href="../../drafts/crescente.css"/>
+
 <body>
 
 
@@ -18,69 +22,66 @@
         </f:metadata>
     </ui:define>
 
-    <ui:define name="title">Input analysis report</ui:define>
-    <!--<ui:define name="title">Editing: #{documentPageBean.documentName}</ui:define>-->
+    <ui:define name="link" rel="stylesheet" href="crescente.css"/>
 
     <ui:define name="body">
-        <p class="docs-par">Ipnut analysis data of your patient</p>
-<!--                         we use '/' for a reason - to get links w/o '/faces/' -->
-<!--                        <a href="/hello-servlet">Hello Servlet</a> works, but we lose app path -->
-        <p>
-<!--                            equivalent of : FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath();-->
-            <a href="#{request.contextPath}/hello-servlet">Hello Servlet</a>
-        </p>
-        <p>
-            <a href="#{request.contextPath}/api/hello-world">Hello Rest Service</a>
-        </p>
 
-        <table cellpadding="3">
-            <tr>
-                <td><label for="nickname">Nickname:</label></td>
-                <td><input type="text" name="nickname" id="nickname"/></td>
-            </tr>
-            <tr>
-                <td><label for="nickname"><label for="birthdate">Birth Date:</label></label></td>
-                <td><input type="text" name="birthdate" id="birthdate"/></td>
-            </tr>
 
-            <tr>
-                <td colspan="2" align="center">ANALYSIS DATA:</td>
-            </tr>
+        <div id="inputArea">
+            <form>
+                <div id="childArea">
+                    <p>
+                        <label for="childNickInput">ID пациента:</label>
+                        <input type="text" id="childNickInput" name="childNick"/>
+                    </p>
+                </div>
 
-            <tr>
-                <td><label for="lh">LH (mIU/ml):</label></td>
-                <td><input type="text" name="lh" id="lh"/></td>
-            </tr>
+                <div id="dateArea">
+                    <p>
+                        <label for="birthdayInput">Дата рождения:</label>
+                        <input type="date" id="birthdayInput" name="birthday"/>
+                    </p>
+                    <p>
+                        <label for="analysisDateInput">Дата анализа:</label>
+                        <input type="date" id="analysisDateInput" name="analysisDate"/>
+                    </p>
+                </div>
 
-            <tr>
-                <td><label for="fsh">FSH (mIU/ml):</label></td>
-                <td><input type="text" name="fsh" id="fsh"/></td>
-            </tr>
+                <div id="labelForDataArea">Введите результаты анализов:</div>
+                <div id="dataArea">
+                    <p id="lgp">
+                        <label for="lgInput">ЛГ: </label>
+                        <input type="number" id="lgInput" name="lg"/>
+                        <label for="lgInput" class="after">МЕ/л</label>
+                    </p>
+                    <p id="fsgp">
+                        <label for="fsgInput">ФСГ: </label>
+                        <input type="number" id="fsgInput" name="fsg"/>
+                        <label for="lgInput" class="after">МЕ/л</label>
+                    </p>
+                    <p id="tstp">
+                        <label for="tstInput">Тестостерон: </label>
+                        <input type="number" id="tstInput" name="tst"/>
+                        <label for="lgInput" class="after">нмоль/л</label>
+                    </p>
+                    <p id="ingp">
+                        <label for="ingInput">Ингибин B: </label>
+                        <input type="number" id="ingInput" name="ing"/>
+                        <label for="lgInput" class="after">пг/мл</label>
+                    </p>
+                </div>
 
-            <tr>
-                <td><label for="testosteron">Testosteron (nmol/l):</label></td>
-                <td><input type="text" name="testosteron" id="testosteron"/></td>
-            </tr>
-
-            <tr>
-                <td><label for="inh">Inhibin B (pg/ml):</label></td>
-                <td><input type="text" name="inh" id="inh"/></td>
-            </tr>
-
-            <tr>
-                <td>
-                    <input type="button" value="Calculate" onclick="calc()" id="startButton"/>
-                </td>
-            </tr>
-        </table>
+                <div id="buttonsArea">
+                    <input type="submit" id="submitButton" value="Расчитать" class="button"/>
+                    <input type="reset" id="clearButton" value="Очистить" class="button"/>
+                </div>
+            </form>
+        </div>
 
         <h:messages styleClass="errorMessage" showDetail="true"/>
     </ui:define>
 
-    This text will not be displayed.
 </ui:composition>
-
-This text below will also not be displayed.
 
 </body>
 </html>
