@@ -1,7 +1,8 @@
-package su.ioffe.crescente.data.entities;
+package su.ioffe.crescente.data.db.entities;
 
-import su.ioffe.medstat.ira.attempt2.calculation.AnalysisData;
-import su.ioffe.medstat.ira.attempt2.utils.DateUtils;
+
+import su.ioffe.crescente.data.db.calculation.AnalysisData;
+import su.ioffe.crescente.data.utils.DateUtils;
 
 import java.util.Date;
 
@@ -9,6 +10,9 @@ public class Analysis {
 
     private Date analysisDate;
     private long childID;
+
+    private Child child;
+
     private AnalysisData analysisData;
 
 
@@ -73,5 +77,11 @@ public class Analysis {
 
     public void setAnalysisData(AnalysisData analysisData) {
         this.analysisData = analysisData;
+    }
+
+    public Child getChild() { return child; }
+
+    public void setChild(Child child) {
+        this.child = child;
     }
 }

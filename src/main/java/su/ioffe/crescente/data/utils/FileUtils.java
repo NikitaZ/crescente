@@ -1,6 +1,6 @@
-package su.ioffe.medstat.ira.attempt2.utils;
+package su.ioffe.crescente.data.utils;
 
-import org.apache.logging.log4j.LogManager;
+//import org.apache.logging.log4j.LogManager;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -40,7 +40,8 @@ public class FileUtils {
                 }
             }
         } catch (IOException ex) {
-            LogManager.getRootLogger().error(StringUtils.traceToString(ex));
+            ex.printStackTrace();
+//            LogManager.getRootLogger().error(StringUtils.traceToString(ex));
         }
         return stringBuilder.toString();
     }
@@ -50,7 +51,8 @@ public class FileUtils {
         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
             stream.forEach(s -> contentBuilder.append(s).append("\n"));
         } catch (IOException e) {
-            LogManager.getRootLogger().error(StringUtils.traceToString(e));
+            e.printStackTrace();
+//            LogManager.getRootLogger().error(StringUtils.traceToString(e));
         }
         return contentBuilder.toString();
     }
@@ -60,7 +62,8 @@ public class FileUtils {
         try (BufferedWriter bufWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(filePath))))) {
             bufWriter.write(str);
         } catch (IOException e) {
-            LogManager.getRootLogger().error(StringUtils.traceToString(e));
+            e.printStackTrace();
+//            LogManager.getRootLogger().error(StringUtils.traceToString(e));
         }
     }
 }

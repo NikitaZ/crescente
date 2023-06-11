@@ -1,7 +1,8 @@
 package su.ioffe.crescente.data.db.calculation;
 
-import su.ioffe.medstat.ira.attempt2.CalcChildren;
-import su.ioffe.medstat.ira.attempt2.data.Analysis;
+
+import su.ioffe.crescente.data.db.entities.Analysis;
+import su.ioffe.crescente.data.db.example.CalcChildren;
 
 import java.util.Date;
 
@@ -164,7 +165,7 @@ public class PointsAlgorythmImplLInearWithAge implements PointsAlgorythm {
             return -1000;
         }
 
-        Date birthDate = CalcChildren.childrenMap.get(analysis.getChildID()).getBirthdate();
+        Date birthDate = analysis.getChild().getBirthdate();
         Date analysisDate = analysis.getAnalysisDate();
         long monthAge = getMonthAge(birthDate,analysisDate);
         totalMaxMark = totalMaxMark;

@@ -1,4 +1,4 @@
-package su.ioffe.medstat.ira.attempt2.utils;
+package su.ioffe.crescente.data.utils;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

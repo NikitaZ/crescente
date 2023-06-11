@@ -1,22 +1,22 @@
-package su.ioffe.medstat.ira.attempt2;
+package su.ioffe.crescente.data.db.example;
 
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartUtils;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.data.xy.XYSeries;
-import org.jfree.data.xy.XYSeriesCollection;
-import su.ioffe.medstat.ira.attempt2.calculation.AnalysisData;
-import su.ioffe.medstat.ira.attempt2.calculation.PointsAlgorythm;
-import su.ioffe.medstat.ira.attempt2.calculation.PointsAlgorythmImpl2;
-import su.ioffe.medstat.ira.attempt2.calculation.PointsAlgorythmImplLInearWithAge;
-import su.ioffe.medstat.ira.attempt2.data.Analysis;
-import su.ioffe.medstat.ira.attempt2.data.Child;
-import su.ioffe.medstat.ira.attempt2.data.ChildResult;
-import su.ioffe.medstat.ira.attempt2.utils.DateUtils;
-import su.ioffe.medstat.ira.attempt2.utils.FileUtils;
-import su.ioffe.medstat.ira.data.CalculatedPoints;
+//import org.jfree.chart.ChartFactory;
+//import org.jfree.chart.ChartUtils;
+//import org.jfree.chart.JFreeChart;
+//import org.jfree.chart.plot.XYPlot;
+//import org.jfree.data.xy.XYDataset;
+//import org.jfree.data.xy.XYSeries;
+//import org.jfree.data.xy.XYSeriesCollection;
+
+import su.ioffe.crescente.data.db.calculation.AnalysisData;
+import su.ioffe.crescente.data.db.calculation.PointsAlgorythm;
+import su.ioffe.crescente.data.db.calculation.PointsAlgorythmImpl2;
+import su.ioffe.crescente.data.db.calculation.PointsAlgorythmImplLInearWithAge;
+import su.ioffe.crescente.data.db.entities.Analysis;
+import su.ioffe.crescente.data.db.entities.Child;
+import su.ioffe.crescente.data.db.entities.ChildResult;
+import su.ioffe.crescente.data.utils.DateUtils;
+import su.ioffe.crescente.data.utils.FileUtils;
 
 import java.awt.*;
 import java.io.File;
@@ -38,8 +38,13 @@ public class CalcChildren {
 
         String childrenFileName = args[0];
         List<Child> children = null;
+        Map<Long, Child> childrenMap = null;
         try {
             children = loadChildren(childrenFileName);
+            childrenMap = new HashMap<>();
+            for (Child child : children) {
+                childrenMap.put(child.getId(), child);
+            }
         } catch (IOException e) {
             e.printStackTrace();
             return;
@@ -51,7 +56,7 @@ public class CalcChildren {
         String analysisFileName = args[1];
         List<Analysis> analysisList = null;
         try {
-            analysisList = loadAnalysis(analysisFileName);
+            analysisList = loadAnalysis(analysisFileName, childrenMap);
         } catch (IOException e) {
             e.printStackTrace();
             return;
@@ -73,23 +78,23 @@ public class CalcChildren {
         String savePath = args[2];
         saveResults(savePath, results);
 
-
-        XYDataset dataset = createDataset(results, childrenMap);
-        JFreeChart chart = ChartFactory.createScatterPlot(
-                "Sick vs ZPR with age WithFake27and54Ing",
-                "X-Axis", "Y-Axis", dataset);
-
-
-        String graphFile = args[3];
-        //Changes background color
-        XYPlot plot = (XYPlot) chart.getPlot();
-        plot.setBackgroundPaint(new Color(255, 228, 196));
-
-        try {
-            ChartUtils.saveChartAsPNG(new File(graphFile), chart, 450, 400);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//
+//        XYDataset dataset = createDataset(results, childrenMap);
+//        JFreeChart chart = ChartFactory.createScatterPlot(
+//                "Sick vs ZPR with age WithFake27and54Ing",
+//                "X-Axis", "Y-Axis", dataset);
+//
+//
+//        String graphFile = args[3];
+//        //Changes background color
+//        XYPlot plot = (XYPlot) chart.getPlot();
+//        plot.setBackgroundPaint(new Color(255, 228, 196));
+//
+//        try {
+//            ChartUtils.saveChartAsPNG(new File(graphFile), chart, 450, 400);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
 
     }
 
@@ -112,7 +117,7 @@ public class CalcChildren {
         return children;
     }
 
-    private static List<Analysis> loadAnalysis(String filePath) throws IOException {
+    private static List<Analysis> loadAnalysis(String filePath, Map<Long, Child> childrenMap) throws IOException {
 
         List<Analysis> analysisList = new ArrayList<Analysis>();
 
@@ -124,6 +129,7 @@ public class CalcChildren {
             line = line.trim();
             if (!"".equals(line) && !line.startsWith("#")) {
                 Analysis analysis = Analysis.parseCSV(line);
+                analysis.setChild(childrenMap.get(analysis.getChildID()));
                 analysisList.add(analysis);
             }
         }
@@ -142,26 +148,26 @@ public class CalcChildren {
         FileUtils.saveToFile(path, stringBuffer.toString());
     }
 
-    private static XYDataset createDataset(List<ChildResult> results, Map<Long, Child> children) {
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        XYSeries seriesSick = new XYSeries("Sick");
-        XYSeries seriesCDP = new XYSeries("CDP");
-
-        for (ChildResult result : results) {
-            long childId = result.getChildID();
-            Boolean diagnos = children.get(childId).isDiagnoz();
-            if (diagnos == null) {
-                continue;
-            }
-            if (diagnos) {
-                seriesSick.add(childId, result.getResult());
-            } else {
-                seriesCDP.add(childId, result.getResult());
-            }
-        }
-        dataset.addSeries(seriesSick);
-        dataset.addSeries(seriesCDP);
-
-        return dataset;
-    }
+//    private static XYDataset createDataset(List<ChildResult> results, Map<Long, Child> children) {
+//        XYSeriesCollection dataset = new XYSeriesCollection();
+//        XYSeries seriesSick = new XYSeries("Sick");
+//        XYSeries seriesCDP = new XYSeries("CDP");
+//
+//        for (ChildResult result : results) {
+//            long childId = result.getChildID();
+//            Boolean diagnos = children.get(childId).isDiagnoz();
+//            if (diagnos == null) {
+//                continue;
+//            }
+//            if (diagnos) {
+//                seriesSick.add(childId, result.getResult());
+//            } else {
+//                seriesCDP.add(childId, result.getResult());
+//            }
+//        }
+//        dataset.addSeries(seriesSick);
+//        dataset.addSeries(seriesCDP);
+//
+//        return dataset;
+//    }
 }
