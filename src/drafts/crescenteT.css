@@ -15,29 +15,35 @@ body {
   left: 30px;
 }
 
-label {
-    width: 110px; /* Ширина */
-    text-align: left; /* Выравниваем по правому краю */
-    float: left; /* Выстраиваем элементы рядом */
-    margin-left: 15px; /* Расстояние от текста до текстового поля */
-    margin-right: 10px; /* Расстояние от текста до текстового поля */
-    line-height: 30px; /* Выравниваем по высоте */
+#inputDataArea {
+  height: 410px;
+  width: 440px;
+  position: relative;
+  top: 30px;
+  left: 0px;
 }
-
-label.after {
-    width: 70px; /* Ширина */
-    position: relative;
-/*    left: 120px;*/
-    right: -100px;
-    top: -14px;
-    text-align: right; /* Выравниваем по правому краю */
-    }
 
 #childArea {
   height: 30px;
-  width: 500px;
+  width: 440px;
   position: relative;
-  top: 30px;
+  top: 0px;
+  left: 50px;
+}
+
+#birthdayArea {
+  height: 30px;
+  width: 440px;
+  position: relative;
+  top: 40px;
+  left: 50px;
+}
+
+#analysisDateArea {
+  height: 30px;
+  width: 440px;
+  position: relative;
+  top: 40px;
   left: 50px;
 }
 
@@ -48,6 +54,7 @@ label.after {
   width: 170px;
 }
 
+/*
 #dateArea {
   height: 65px;
   width: 500px;
@@ -55,6 +62,7 @@ label.after {
   top: 50px;
   left: 50px;
 }
+*/
 
 #birthdayInput {
   position: relative;
@@ -70,43 +78,51 @@ label.after {
   width: 170px;
 }
 
-#labelForDataArea {
+#dataLabelArea {
+  height: 65px;
+  width: 500px;
   position: relative;
-  top: 85px;
-  left: 60px;
+  top: 50px;
+  left: 30px;
 }
 
-#dataArea {
-  border-radius: 20px;
-  background-color: #EFEFEF;
-  height: 140px;
-  width: 340px;
+#labelForData {
   position: relative;
-  top: 95px;
-  left: 50px;
+  top: 5px;
+  left: 20px;
+  width: 170px;
 }
 
 #lgp {
+  height: 30px;
+  width: 500px;
   position: relative;
-  top: 5px;
-  left: 0px;
+  top: 40px;
+  left: 50px;
 }
 
 #fsgp {
+  height: 30px;
+  width: 500px;
   position: relative;
-  top: -12px;
-  left: 0px;
+  top: 35px;
+  left: 50px;
 }
 
 #tstp {
+  height: 30px;
+  width: 500px;
   position: relative;
-  top: -27px;
-  left: 0px;
+  top: 35px;
+  left: 50px;
 }
+
 #ingp {
+  height: 30px;
+  width: 500px;
   position: relative;
-  top: -44px;
-  left: 0px;
+  top: 35px;
+  left: 50px;
 }
 
 input {
@@ -114,6 +130,7 @@ input {
   border-radius: 20px;
 }
 
+/*
 #lgInput {
   position: relative;
   top: 10px;
@@ -141,17 +158,21 @@ input {
   left: 20px;
   width: 120px;
 }
+*/
 
 #buttonsArea {
+  height: 65px;
+  width: 500px;
   position: relative;
-  top: 125px;
-  left: 0px;
+  top: 40px;
+  left: 30px;
 }
+
 
 #submitButton {
   position: relative;
-  top: 15px;
-  left: -175px;
+  top: -15px;
+  left: 20px;
   background-color: #3CBC8D;
   color: #EFEFEF;
 }
@@ -159,9 +180,10 @@ input {
 #clearButton {
   position: relative;
   top: -15px;
-  left: 18px;
+  left: -90px;
   background-color: #EFEFEF;
 }
+
 
 .button {
   width: 140px;
@@ -170,32 +192,48 @@ input {
 }
 
 #loginDataArea {
-  height: 30px;
-  width: 500px;
+  height: 430px;
+  width: 340px;
   position: relative;
   top: 30px;
   left: 50px;
 }
 
+#loginTextArea {
+  height: 30px;
+  width: 340px;
+  position: relative;
+  top: 20px;
+  left: 0px;
+}
+
+#passTextArea {
+  height: 30px;
+  width: 340px;
+  position: relative;
+  top: 20px;
+  left: 0px;
+}
+
 #loginButtonsArea {
   height: 30px;
-  width: 500px;
+  width: 340px;
   position: relative;
-  top: 80px;
-  left: -70px;
+  top: 40px;
+  left: 0px;
 }
 
 #forgetButtonsArea {
   height: 30px;
-  width: 500px;
+  width: 340px;
   position: relative;
-  top: 120px;
-  left: -70px;
+  top: 60px;
+  left: 0px;
 }
 
 #forgetButton {
   height: 30px;
-  width: 550px;
+  width: 3400px;
   position: relative;
   top: 0px;
   left: 0px;
@@ -209,8 +247,8 @@ input {
 
 #loginLogo {
   position: relative;
-  top: 150px;
-  left: 110px;
+  top: 50px;
+  left: 70px;
 }
 
 .loginLogo {

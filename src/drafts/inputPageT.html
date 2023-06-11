@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ввод данных</title>
+    <link rel="stylesheet" href="crescenteT.css">
+</head>
+<body>
+<div id="inputArea">
+    <form>
+        <table id="inputDataArea">
+            <tr id="childArea">
+                <td>ID пациента:</td>
+                <td colspan="2"><input type="text" id="childNickInput" name="childNick"></td>
+            </tr>
+            <tr id="birthdayArea">
+                <td>Дата рождения:</td>
+                <td colspan="2"><input type="date" id="birthdayInput" name="birthday"></td>
+            </tr>
+            <tr id="analysisDateArea">
+                <td>Дата анализа:</td>
+                <td colspan="2"><input type="date" id="analysisDateInput" name="analysisDate"></td>
+            </tr>
+
+            <tr id="dataLabelArea">
+                <td id="labelForData" colspan="3">Введите результаты анализов:</td>
+            </tr>
+
+            <tr id="lgp">
+                <td>ЛГ:</td>
+                <td><input type="number" id="lgInput" name="lg"></td>
+                <td>МЕ/л</td>
+            </tr>
+            <tr id="fsgp">
+                <td>ФСГ:</td>
+                <td><input type="number" id="fsgInput" name="fsg"></td>
+                <td>МЕ/л</td>
+            </tr>
+            <tr id="tstp">
+                <td>Тестостерон:</td>
+                <td><input type="number" id="tstInput" name="tst"></td>
+                <td>нмоль/л</td>
+            </tr>
+            <tr id="ingp">
+                <td>Ингибин B:</td>
+                <td><input type="number" id="ingInput" name="ing"></td>
+                <td>пг/мл</td>
+            </tr>
+
+            <tr id="buttonsArea">
+                <td><input type="submit" id="submitButton" value="Расчитать" class="button"></td>
+                <td></td>
+                <td><input type="reset" id="clearButton" value="Очистить" class="button"></td>
+            </tr>
+        </table>
+
+
+    </form>
+</div>
+
+</body>
+</html>
