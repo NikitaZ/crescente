@@ -25,7 +25,7 @@ import java.util.Objects;
 /**
  * @author nikita.zinoviev@gmail.com
  */
-@Named("userEditPageBean")
+@Named("resultCalculationBean")
 @RequestScoped
 public class ResultCalculationBean implements Serializable {
 
