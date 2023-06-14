@@ -6,10 +6,20 @@ import jakarta.faces.context.FacesContext;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.security.enterprise.SecurityContext;
+import su.ioffe.crescente.data.db.calculation.AnalysisData;
+import su.ioffe.crescente.data.db.calculation.PointsAlgorythm;
+import su.ioffe.crescente.data.db.calculation.PointsAlgorythmImplLInearWithAge;
+import su.ioffe.crescente.data.db.entities.Analysis;
+import su.ioffe.crescente.data.db.entities.Child;
+import su.ioffe.crescente.data.db.entities.ChildResult;
 import su.ioffe.crescente.data.exceptions.UserNotFoundException;
 import su.ioffe.crescente.data.info.UserAccountSummary;
+import su.ioffe.crescente.data.utils.DateUtils;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -21,7 +31,7 @@ public class ResultCalculationBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private transient String userID;
+    private transient String childID;
 
     private transient String birthday;
 
@@ -51,12 +61,12 @@ public class ResultCalculationBean implements Serializable {
 
     public ResultCalculationBean() {  }
 
-    public String getUserID() {
-        return userID;
+    public String getChildID() {
+        return childID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
+    public void setChildID(String childID) {
+        this.childID = childID;
     }
 
     public String getBirthday() {
@@ -109,72 +119,57 @@ public class ResultCalculationBean implements Serializable {
      */
     public String calc() {
 
+        Child child = new Child();
+        child.setNickname(getChildID());
+        Date birthdate = DateUtils.stringToDate(getBirthday());
+        child.setBirthdate(birthdate);
+
+        Analysis analysis = new Analysis();
+        analysis.setChild(child);
+        Date parsedDate = DateUtils.stringToDate(getAnalysisDate());
+        analysis.setAnalysisDate(parsedDate);
+
+        AnalysisData analysisData = new AnalysisData();
+        try {
+            double lgValue = Double.parseDouble(getLg());
+            analysisData.setLhValue(lgValue);
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            double fshValue = Double.parseDouble(getLg());
+            analysisData.setFshValue(fshValue);
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            double tstValue = Double.parseDouble(getLg());
+            analysisData.setTesValue(tstValue);
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+        }
+        try {
+            double ingValue = Double.parseDouble(getLg());
+            analysisData.setInhValue(ingValue);
+        } catch (NumberFormatException ex) {
+            ex.printStackTrace();
+        }
+
+        analysis.setAnalysisData(analysisData);
+
+        PointsAlgorythm algo = new PointsAlgorythmImplLInearWithAge();
+        ChildResult result = new ChildResult();
+        result.setChildID(analysis.getChildID());
+        result.setAlgUsed(algo.getName());
+        result.setCalcDate(DateUtils.getToday());
+        result.setResult(algo.calcPoints(analysis));
 
 
-        if (securityContext.isCallerInRole("admin") || isReallyEditingOwnProfile()) {
-            UserAccountSummary user = serviceBean.getUserService().createOrUpdate(getUserName(), getFullName(), getEmail(), getColour(), getPictureURL());
-            if (logIntoOnSave) {
-                userBean.loginUser(user);
-                return "About";
-            }
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "You are not allowed to modify profiles of other users.", "Error during edit of user '" + userName + "'"));
-        }
-        if (securityContext.isCallerInRole("admin")) {
-            return "Users";
-        }
-        else {
-            return "About";
-        }
-    }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Результат: " + result.getResult(), ""));
 
-    public void revokeRights() {
-        serviceBean.getUserService().revokeRights(getUserName());
-    }
+        return "Users";
 
-    public void addToRole(String role) {
-        serviceBean.getUserService().addToSecurityRole(getUserName(), role);
-    }
-
-    public void changePassword() {
-        if (!isReallyEditingOwnProfile()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "You are not allowed to change passwords of other users.", "Error during edit of user '" + userName + "'"));
-        } else  if (!Objects.equals(getPassword(), getRepeatedPassword())) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "The new passwords do not match.", ""));
-        }
-        else if (getPassword() == null || getPassword().isBlank()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "The new password cannot be empty or blank.", ""));
-        } else {
-            try {
-                serviceBean.getUserService().changePassword(getUserName(), getPassword().trim());
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "The password has been changed!", ""));
-            } catch (UserNotFoundException e) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Unable to change password for not yet saved new user.", ""));
-            }
-        }
-    }
-
-    public void resetPassword() {
-        if (securityContext.isCallerInRole("admin")) {
-            try {
-                // reset password to user name
-                serviceBean.getUserService().changePassword(getUserName(), getUserName());
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-                        "The password has been reset!", ""));
-            } catch (UserNotFoundException e) {
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Unable to reset password for the user.", ""));
-            }
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "You are not allowed to reset passwords of other users.", "Error during edit of user '" + userName + "'"));
-        }
     }
 
 }

@@ -31,7 +31,7 @@
                 <h:panelGroup>
                     <!-- it is too expensive to make it read-only -->
                     <!--                readonly="#{userEditPageBean.editingOwnOpenIDProfile}"-->
-                    <h:inputText id="name" value="#{resultCalculationBean.userID}"
+                    <h:inputText id="name" value="#{resultCalculationBean.childID}"
                                  size="80" maxlength="80"
                                  required="false" requiredMessage=" введите ID пациента"/>
                     <h:message for="name" errorStyle="color: red"/>
@@ -40,12 +40,12 @@
                 <h:outputLabel for="birthday" value="Дата рождения: "/>
                 <h:panelGroup>
                     <h:inputText id="birthday" value="#{resultCalculationBean.birthday}" size="80" maxlength="80"
-                                 required="false" requiredMessage=" ввведите дату рождения пациента"/>
+                                 required="false" requiredMessage=" ввведите дату рождения пациента (yyyy-MM-dd)"/>
                     <h:message for="birthday" errorStyle="color: red"/>
                 </h:panelGroup>
 
 
-                <h:outputLabel for="analysisDate" value="Дата анализа: "/>
+                <h:outputLabel for="analysisDate" value="Дата анализа (yyyy-MM-dd): "/>
                 <h:panelGroup>
                     <h:inputText id="analysisDate" value="#{resultCalculationBean.analysisDate}"
                                  readonly="false"

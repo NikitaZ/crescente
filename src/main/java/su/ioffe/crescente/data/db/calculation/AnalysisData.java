@@ -7,6 +7,9 @@ public class AnalysisData {
     private Double tesValue;
     private Double inhValue;
 
+    public AnalysisData() {
+
+    }
     public AnalysisData(Double lhValue, Double fshValue, Double tesValue, Double inhValue) {
         this.lhValue = lhValue;
         this.fshValue = fshValue;
