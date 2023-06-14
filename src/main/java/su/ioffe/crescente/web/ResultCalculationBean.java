@@ -168,7 +168,8 @@ public class ResultCalculationBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
                 "Результат: " + result.getResult(), ""));
 
-        return "Users";
+//        return "Input data";
+        return "";
 
     }
 
