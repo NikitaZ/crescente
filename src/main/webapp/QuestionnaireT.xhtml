@@ -10,19 +10,19 @@
 <body>
 
 <ui:composition template="/template.xhtml">
-    <ui:define name="metadata">
-        <f:metadata>
-            <f:viewParam name="#{UtilityBean.userParamName}" value="#{userEditPageBean.userNameViaParameter}"/>
-            <f:viewParam name="#{UtilityBean.logIntoOnSaveParamName}" value="#{userEditPageBean.logIntoOnSave}"/>
-        </f:metadata>
-    </ui:define>
+<!--    <ui:define name="metadata">-->
+<!--        <f:metadata>-->
+<!--            <f:viewParam name="#{UtilityBean.userParamName}" value="#{userEditPageBean.userNameViaParameter}"/>-->
+<!--            <f:viewParam name="#{UtilityBean.logIntoOnSaveParamName}" value="#{userEditPageBean.logIntoOnSave}"/>-->
+<!--        </f:metadata>-->
+<!--    </ui:define>-->
     <ui:define name="title">Ввод результатов анализов</ui:define>
 
     <ui:define name="action">&nbsp;</ui:define>
     <ui:define name="status">&nbsp;</ui:define>
     <ui:define name="body">
 
-        <h:panelGroup rendered="#{userEditPageBean.editingOwnProfile or request.isUserInRole('admin')}">
+        <h:panelGroup rendered="true">
             <h:panelGrid columns="1">
                 <f:facet name="caption">
                     <h:outputText value="Ввод результатов анализов для пациента"/>
@@ -37,7 +37,7 @@
                     <h:message for="name" errorStyle="color: red"/>
                 </h:panelGroup>
 
-                <h:outputLabel for="birthday" value="Дата рождения: "/>
+                <h:outputLabel for="birthday" value="Дата рождения  (yyyy-MM-dd): "/>
                 <h:panelGroup>
                     <h:inputText id="birthday" value="#{resultCalculationBean.birthday}" size="80" maxlength="80"
                                  required="false" requiredMessage=" ввведите дату рождения пациента (yyyy-MM-dd)"/>
