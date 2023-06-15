@@ -28,11 +28,13 @@
                 </p>
             </li>
         </h:panelGroup>
-        <li class="top-level">
-            <p>
-                <h:link outcome="About" value="About"/>
-            </p>
-        </li>
+        <h:panelGroup rendered="#{securityHelperBean.hasAccessToView('Users')}">
+            <li class="top-level">
+                <p>
+                    <h:link outcome="About" value="About"/>
+                </p>
+            </li>
+        </h:panelGroup>
         <li class="login-form">
             <p>
                 <gc:loginPanel/>
