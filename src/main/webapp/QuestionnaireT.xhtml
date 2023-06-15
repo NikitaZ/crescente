@@ -10,12 +10,12 @@
 <body>
 
 <ui:composition template="/template.xhtml">
-<!--    <ui:define name="metadata">-->
-<!--        <f:metadata>-->
-<!--            <f:viewParam name="#{UtilityBean.userParamName}" value="#{userEditPageBean.userNameViaParameter}"/>-->
-<!--            <f:viewParam name="#{UtilityBean.logIntoOnSaveParamName}" value="#{userEditPageBean.logIntoOnSave}"/>-->
-<!--        </f:metadata>-->
-<!--    </ui:define>-->
+    <ui:define name="metadata">
+        <f:metadata>
+            <f:viewParam name="#{UtilityBean.userParamName}" value="#{userEditPageBean.userNameViaParameter}"/>
+            <f:viewParam name="#{UtilityBean.logIntoOnSaveParamName}" value="#{userEditPageBean.logIntoOnSave}"/>
+        </f:metadata>
+    </ui:define>
     <ui:define name="title">Ввод результатов анализов</ui:define>
 
     <ui:define name="action">&nbsp;</ui:define>
@@ -29,8 +29,6 @@
                 </f:facet>
                 <h:outputLabel for="name" value="ID пациента: "/>
                 <h:panelGroup>
-                    <!-- it is too expensive to make it read-only -->
-                    <!--                readonly="#{userEditPageBean.editingOwnOpenIDProfile}"-->
                     <h:inputText id="name" value="#{resultCalculationBean.childID}"
                                  size="80" maxlength="80"
                                  required="false" requiredMessage=" введите ID пациента"/>
