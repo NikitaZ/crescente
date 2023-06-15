@@ -16,7 +16,7 @@
 <!--            <f:viewParam name="#{UtilityBean.logIntoOnSaveParamName}" value="#{userEditPageBean.logIntoOnSave}"/>-->
 <!--        </f:metadata>-->
 <!--    </ui:define>-->
-<!--    <ui:define name="title">Ввод результатов анализов</ui:define>-->
+    <ui:define name="title">Ввод результатов анализов</ui:define>
 
     <ui:define name="action">&nbsp;</ui:define>
     <ui:define name="status">&nbsp;</ui:define>
@@ -24,9 +24,9 @@
 
         <h:panelGroup rendered="true">
             <h:panelGrid columns="1">
-                <f:facet name="caption">
-                    <h:outputText value="Ввод результатов анализов для пациента"/>
-                </f:facet>
+<!--                <f:facet name="caption">-->
+<!--                    <h:outputText value="Ввод результатов анализов для пациента"/>-->
+<!--                </f:facet>-->
                 <h:outputLabel for="name" value="ID пациента: "/>
                 <h:panelGroup>
                     <h:inputText id="name" value="#{resultCalculationBean.childID}"
