@@ -27,7 +27,7 @@
 <!--                <f:facet name="caption">-->
 <!--                    <h:outputText value="Ввод результатов анализов для пациента"/>-->
 <!--                </f:facet>-->
-                <h:outputLabel for="name" value="ID пациента: "/>
+                <h:outputLabel for="name" value="ID пациента: " style="width:200px"/>
                 <h:panelGroup>
                     <h:inputText id="name" value="#{resultCalculationBean.childID}"
                                  size="80" maxlength="80"
@@ -43,7 +43,7 @@
                 </h:panelGroup>
 
 
-                <h:outputLabel for="analysisDate" value="Дата анализа (yyyy-MM-dd): "/>
+                <h:outputLabel for="analysisDate" value="Дата анализа (yyyy-MM-dd): " style="width:200px"/>
                 <h:panelGroup>
                     <h:inputText id="analysisDate" value="#{resultCalculationBean.analysisDate}"
                                  readonly="false"
@@ -53,28 +53,28 @@
                 </h:panelGroup>
 
 
-                <h:outputLabel for="lg" value="ЛГ (МЕ/л): "/>
+                <h:outputLabel for="lg" value="ЛГ (МЕ/л): " style="width:200px"/>
                 <h:panelGroup>
                     <h:inputText id="lg" value="#{resultCalculationBean.lg}" size="80" maxlength="80"
                                  required="true" requiredMessage=" введите результаты ЛГ"/>
                     <h:message for="lg" errorStyle="color: red"/>
                 </h:panelGroup>
 
-                <h:outputLabel for="fsg" value="ФСГ (МЕ/л): "/>
+                <h:outputLabel for="fsg" value="ФСГ (МЕ/л): " style="width:200px"/>
                 <h:panelGroup>
                     <h:inputText id="fsg" value="#{resultCalculationBean.fsg}" size="80" maxlength="80"
                                  required="false" requiredMessage=" введите результаты ФСГ"/>
                     <h:message for="fsg" errorStyle="color: red"/>
                 </h:panelGroup>
 
-                <h:outputLabel for="tst" value="Тестостерон (нмоль/л): "/>
+                <h:outputLabel for="tst" value="Тестостерон (нмоль/л): " style="width:200px"/>
                 <h:panelGroup>
                     <h:inputText id="tst" value="#{resultCalculationBean.tst}" size="80" maxlength="80"
                                  required="false" requiredMessage=" введите результаты тестостерона"/>
                     <h:message for="tst" errorStyle="color: red"/>
                 </h:panelGroup>
 
-                <h:outputLabel for="ing" value="Ингибин B (пг/мл): "/>
+                <h:outputLabel for="ing" value="Ингибин B (пг/мл): " style="width:200px"/>
                 <h:panelGroup>
                     <h:inputText id="ing" value="#{resultCalculationBean.ing}" size="80" maxlength="80"
                                  required="false" requiredMessage=" введите результаты ингибина B"/>
