@@ -90,6 +90,7 @@ In order to connect IDEA to DB:
      java -cp ./glassfish/modules/h2.jar org.h2.tools.Script -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.zip -options compression zip
 
      Quote: The SCRIPT command locks objects while it is running. Admin rights are required to execute this command.
+     It seems we need to stop server first and then start it again. Otherwise the command silently does nothing.
 
     Importing database:
         java -cp ./glassfish/modules/h2.jar org.h2.tools.RunScript -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script ../crescente/src/main/sql/crescente.sql
