@@ -71,7 +71,7 @@
 <!--    </servlet-mapping>-->
 
     <welcome-file-list>
-        <welcome-file>faces/Questionnarie.xhtml</welcome-file>
+        <welcome-file>faces/Questionnaire.xhtml</welcome-file>
         <!-- take a look at this file :), it seems to forward to faces/Documents.xhtml via html headers -->
         <!--        <welcome-file>index.html</welcome-file>-->
         <!--        <welcome-file>/</welcome-file>-->
