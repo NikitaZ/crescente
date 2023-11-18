@@ -59,6 +59,7 @@ label.after {
 #dateArea label {
   position: relative;
   background-color: green;
+  left: -100px;
 }
 
 #birthdayInput {
