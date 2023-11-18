@@ -23,18 +23,12 @@
     <ui:define name="status">&nbsp;</ui:define>
     <ui:define name="body">
         <h:panelGrid columns="1">
-            <f:facet name="caption">
-                <h:outputText value="Добро пожаловать!"/>
-            </f:facet>
-            <f:facet name="caption">
-                <h:outputText value="Для расчетов можно использовать:"/>
-            </f:facet>
-            <f:facet name="caption">
-                <h:outputText value="Логин: doctor"/>
-            </f:facet>
-            <f:facet name="caption">
-                <h:outputText value="Пароль: doctor"/>
-            </f:facet>
+            <tr><td><h:outputText value="Добро пожаловать!"/></td></tr>
+            <tr><td><h:outputText value="Для расчетов можно использовать:"/></td></tr>
+            <tr><td><h:outputText value="Логин: doctor"/></td></tr>
+            <tr><td><h:outputText value="Пароль: doctor"/></td></tr>
+        </h:panelGrid>
+        <h:panelGrid columns="1">
             <h:outputLabel for="name" value="Login name: "/>
             <h:panelGroup>
                 <h:inputText id="name" value="#{loginPageBean.userName}" size="80" maxlength="120"
