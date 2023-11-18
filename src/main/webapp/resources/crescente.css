@@ -54,6 +54,7 @@ label.after {
   position: relative;
   top: 50px;
   left: 50px;
+  background: grey;
 }
 
 #dateArea label {
