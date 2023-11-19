@@ -35,19 +35,19 @@
                 <div id="childArea">
                     <p>
                         <label for="childNickInput">ID пациента:</label>
-                        <input type="text" id="childNickInput" name="childNick"/>
+                        <input type="text" id="childNickInput" name="childNick" value="#{resultCalculationBean.childID}" required="false"/>
                     </p>
                 </div>
 
                 <div id="dateArea">
                     <p>
                         <label for="birthdayInput">Дата рождения:</label>
-                        <input type="date" id="birthdayInput" name="birthday"/>
+                        <input type="date" id="birthdayInput" name="birthday" value="#{resultCalculationBean.birthday}" required="false"/>
                     </p>
                     <p><br></br></p>
                     <p>
                         <label for="analysisDateInput">Дата анализа:</label>
-                        <input type="date" id="analysisDateInput" name="analysisDate"/>
+                        <input type="date" id="analysisDateInput" name="analysisDate" value="#{resultCalculationBean.analysisDate}" required="false"/>
                     </p>
                 </div>
 
@@ -55,34 +55,34 @@
                 <div id="dataArea">
                     <p id="lgp">
                         <label for="lgInput">ЛГ: </label>
-                        <input type="number" id="lgInput" name="lg" step="any"/>
+                        <input type="number" id="lgInput" name="lg" step="any" value="#{resultCalculationBean.lg}" required="false"/>
                         <label for="lgInput" class="after">МЕ/л</label>
                     </p>
                     <p><br></br></p>
                     <p><br></br></p>
                     <p id="fsgp">
                         <label for="fsgInput">ФСГ: </label>
-                        <input type="number" id="fsgInput" name="fsg" step="any"/>
+                        <input type="number" id="fsgInput" name="fsg" step="any" value="#{resultCalculationBean.fsg}" required="false"/>
                         <label for="lgInput" class="after">МЕ/л</label>
                     </p>
                     <p><br></br></p>
                     <p><br></br></p>
                     <p id="tstp">
                         <label for="tstInput">Тестостерон: </label>
-                        <input type="number" id="tstInput" name="tst" step="any"/>
+                        <input type="number" id="tstInput" name="tst" step="any"value="#{resultCalculationBean.tst}" required="false"/>
                         <label for="lgInput" class="after">нмоль/л</label>
                     </p>
                     <p><br></br></p>
                     <p><br></br></p>
                     <p id="ingp">
                         <label for="ingInput">Ингибин B: </label>
-                        <input type="number" id="ingInput" name="ing" step="any"/>
+                        <input type="number" id="ingInput" name="ing" step="any"value="#{resultCalculationBean.ing}" required="false"/>
                         <label for="lgInput" class="after">пг/мл</label>
                     </p>
                 </div>
 
                 <div id="buttonsArea">
-                    <input type="submit" id="submitButton" value="Расчитать" class="button"/>
+                    <input type="submit" id="submitButton" value="Расчитать" class="button" action="#{resultCalculationBean.calc}"/>
                     <input type="reset" id="clearButton" value="Очистить" class="button"/>
                 </div>
             </form>
