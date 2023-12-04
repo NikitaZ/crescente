@@ -30,20 +30,20 @@
         </h:panelGrid>
         <h:panelGrid columns="1">
             <h:panelGroup>
-                <h:outputLabel for="name" value="Login name: "/>
+                <h:outputLabel for="name" value="Логин: "/>
                 <h:inputText id="name" value="#{loginPageBean.userName}" size="80" maxlength="120"
                                  required="true" requiredMessage="enter your username!"/>
 <!--                    <h:message for="name" errorStyle="color: red"/>-->
 
             </h:panelGroup>
             <h:panelGroup>
-                <h:outputLabel for="password" value="Password: "/>
+                <h:outputLabel for="password" value="Пароль: "/>
                 <h:inputSecret id="password" value="#{loginPageBean.password}" size="80" maxlength="120"
                                    required="true" requiredMessage="enter your password!"/>
 <!--                    <h:message for="password" errorStyle="color: red"/>-->
             </h:panelGroup>
             <h:panelGroup>
-                <h:commandButton action="#{loginPageBean.login}" value="Login"/>
+                <h:commandButton action="#{loginPageBean.login}" value="Вход"/>
             </h:panelGroup>
         </h:panelGrid>
 
