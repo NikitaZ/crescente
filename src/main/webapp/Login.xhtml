@@ -29,25 +29,22 @@
             <tr><td><h:outputText value="Пароль: doctor"/></td></tr>
         </h:panelGrid>
         <h:panelGrid columns="1">
-            <tr>
-                <td><h:outputLabel for="name" value="Login name: "/></td>
-                <td>
-                    <h:inputText id="name" value="#{loginPageBean.userName}" size="80" maxlength="120"
+            <h:panelGroup>
+                <h:outputLabel for="name" value="Login name: "/>
+                <h:inputText id="name" value="#{loginPageBean.userName}" size="80" maxlength="120"
                                  required="true" requiredMessage="enter your username!"/>
-                    <h:message for="name" errorStyle="color: red"/>
-                </td>
-            </tr>
-            <tr>
-                <td><h:outputLabel for="password" value="Password: "/></td>
-                <td>
-                    <h:inputSecret id="password" value="#{loginPageBean.password}" size="80" maxlength="120"
+<!--                    <h:message for="name" errorStyle="color: red"/>-->
+
+            </h:panelGroup>
+            <h:panelGroup>
+                <h:outputLabel for="password" value="Password: "/>
+                <h:inputSecret id="password" value="#{loginPageBean.password}" size="80" maxlength="120"
                                    required="true" requiredMessage="enter your password!"/>
-                    <h:message for="password" errorStyle="color: red"/>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2"><h:commandButton action="#{loginPageBean.login}" value="Login"/></td>
-            </tr>
+<!--                    <h:message for="password" errorStyle="color: red"/>-->
+            </h:panelGroup>
+            <h:panelGroup>
+                <h:commandButton action="#{loginPageBean.login}" value="Login"/>
+            </h:panelGroup>
         </h:panelGrid>
 
         <h:messages styleClass="errorMessage" showDetail="true"/>
