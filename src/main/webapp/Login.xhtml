@@ -32,21 +32,17 @@
             <tr>
                 <td><h:outputLabel for="name" value="Login name: "/></td>
                 <td>
-                    <h:panelGroup>
-                        <h:inputText id="name" value="#{loginPageBean.userName}" size="80" maxlength="120"
-                                     required="true" requiredMessage="enter your username!"/>
-                        <h:message for="name" errorStyle="color: red"/>
-                    </h:panelGroup>
-            </td>
+                    <h:inputText id="name" value="#{loginPageBean.userName}" size="80" maxlength="120"
+                                 required="true" requiredMessage="enter your username!"/>
+                    <h:message for="name" errorStyle="color: red"/>
+                </td>
             </tr>
             <tr>
                 <td><h:outputLabel for="password" value="Password: "/></td>
                 <td>
-                    <h:panelGroup>
-                        <h:inputSecret id="password" value="#{loginPageBean.password}" size="80" maxlength="120"
-                                       required="true" requiredMessage="enter your password!"/>
-                        <h:message for="password" errorStyle="color: red"/>
-                    </h:panelGroup>
+                    <h:inputSecret id="password" value="#{loginPageBean.password}" size="80" maxlength="120"
+                                   required="true" requiredMessage="enter your password!"/>
+                    <h:message for="password" errorStyle="color: red"/>
                 </td>
             </tr>
             <tr>
