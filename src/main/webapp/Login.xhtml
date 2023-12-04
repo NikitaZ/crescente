@@ -29,23 +29,29 @@
             <tr><td><h:outputText value="Пароль: doctor"/></td></tr>
         </h:panelGrid>
         <h:panelGrid columns="1">
-            <h:outputLabel for="name" value="Login name: "/>
-            <h:panelGroup>
-                <h:inputText id="name" value="#{loginPageBean.userName}" size="80" maxlength="120"
-                             required="true" requiredMessage="enter your username!"/>
-                <h:message for="name" errorStyle="color: red"/>
-            </h:panelGroup>
-
-            <h:outputLabel for="password" value="Password: "/>
-            <h:panelGroup>
-                <h:inputSecret id="password" value="#{loginPageBean.password}" size="80" maxlength="120"
-                             required="true" requiredMessage="enter your password!"/>
-                <h:message for="password" errorStyle="color: red"/>
-            </h:panelGroup>
-
-            <h:panelGrid columns="2">
-                <h:commandButton action="#{loginPageBean.login}" value="Login"/>
-            </h:panelGrid>
+            <tr>
+                <td><h:outputLabel for="name" value="Login name: "/></td>
+                <td>
+                    <h:panelGroup>
+                        <h:inputText id="name" value="#{loginPageBean.userName}" size="80" maxlength="120"
+                                     required="true" requiredMessage="enter your username!"/>
+                        <h:message for="name" errorStyle="color: red"/>
+                    </h:panelGroup>
+            </td>
+            </tr>
+            <tr>
+                <td><h:outputLabel for="password" value="Password: "/></td>
+                <td>
+                    <h:panelGroup>
+                        <h:inputSecret id="password" value="#{loginPageBean.password}" size="80" maxlength="120"
+                                       required="true" requiredMessage="enter your password!"/>
+                        <h:message for="password" errorStyle="color: red"/>
+                    </h:panelGroup>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><h:commandButton action="#{loginPageBean.login}" value="Login"/></td>
+            </tr>
         </h:panelGrid>
 
         <h:messages styleClass="errorMessage" showDetail="true"/>
