@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.sql.DataSource;
 
@@ -37,7 +38,9 @@ public class DatabaseSetupBean {
      */
     @Inject
     private Pbkdf2PasswordHash passwordHash;
-    
+
+    private static final Logger LOGGER = Logger.getLogger(DatabaseSetupBean.class.getName());
+
     @PostConstruct
     public void init() {
         
@@ -45,10 +48,11 @@ public class DatabaseSetupBean {
 //        parameters.put("Pbkdf2PasswordHash.Iterations", "3072");
 //        parameters.put("Pbkdf2PasswordHash.Algorithm", "PBKDF2WithHmacSHA512");
 //        parameters.put("Pbkdf2PasswordHash.SaltSizeBytes", "64");
-        passwordHash.initialize(Map.ofEntries(Map.entry("Pbkdf2PasswordHash.Iterations", "3072"),
+        passwordHash.initialize(Map.ofEntries(
+                Map.entry("Pbkdf2PasswordHash.Iterations", "3072"),
                 Map.entry("Pbkdf2PasswordHash.Algorithm", "PBKDF2WithHmacSHA512"),
-                Map.entry("Pbkdf2PasswordHash.SaltSizeBytes", "64")));
-
+                Map.entry("Pbkdf2PasswordHash.SaltSizeBytes", "64")
+        ));
 //        Left as example, we do not need raw db manipulation so far.
 //        executeUpdate(dataSource, "CREATE TABLE caller(name VARCHAR(64) PRIMARY KEY, password VARCHAR(255))");
 //        executeUpdate(dataSource, "CREATE TABLE caller_groups(caller_name VARCHAR(64), group_name VARCHAR(64))");
@@ -63,6 +67,7 @@ public class DatabaseSetupBean {
         // although probably it doesn't matter.
         if (em.createNamedQuery(UserAccount.FIND_ALL, UserAccount.class).getResultList().isEmpty())
         {
+            LOGGER.info("Empty database. Creating admin account, see README.txt.");
             UserAccount adminUser = new UserAccount("admin");
             adminUser.setPasswordHash(passwordHash.generate("admin".toCharArray()));
             em.persist(adminUser);
@@ -71,6 +76,8 @@ public class DatabaseSetupBean {
             group.setGroupName("admin");
             group.setUserAccountName("admin");
             em.persist(group);
+        } else {
+            LOGGER.info("Database already exists. Skipping.");
         }
     }
 
