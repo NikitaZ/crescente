@@ -8,26 +8,28 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 public class DateUtils {
+    private static final SimpleDateFormat FORMATTER = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
+    private static final TimeZone MOSCOW_TZ = TimeZone.getTimeZone("Europe/Moscow");
+
+    static {
+        FORMATTER.setTimeZone(MOSCOW_TZ);
+    }
 
     public static Date stringToDate(String str) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        formatter.setTimeZone(TimeZone.getTimeZone("Europe/Moscow"));
-
         try {
-            return formatter.parse(str);
+            return FORMATTER.parse(str);
         } catch (ParseException e) {
+            //noinspection CallToPrintStackTrace
             e.printStackTrace();
             return null;
         }
     }
 
     public static String dateToString(Date date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
-        formatter.setTimeZone(TimeZone.getTimeZone("Europe/Moscow"));
-        return formatter.format(date);
+        return FORMATTER.format(date);
     }
 
     public static Date getToday() {
-        return Calendar.getInstance(TimeZone.getTimeZone("Europe/Moscow")).getTime();
+        return Calendar.getInstance(MOSCOW_TZ).getTime();
     }
 }
