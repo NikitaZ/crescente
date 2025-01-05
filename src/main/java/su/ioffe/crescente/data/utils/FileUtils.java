@@ -11,11 +11,14 @@ import java.util.stream.Stream;
 
 public class FileUtils {
 
+    private FileUtils() {
+    }
+
     public static List<String> readIDsFromFile(String path) {
         try (InputStream in = FileUtils.class.getResourceAsStream(path)) {
             if (in != null) {
-                List<String> ids = new ArrayList<>();
-                BufferedReader bufReader = new BufferedReader(new InputStreamReader(in));
+                final List<String> ids = new ArrayList<>();
+                final BufferedReader bufReader = new BufferedReader(new InputStreamReader(in));
                 String line = bufReader.readLine();
                 while (line != null) {
                     ids.add(line.trim());
@@ -24,11 +27,13 @@ public class FileUtils {
                 return ids;
             }
         } catch (IOException ex) {
+            //noinspection CallToPrintStackTrace
             ex.printStackTrace();
         }
         return null;
     }
 
+    // TODO is this the best way? Is it some sort of win->linux line endings converter? like Files.read()...
     public static String readResourceString(String path) {
         StringBuilder stringBuilder = new StringBuilder();
         try (InputStream in = FileUtils.class.getResourceAsStream(path)) {
@@ -47,6 +52,7 @@ public class FileUtils {
 
     public static String readFile(String filePath) {
         StringBuilder contentBuilder = new StringBuilder();
+        // todo compare to above
         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
             stream.forEach(s -> contentBuilder.append(s).append("\n"));
         } catch (IOException e) {
@@ -57,7 +63,6 @@ public class FileUtils {
     }
 
     public static void saveToFile(String filePath, String str) {
-
         try (BufferedWriter bufWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(filePath))))) {
             bufWriter.write(str);
         } catch (IOException e) {

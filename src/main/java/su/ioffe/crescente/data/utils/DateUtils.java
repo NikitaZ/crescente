@@ -15,6 +15,9 @@ public class DateUtils {
         FORMATTER.setTimeZone(MOSCOW_TZ);
     }
 
+    private DateUtils() {
+    }
+
     public static Date stringToDate(String str) {
         try {
             return FORMATTER.parse(str);
