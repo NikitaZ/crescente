@@ -1,6 +1,7 @@
-package su.ioffe.crescente.data.entities;
+package su.ioffe.crescente.data.db.entities;
 
-import su.ioffe.medstat.ira.attempt2.utils.DateUtils;
+
+import su.ioffe.crescente.data.utils.DateUtils;
 
 import java.util.Date;
 

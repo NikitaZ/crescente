@@ -1,7 +1,8 @@
 package su.ioffe.crescente.data.db.calculation;
 
-import su.ioffe.medstat.ira.attempt2.CalcChildren;
-import su.ioffe.medstat.ira.attempt2.data.Analysis;
+
+import su.ioffe.crescente.data.db.entities.Analysis;
+import su.ioffe.crescente.data.db.example.CalcChildren;
 
 import java.util.Date;
 
