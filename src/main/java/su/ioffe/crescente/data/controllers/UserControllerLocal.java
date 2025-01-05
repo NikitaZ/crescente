@@ -12,6 +12,7 @@ import java.util.List;
  */
 @Local
 public interface UserControllerLocal {
+    // todo should return Optional<UserAccount>
     UserAccount findByName(String name);
 
     /**

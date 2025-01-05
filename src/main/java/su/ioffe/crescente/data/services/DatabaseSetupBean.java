@@ -3,6 +3,7 @@ package su.ioffe.crescente.data.services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -65,7 +66,8 @@ public class DatabaseSetupBean {
         // If there are no users, create admin user.
         // I don't want to introduce dependency on UserController here,
         // although probably it doesn't matter.
-        if (em.createNamedQuery(UserAccount.FIND_ALL, UserAccount.class).getResultList().isEmpty())
+        List<UserAccount> users = em.createNamedQuery(UserAccount.FIND_ALL, UserAccount.class).getResultList();
+        if (users.isEmpty())
         {
             LOGGER.info("Empty database. Creating admin account, see README.txt.");
             UserAccount adminUser = new UserAccount("admin");

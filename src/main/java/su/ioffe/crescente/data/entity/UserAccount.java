@@ -13,7 +13,12 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
+import java.io.Serial;
 import java.io.Serializable;
+
+import static su.ioffe.crescente.data.entity.UserAccount.FIND_ALL;
+import static su.ioffe.crescente.data.entity.UserAccount.FIND_BY_NAME;
+import static su.ioffe.crescente.data.entity.UserAccount.PARAM_NAME;
 
 /**
  * @author nikita.zinoviev@gmail.com
@@ -21,10 +26,16 @@ import java.io.Serializable;
 @Entity
 // todo why do we need this line?
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name"}))
-@NamedQueries({@NamedQuery(name = UserAccount.FIND_BY_NAME,
-        query = "select user from UserAccount user where user.name = :" + UserAccount.PARAM_NAME),
-        @NamedQuery(name = UserAccount.FIND_ALL, query = "SELECT u from UserAccount u ORDER BY u.name")})
+@NamedQueries({
+        @NamedQuery(name = FIND_BY_NAME,
+                query = "SELECT user FROM UserAccount user WHERE user.name = :" + PARAM_NAME
+        ),
+        @NamedQuery(name = FIND_ALL,
+                query = "SELECT u from UserAccount u ORDER BY u.name"
+        )
+})
 public class UserAccount implements Serializable, NamedEntity {
+    @Serial
     private static final long serialVersionUID = 1L;
     private static final String QUERY_PREFIX = "admin.UserAccount.";
     public static final String PARAM_NAME = "name";
@@ -72,6 +83,7 @@ public class UserAccount implements Serializable, NamedEntity {
         return new UserAccountSummary(name, fullName, email, colour, pictureURL);
     }
 
+    // todo get rid of "get", why override is commented out??
 //    @Override
     public String getName() {
         return name;

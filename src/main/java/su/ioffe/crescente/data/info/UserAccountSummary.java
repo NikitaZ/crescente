@@ -2,10 +2,11 @@ package su.ioffe.crescente.data.info;
 
 import su.ioffe.crescente.data.entity.NamedEntity;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class UserAccountSummary implements Serializable, NamedEntity {
-
+    @Serial
     private static final long serialVersionUID = 1L;
 
     private String name;
@@ -33,6 +34,8 @@ public class UserAccountSummary implements Serializable, NamedEntity {
         this.pictureURL = pictureURL;
     }
 
+    // todo for sure get rid of 'get' as this is info object(?) or may it cause problems for JSF?
+    // upgrade JSF to newest version first
 //    @Override
     public String getName() {
         return name;

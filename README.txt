@@ -49,7 +49,8 @@ add
    default-web-module="crescente-1.0-SNAPSHOT"
 so it becomes   
      <virtual-server default-web-module="crescente-1.0-SNAPSHOT" network-listeners="http-listener-1,http-listener-2" id="server"></virtual-server>
-
+# above is an example of editing domain.xml settings file manually. It is actually not needed, see the 'set' command below.
+# (BUT for it to work (take place) one needs to restart the server, if domain.xml has been edited, server needs to be restarted)
 
 
 In order to connect IDEA to DB: 
@@ -60,8 +61,8 @@ In order to connect IDEA to DB:
    So that URL becomes
      jdbc:h2:/Users/.../glassfish7/glassfish/domains/domain1/config/deploy/crescente
 
-   Do not click 'download missing driver files', use 'h2/bin/h2-2.1.212.jar' instead.
-   (Idea now downloads 2.1.210 which doesn't seem to be fully compatible)
+   // Do not click 'download missing driver files', use 'h2/bin/h2-2.1.212.jar' instead.
+   // (Idea now downloads 2.1.210 which doesn't seem to be fully compatible)
    Update: Now idea downloads 2.2.220 which is ok.
    TODO: upgrade to a never H2 (current is aug 2 2024)
 
@@ -82,15 +83,16 @@ In order to connect IDEA to DB:
     (ping was 16 -> 11 -> 10 -> 10.. (above is warmed up))
 
 
-   IMPORTANT: on 'advanced' tab at 'Expert options' check 'Introspect using JDBC metadata'
-   - H2 integration with IDEA seems to be a bit broken, it uses TABLE_CATALOG instead of INFORMATION_SCHEMA_CATALOG_NAME
-    TODO check if this is still needed
+   //IMPORTANT: on 'advanced' tab at 'Expert options' check 'Introspect using JDBC metadata'
+   //- H2 integration with IDEA seems to be a bit broken, it uses TABLE_CATALOG instead of INFORMATION_SCHEMA_CATALOG_NAME
+   The above seems to be not needed anymore
 
-   now under PUBLIC you should see tables and USERACCOUNT.
+   now under PUBLIC you should see tables USERACCOUNT and SECURITYGROUPLINK provided that the app has been deployed
 
+[IMPORTANT:]
     As said in (https://blog.jetbrains.com/idea/2021/02/creating-a-simple-jakarta-persistence-application/)
     its a good idea to connect this datasource to our persistence unit by right-clicking on the 'default' persistence unit
-    in the Persistence tool window (View -> Tool Windows -> Persistence)
+    in the 'Persistence tool' window of Idea (View -> Tool Windows -> Persistence)
     and clicking Assign Data Sources… then selecting our myDB database from the drop-down menu.
     This step is required for the IntelliJ IDEA code completion
 

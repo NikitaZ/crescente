@@ -22,6 +22,7 @@ import java.util.Map;
 @Stateless
 public class UserControllerBean implements UserControllerLocal {
 
+    // todo check that these fields cannot be final
     @PersistenceContext(name = "default")
     private EntityManager em;
 
@@ -37,18 +38,20 @@ public class UserControllerBean implements UserControllerLocal {
     }
 
     public UserAccount findByName(String name) {
+        final List<UserAccount> resultList = em.createNamedQuery(UserAccount.FIND_BY_NAME, UserAccount.class)
+                .setParameter(UserAccount.PARAM_NAME, name)
+                .getResultList();
 
-        List<UserAccount> resultList = em.createNamedQuery(UserAccount.FIND_BY_NAME, UserAccount.class).setParameter(UserAccount.PARAM_NAME, name).getResultList();
-
+        // todo return empty optional
         if (resultList.isEmpty()) {
             return null;
         }
 
         if (resultList.size() > 1) {
-            throw new EJBException(" DB integrity violation, looked up more than one UserAccount for name " + name);
+            throw new EJBException("DB integrity violation, looked up more than one UserAccount for name " + name);
         }
 
-        return resultList.get(0);
+        return resultList.getFirst();
     }
 
 
@@ -59,7 +62,8 @@ public class UserControllerBean implements UserControllerLocal {
     @Override
     public void revokeRights(String userName) {
         em.createQuery("DELETE FROM SecurityGroupLink l WHERE l.userAccountName = :" + UserAccount.PARAM_NAME)
-                .setParameter(UserAccount.PARAM_NAME, userName).executeUpdate();
+                .setParameter(UserAccount.PARAM_NAME, userName)
+                .executeUpdate();
     }
 
     @Override
@@ -74,8 +78,11 @@ public class UserControllerBean implements UserControllerLocal {
 
     @Override
     public Collection<String> findUserRoles(String userName) {
-        return em.createQuery("SELECT l.groupName FROM SecurityGroupLink l WHERE l.userAccountName = :" + UserAccount.PARAM_NAME,
-                String.class).setParameter(UserAccount.PARAM_NAME, userName).getResultList();
+        return em.createQuery(
+                "SELECT l.groupName FROM SecurityGroupLink l WHERE l.userAccountName = :" + UserAccount.PARAM_NAME,
+                    String.class
+                )
+                .setParameter(UserAccount.PARAM_NAME, userName).getResultList();
     }
 
     @Override
@@ -94,7 +101,7 @@ public class UserControllerBean implements UserControllerLocal {
      * @throws UserNotFoundException if user with a given name cannot be found
      */
     public UserAccount checkedFindByName(String name) throws UserNotFoundException {
-        UserAccount user = findByName(name);
+        final UserAccount user = findByName(name);
 
         if (user == null) {
             throw new UserNotFoundException(name);
@@ -105,7 +112,7 @@ public class UserControllerBean implements UserControllerLocal {
 
 
     public UserAccount create(String name) {
-        UserAccount user = new UserAccount(name);
+        final UserAccount user = new UserAccount(name);
         user.setPasswordHash(passwordHashGenerator.generate(name.toCharArray()));
         em.persist(user);
         return user;
@@ -118,13 +125,7 @@ public class UserControllerBean implements UserControllerLocal {
      * @throws UserNotFoundException
      */
     public void delete(String userName) throws UserNotFoundException {
-        UserAccount user = findByName(userName);
-
-        if (user == null) {
-            throw new UserNotFoundException(userName);
-        }
-
-        em.remove(user);
+        em.remove(checkedFindByName(userName));
     }
 
 }

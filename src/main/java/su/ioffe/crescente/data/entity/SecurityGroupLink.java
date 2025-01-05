@@ -10,11 +10,10 @@ import jakarta.persistence.UniqueConstraint;
 import java.io.Serializable;
 
 /**
- * Associates user name with security group - we don't use any many-many relationships here to keep things simple.
+ * Associates username with security group - we don't use any many-many relationships here to keep things simple.
  * See Group(s) in Duke’s Forest Case Study Example from JakartaEE tutorial for a many-to-many example.
  */
 @Entity
-
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"groupName", "userAccountName"}))
 public class SecurityGroupLink implements Serializable {
 
