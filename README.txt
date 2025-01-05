@@ -29,15 +29,15 @@ Now install h2.jar into glassfish via
 Restart glassfish.
 
 Run
-  glassfish6/bin/asadmin add-resources ../src/main/resources/app-server-resources.xml 
+  glassfish7/bin/asadmin add-resources ../src/main/resources/app-server-resources.xml
 this will add connection pool and datasource.
 
 Ping the datasource (via Ping button at 'Edit JDBC Connection Pool' for crescente-h2-pool at admin console)
 If it succeeds the db file will be created at
-glassfish6/glassfish/domains/domain1/config/deploy/crescente.mv.db
+glassfish7/glassfish/domains/domain1/config/deploy/crescente.mv.db
 
 
-stop server, edit glassfish6/glassfish/domains/domain1/domain.xml
+stop server, edit glassfish7/glassfish/domains/domain1/domain.xml
 at 
   <configs>
     <config name="server-config">
@@ -56,12 +56,14 @@ In order to connect IDEA to DB:
    on the 'Database' tab of Idea add new data source:
       choose H2, "embedded" mode (by clicking on 'remote' in blue) and enter PATH:
    the path to the .mv.db file above, i.e. 
-      /Users/<name>/.../glassfish6/glassfish/domains/domain1/config/deploy/crescente.mv.db
+      /Users/<name>/.../glassfish7/glassfish/domains/domain1/config/deploy/crescente.mv.db
    So that URL becomes
-     jdbc:h2:/Users/.../glassfish6/glassfish/domains/domain1/config/deploy/crescente
+     jdbc:h2:/Users/.../glassfish7/glassfish/domains/domain1/config/deploy/crescente
 
    Do not click 'download missing driver files', use 'h2/bin/h2-2.1.212.jar' instead.
    (Idea now downloads 2.1.210 which doesn't seem to be fully compatible)
+   Update: Now idea downloads 2.2.220 which is ok.
+   TODO: upgrade to a never H2 (current is aug 2 2024)
 
    Use username and password from crescente/src/main/resources/app-server-resources.xml
    (both crescente for now)
@@ -72,8 +74,17 @@ In order to connect IDEA to DB:
         Driver: H2 JDBC Driver (ver. 2.1.212 (2022-04-09), JDBC4.2)
         Ping: 14 ms
 
-   IMPORTANT: on 'advanced' tab at 'expert' check 'use JDBC metadata for intraspection'
+        DBMS: H2 (ver. 2.2.220 (2023-07-04))
+        Case sensitivity: plain=upper, delimited=exact
+        Driver: H2 JDBC Driver (ver. 2.2.220 (2023-07-04), JDBC4.2)
+
+        Ping: 10 ms
+    (ping was 16 -> 11 -> 10 -> 10.. (above is warmed up))
+
+
+   IMPORTANT: on 'advanced' tab at 'Expert options' check 'Introspect using JDBC metadata'
    - H2 integration with IDEA seems to be a bit broken, it uses TABLE_CATALOG instead of INFORMATION_SCHEMA_CATALOG_NAME
+    TODO check if this is still needed
 
    now under PUBLIC you should see tables and USERACCOUNT.
 
@@ -84,7 +95,7 @@ In order to connect IDEA to DB:
     This step is required for the IntelliJ IDEA code completion
 
     Exporting database:
-     // uncompressed sql file
+     // uncompressed sql file // TODO try and fix suffix
      java -cp ./glassfish/modules/h2.jar org.h2.tools.Script -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.zip -compression zip
      // compressed sql file
      java -cp ./glassfish/modules/h2.jar org.h2.tools.Script -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.zip -options compression zip
@@ -94,7 +105,7 @@ In order to connect IDEA to DB:
     Importing database:
         java -cp ./glassfish/modules/h2.jar org.h2.tools.RunScript -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script ../crescente/src/main/sql/crescente.sql
 
-    // or compressed with
+    // For compressed one use
         java -cp ./glassfish/modules/h2.jar org.h2.tools.RunScript -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script test.zip -options compression zip
 
      or via h2 Shell, etc
@@ -103,8 +114,8 @@ In order to connect IDEA to DB:
         RUNSCRIPT FROM 'classpath:/com/acme/test.sql'
 
 
-
-    The is also BACKUP command and RESTORE command as well as Backup/Restore tools, tools can work only offline, but
+[VERY IMPORTANT FOR PRODUCTION]
+    There is also BACKUP command and RESTORE command as well as Backup/Restore tools, tools can work only offline, but
     BACKUP maybe performed online.
             BACKUP TO 'backup.zip'
     produces a zip with crescente.mv.db inside.
@@ -119,7 +130,7 @@ In order to connect IDEA to DB:
         because the transaction log is also copied. Admin rights are required to execute this command.
 
 
-SSH Tunnels:
+[SSH Tunnels:]
 ssh -L 9999:localhost:4848 <user>@<prod_host> # access production admin via localhost:9999
 ssh -R 8888:localhost:8080 <user>@<prod_host> # publish local GF as prodhost:8888 - say for a demo
 the last needs /etc/ssh/sshd_config: GateWayForwarding = yes
@@ -127,25 +138,40 @@ the last needs /etc/ssh/sshd_config: GateWayForwarding = yes
 GF related system setup:
 sudo sysctl -w net.ipv4.ip_unprivileged_port_start=443
 
+----
+
 GF:
-(the config is in glassfish6/glassfish/domains/domain1/config/domain.xml)
+(the config is in glassfish7/glassfish/domains/domain1/config/domain.xml)
 # increase default value (8192) to support long redirects (on long URLs)
 ./bin/asadmin set server-config.network-config.protocols.protocol.http-listener-1.http.header-buffer-length-bytes=16384
 ./bin/asadmin set server-config.network-config.protocols.protocol.http-listener-2.http.header-buffer-length-bytes=16384
 
+[TODO do not work now!]
 ./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compression=on
 ./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compressable-mime-type=text/html,text/xml,text/plain,text/css,text/javascript,application/json
+[
+
+nikitazinoviev@Nikitas-MacBook-Pro glassfish7 % ./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compression=on
+remote failure: No configuration found for server-config.network-config.protocols.protocol.ws-http-listener.http
+Command set failed.
+nikitazinoviev@Nikitas-MacBook-Pro glassfish7 %
+./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compressable-mime-type=text/html,text/xml,text/plain,text/css,text/javascript,application/json
+remote failure: No configuration found for server-config.network-config.protocols.protocol.ws-http-listener.http
+]
 
 # default web module
 ./bin/asadmin set server-config.http-service.virtual-server.server.default-web-module=crescente-1.0-SNAPSHOT
-# in case of a war in ear: crescente-ear-1.0-SNAPSHOT#crescente-1.0-SNAPSHOT.war
+# IMPORTANT!
+# in case of a war in ear use above: crescente-ear-1.0-SNAPSHOT#crescente-1.0-SNAPSHOT.war
 
-IMPT! diabled http2 for https
+IMPT! disabled http2 for https
 ./bin/asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-2.http.http2-enabled=false
 see
 https://github.com/payara/Payara/issues/2625
 and
 https://github.com/eclipse-ee4j/grizzly/issues/2111 which seems still open!
+[TODO - doublecheck, especially for GFv8]
+
 
 Useful commands
 ---------------
@@ -155,37 +181,37 @@ build via
 
   
 deploy (from glassfish6)
-  glassfish6/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
+  glassfish7/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
 
 list installed applications (from glassfish6)
-  glassfish6/bin/asadmin list-components
+  glassfish7/bin/asadmin list-components
 
 server log is located at
-  glassfish6/glassfish/domains/domain1/logs/server.log
+  glassfish7/glassfish/domains/domain1/logs/server.log
 
 redeploy
-  glassfish6/bin/asadmin redeploy --name crescente-1.0-SNAPSHOT target/crescente-1.0-SNAPSHOT.war
+  glassfish7/bin/asadmin redeploy --name crescente-1.0-SNAPSHOT target/crescente-1.0-SNAPSHOT.war
   or just use
-  glassfish6/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
+  glassfish7/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
   both seem to do the same as
-  glassfish6/bin/asadmin undeploy crescente-1.0-SNAPSHOT && glassfish6/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
+  glassfish7/bin/asadmin undeploy crescente-1.0-SNAPSHOT && glassfish6/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
 
 
 undeploy
-  glassfish6/bin/asadmin undeploy crescente-1.0-SNAPSHOT
+  glassfish7/bin/asadmin undeploy crescente-1.0-SNAPSHOT
 
 restart server
-  glassfish6/bin/asadmin stop-domain && glassfish6/bin/asadmin start-domain
+  glassfish7/bin/asadmin stop-domain && glassfish7/bin/asadmin start-domain
 
 easiest way to rebuild and deploy [development, is default] and [production]
-  mvn clean install && ./glassfish6/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
+  mvn clean install && ./glassfish7/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
 
-  mvn clean install -Pproduction && ./glassfish6/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
+  mvn clean install -Pproduction && ./glassfish7/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
 
 
 If there are no users in the database, DatabaseSetup singleton EJB creates a user 'admin' with 'admin' password and administration rights,
 use it to create actual admin users, test them and then delete the 'admin' user. This is partly because it is hard to
-calculate password hash via the same algorithm outside the server, although if course, we need only to calculate it once.
+calculate password hash via the same algorithm outside the server, although of course, we need only to calculate it once.
 one password hash for 'admin' is
 PBKDF2WithHmacSHA512:3072:CCDMAnF2/zhBrkR+8KvRv56AP+ZmDCmXIUVGlP0mQyZjwy9lqIGZXkwq7dzCazchX9iuOIHdGfoxMkpraDKnKg==:+uXwQ4/zqSbs/QYJheYoTMfV68qCiKL2wlRKUZiieaU=
 
@@ -203,13 +229,15 @@ To give admin rights to 'username' run
 
 
 We cannot connect IDEA to production DB as it is run in embedded mode. But may be this is a good thing that we cannot.
+[IMPORTNANT]
 Also h2/bin/h2.sh starts admin console to which we can connect with a browser to it (at 8182?).
 
+TODO:
 Q: should we use 'cargo' maven plugin to deploy application via maven? see tutorial examples (topmost pom file)
 
 
-
-Books:
+  Books:
+========
 - this one has been republished recently with Jakarta EE 10 in mind!
 Some comments refer to this book as "JSF and Java EE8" book.
 
@@ -223,5 +251,4 @@ cover
 Author(s): Arjan Tijms, Teo Bais, Werner Keil
 Publisher: Springer, Year: 2022
 
-I also love "Mastering EJB 3(?)" book but its last edition has been
-published quite a long time ago.
+I also love "Mastering EJB 4th edition" book -- it is still great!
