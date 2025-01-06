@@ -11,3 +11,7 @@ tmp
 .idea/dataSources
 .idea/httpRequests
 glassfish6
+glassfish7
+glassfish8
+h2
+old*

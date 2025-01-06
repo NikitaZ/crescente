@@ -10,23 +10,63 @@ Use your GitHub user (not e-mail) as the user and an access token (settings->dev
 see
 https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 
+See
+  https://github.com/eclipse-ee4j/glassfish/releases/tag/7.0.21
 download glassfish zip from glassfish.org
-unzip it at some location, in will unpack to glassfish6 directory
-  unzip ./glassfish-6.2.5.zip
+  https://www.eclipse.org/downloads/download.php?file=/ee4j/glassfish/glassfish-7.0.21.zip&mirror_id=1287
+unzip it at (some location) root of project, in will unpack to glassfish7 directory
+  unzip ./glassfish-7.0.21.zip
 
-NOTE: Maybe it is a good idea to unzip it into our project, 'glassfish6' is added to .gitignore
+NOTE: Maybe it is a good idea to unzip it into our project, 'glassfish6, glassfish7, glassfish8' is added to .gitignore
 (or symlink it, i.e.  ln -s ../glassfish6 )
 
 Download h2 as a platform independent zip from https://www.h2database.com/html/download.html
-(say, https://github.com/h2database/h2database/releases/download/version-2.1.212/h2-2022-04-09.zip)
+(say, https://github.com/h2database/h2database/releases/download/version-2.1.212/h2-2022-04-09.zip
+better https://github.com/h2database/h2database/releases/download/version-2.3.232/h2-2024-08-11.zip
+)
 unzip it to glassfish6 so that it would have h2 directory next to javadb and imq
   cd glassfish6
-  unzip ~/Downloads/h2-2022-04-09.zip   
+  unzip ~/Downloads/h2-2024-08-11.zip
 Now install h2.jar into glassfish via
   cp h2/bin/h2-2.1.212.jar ./glassfish/modules/h2.jar
-(we change the name to h2.jar so that we always overwrite the same file)
+(we change the name to h2.jar so that we always overwrite the same file, probably this is good as it prevents us
+from installing two h2 versions into same application server (GF) )
 
 Restart glassfish.
+
+[Naive GF/H2 upgrade:]
+<note>
+    # install new db
+    cp h2/bin/h2-2.3.232.jar glassfish7/glassfish/modules/h2.jar
+    # copy GF configuration
+    cp old_glassfish7_0_15/glassfish/domains/domain1/config/domain.xml glassfish7/glassfish/domains/domain1/config
+    # copy DB files:
+    cp -r old_glassfish7_0_15/glassfish/domains/domain1/config/deploy glassfish7/glassfish/domains/domain1/config
+    # redeploy app
+    # failed (hence need to reimport db):
+    # Caused by: org.h2.mvstore.MVStoreException: The write format 2 is smaller than the supported format 3 [2.3.232/5]
+    <strange> <!--todo why console backup fails??-->
+        java -cp ./old_glassfish7_0_15//glassfish/modules/h2.jar org.h2.tools.Shell -url "jdbc:h2:./old_glassfish7_0_15/glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente
+
+        Welcome to H2 Shell 2.1.212 (2022-04-09)
+        sql> BACKUP TO crescente_2_1_212;
+        Error: org.h2.jdbc.JdbcSQLNonTransientException: General error: "java.lang.NullPointerException: Cannot invoke ""org.h2.table.ColumnResolver.getSelect()"" because ""this.columnResolver"" is null"; SQL statement:
+        BACKUP TO crescente_2_1_212 [50000-212]
+    </strange>
+    # below worked and produced crescente.sql dump in the current directory
+    # a. export db
+    java -cp ./old_glassfish7_0_15/glassfish/modules/h2.jar org.h2.tools.Script -url "jdbc:h2:./old_glassfish7_0_15/glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.sql
+    # b. old DB doesn't work, get rid of it:
+    rm glassfish7/glassfish/domains/domain1/config/deploy/crescente.*
+    # c. import back
+    java -cp ./glassfish7//glassfish/modules/h2.jar org.h2.tools.RunScript -url "jdbc:h2:./glassfish7/glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script ../crescente/src/main/sql/crescente.sql
+    # d. check:
+    ls -l glassfish7/glassfish/domains/domain1/config/deploy
+      20480 Jan  6 15:16 crescente.mv.db
+    # e. needed to start GF, run (and then restart GF)
+    ./glassfish7/bin/asadmin set server-config.http-service.virtual-server.server.default-web-module=crescente-1.0-SNAPSHOT
+    # f. update jdbc driver in IDEA, I just used h2...jar from H2 directory
+</note>
 
 Run
   glassfish7/bin/asadmin add-resources ../src/main/resources/app-server-resources.xml
@@ -97,8 +137,8 @@ In order to connect IDEA to DB:
     This step is required for the IntelliJ IDEA code completion
 
     Exporting database:
-     // uncompressed sql file // TODO try and fix suffix
-     java -cp ./glassfish/modules/h2.jar org.h2.tools.Script -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.zip -compression zip
+     // uncompressed sql file
+     java -cp ./glassfish/modules/h2.jar org.h2.tools.Script -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.sql
      // compressed sql file
      java -cp ./glassfish/modules/h2.jar org.h2.tools.Script -url "jdbc:h2:./glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.zip -options compression zip
 
