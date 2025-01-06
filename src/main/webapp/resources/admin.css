@@ -87,7 +87,7 @@ a.collapseHeader:hover {
 
 .show-left-separator {
     /*noinspection CssUnknownTarget*/
-    /* TODO fix me, there must be a replacement in newest JSF
+    /* TODO fix me, there must be a replacement in newest JSF, still exists in GF 8
         background: url("/faces/javax.faces.resource/images/separator.png") no-repeat scroll left top transparent;*/
     background: url("images/separator.png") no-repeat scroll left top transparent;
 }

@@ -108,13 +108,14 @@ In order to connect IDEA to DB:
    So that URL becomes
      jdbc:h2:/Users/.../glassfish8/glassfish/domains/domain1/config/deploy/crescente
 
-   // Do not click 'download missing driver files', use 'h2/bin/h2-2.1.212.jar' instead.
-   // (Idea now downloads 2.1.210 which doesn't seem to be fully compatible)
-   Update: Now idea downloads 2.2.220 which is ok.
-   TODO: upgrade to a never H2 (current is aug 2 2024)
+   // TODO need to retry this once again
+   // Do not click 'download missing driver files', use 'h2/bin/h2-2.3.232.jar' instead.
+   // (At the time of 2.1.212 Idea used to download 2.1.210 which didn't seem to be fully compatible)
+   Update: Now idea downloads 2.2.220 which is ok (for 2.1.212).
+   BUT we upgraded to 2.3.232, if it downloads 2.2.220, use h2.jar instead as described above.
 
    Use username and password from crescente/src/main/resources/app-server-resources.xml
-   (both crescente for now)
+   (both 'crescente' for now)
 
    Click 'Test Connection' at the bottom, it should succeed and say:
         DBMS: H2 (ver. 2.1.212 (2022-04-09))
@@ -213,13 +214,12 @@ remote failure: No configuration found for server-config.network-config.protocol
 # IMPORTANT!
 # in case of a war in ear use above: crescente-ear-1.0-SNAPSHOT#crescente-1.0-SNAPSHOT.war
 
-IMPT! disabled http2 for https
-./bin/asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-2.http.http2-enabled=false
-see
-https://github.com/payara/Payara/issues/2625
-and
-https://github.com/eclipse-ee4j/grizzly/issues/2111 which seems still open!
-[TODO - doublecheck, especially for GFv8, in progress, I didn't apply above to GF8]
+Skip, seems not needed for Glassfish 8! IMPT! disabled http2 for https
+    ./bin/asadmin set configs.config.server-config.network-config.protocols.protocol.http-listener-2.http.http2-enabled=false
+    see
+    https://github.com/payara/Payara/issues/2625
+    and
+    https://github.com/eclipse-ee4j/grizzly/issues/2111 which seems still open!
 
 
 Useful commands
