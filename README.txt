@@ -66,7 +66,7 @@ Restart glassfish.
     # b. old DB doesn't work, get rid of it:
     rm glassfish7/glassfish/domains/domain1/config/deploy/crescente.*
     # c. import back
-    java -cp ./glassfish7//glassfish/modules/h2.jar org.h2.tools.RunScript -url "jdbc:h2:./glassfish7/glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script ../crescente/src/main/sql/crescente.sql
+    java -cp ./glassfish7//glassfish/modules/h2.jar org.h2.tools.RunScript -url "jdbc:h2:./glassfish7/glassfish/domains/domain1/config/deploy/crescente;AUTO_SERVER=TRUE" -user crescente -password crescente -script crescente.sql
     # d. check:
     ls -l glassfish7/glassfish/domains/domain1/config/deploy
       20480 Jan  6 15:16 crescente.mv.db
