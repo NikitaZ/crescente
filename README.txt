@@ -10,21 +10,28 @@ Use your GitHub user (not e-mail) as the user and an access token (settings->dev
 see
 https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 
-See
-  https://github.com/eclipse-ee4j/glassfish/releases/tag/7.0.21
-download glassfish zip from glassfish.org
-  https://www.eclipse.org/downloads/download.php?file=/ee4j/glassfish/glassfish-7.0.21.zip&mirror_id=1287
-unzip it at (some location) root of project, in will unpack to glassfish7 directory
-  unzip ./glassfish-7.0.21.zip
+# Install latest Glassfish application server
 
-NOTE: Maybe it is a good idea to unzip it into our project, 'glassfish6, glassfish7, glassfish8' is added to .gitignore
-(or symlink it, i.e.  ln -s ../glassfish6 )
+Here we describe current stable version Glassfish 7 (GF7), but GF8 is feature complete already, better install it
+(https://github.com/eclipse-ee4j/glassfish/releases/tag/8.0.0-M9)
+Below options which we do not use refer to GF7 or even GF6.
+    See
+      https://github.com/eclipse-ee4j/glassfish/releases/tag/7.0.21
+    download glassfish zip from glassfish.org
+      https://www.eclipse.org/downloads/download.php?file=/ee4j/glassfish/glassfish-7.0.21.zip&mirror_id=1287
+    unzip it at (some location) root of project, in will unpack to glassfish7 directory
+      unzip ./glassfish-7.0.21.zip
+
+While not required, it is a good idea to unzip it into our project, 'glassfish6, glassfish7, glassfish8' is added to .gitignore
+(or symlink it, i.e.  ln -s ../glassfish6 ). Below we assume this a little.
+
+# Install H2 database
 
 Download h2 as a platform independent zip from https://www.h2database.com/html/download.html
 (say, https://github.com/h2database/h2database/releases/download/version-2.1.212/h2-2022-04-09.zip
 better https://github.com/h2database/h2database/releases/download/version-2.3.232/h2-2024-08-11.zip
 )
-unzip it to glassfish6 so that it would have h2 directory next to javadb and imq
+unzip it to glassfish8 so that it would have h2 directory next to javadb and imq
   cd glassfish6
   unzip ~/Downloads/h2-2024-08-11.zip
 Now install h2.jar into glassfish via
@@ -34,7 +41,7 @@ from installing two h2 versions into same application server (GF) )
 
 Restart glassfish.
 
-[Naive GF/H2 upgrade:]
+[Example -- naive GF/H2 upgrade: (filenames as when upgrade happened, do not modify, see corresponding commit)]
 <note>
     # install new db
     cp h2/bin/h2-2.3.232.jar glassfish7/glassfish/modules/h2.jar
@@ -69,15 +76,15 @@ Restart glassfish.
 </note>
 
 Run
-  glassfish7/bin/asadmin add-resources ../src/main/resources/app-server-resources.xml
+  glassfish8/bin/asadmin add-resources ./src/main/resources/app-server-resources.xml
 this will add connection pool and datasource.
 
 Ping the datasource (via Ping button at 'Edit JDBC Connection Pool' for crescente-h2-pool at admin console)
 If it succeeds the db file will be created at
-glassfish7/glassfish/domains/domain1/config/deploy/crescente.mv.db
+glassfish8/glassfish/domains/domain1/config/deploy/crescente.mv.db
 
 
-stop server, edit glassfish7/glassfish/domains/domain1/domain.xml
+stop server, edit glassfish8/glassfish/domains/domain1/domain.xml
 at 
   <configs>
     <config name="server-config">
@@ -97,9 +104,9 @@ In order to connect IDEA to DB:
    on the 'Database' tab of Idea add new data source:
       choose H2, "embedded" mode (by clicking on 'remote' in blue) and enter PATH:
    the path to the .mv.db file above, i.e. 
-      /Users/<name>/.../glassfish7/glassfish/domains/domain1/config/deploy/crescente.mv.db
+      /Users/<name>/.../glassfish8/glassfish/domains/domain1/config/deploy/crescente.mv.db
    So that URL becomes
-     jdbc:h2:/Users/.../glassfish7/glassfish/domains/domain1/config/deploy/crescente
+     jdbc:h2:/Users/.../glassfish8/glassfish/domains/domain1/config/deploy/crescente
 
    // Do not click 'download missing driver files', use 'h2/bin/h2-2.1.212.jar' instead.
    // (Idea now downloads 2.1.210 which doesn't seem to be fully compatible)
@@ -183,7 +190,7 @@ sudo sysctl -w net.ipv4.ip_unprivileged_port_start=443
 ----
 
 GF:
-(the config is in glassfish7/glassfish/domains/domain1/config/domain.xml)
+(the config is in glassfish8/glassfish/domains/domain1/config/domain.xml)
 # increase default value (8192) to support long redirects (on long URLs)
 ./bin/asadmin set server-config.network-config.protocols.protocol.http-listener-1.http.header-buffer-length-bytes=16384
 ./bin/asadmin set server-config.network-config.protocols.protocol.http-listener-2.http.header-buffer-length-bytes=16384
@@ -193,10 +200,10 @@ GF:
 ./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compressable-mime-type=text/html,text/xml,text/plain,text/css,text/javascript,application/json
 [
 
-nikitazinoviev@Nikitas-MacBook-Pro glassfish7 % ./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compression=on
+nikitazinoviev@Nikitas-MacBook-Pro glassfish8 % ./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compression=on
 remote failure: No configuration found for server-config.network-config.protocols.protocol.ws-http-listener.http
 Command set failed.
-nikitazinoviev@Nikitas-MacBook-Pro glassfish7 %
+nikitazinoviev@Nikitas-MacBook-Pro glassfish8 %
 ./bin/asadmin set server-config.network-config.protocols.protocol.ws-http-listener.http.compressable-mime-type=text/html,text/xml,text/plain,text/css,text/javascript,application/json
 remote failure: No configuration found for server-config.network-config.protocols.protocol.ws-http-listener.http
 ]
@@ -212,7 +219,7 @@ see
 https://github.com/payara/Payara/issues/2625
 and
 https://github.com/eclipse-ee4j/grizzly/issues/2111 which seems still open!
-[TODO - doublecheck, especially for GFv8]
+[TODO - doublecheck, especially for GFv8, in progress, I didn't apply above to GF8]
 
 
 Useful commands
@@ -222,33 +229,33 @@ build via
   mvn clean install
 
   
-deploy (from glassfish6)
-  glassfish7/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
+deploy
+  glassfish8/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
 
-list installed applications (from glassfish6)
-  glassfish7/bin/asadmin list-components
+list installed applications
+  glassfish8/bin/asadmin list-components
 
 server log is located at
-  glassfish7/glassfish/domains/domain1/logs/server.log
+  glassfish8/glassfish/domains/domain1/logs/server.log
 
 redeploy
-  glassfish7/bin/asadmin redeploy --name crescente-1.0-SNAPSHOT target/crescente-1.0-SNAPSHOT.war
+  glassfish8/bin/asadmin redeploy --name crescente-1.0-SNAPSHOT target/crescente-1.0-SNAPSHOT.war
   or just use
-  glassfish7/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
+  glassfish8/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
   both seem to do the same as
-  glassfish7/bin/asadmin undeploy crescente-1.0-SNAPSHOT && glassfish6/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
+  glassfish8/bin/asadmin undeploy crescente-1.0-SNAPSHOT && glassfish6/bin/asadmin deploy target/crescente-1.0-SNAPSHOT.war
 
 
 undeploy
-  glassfish7/bin/asadmin undeploy crescente-1.0-SNAPSHOT
+  glassfish8/bin/asadmin undeploy crescente-1.0-SNAPSHOT
 
 restart server
-  glassfish7/bin/asadmin stop-domain && glassfish7/bin/asadmin start-domain
+  glassfish8/bin/asadmin stop-domain && glassfish8/bin/asadmin start-domain
 
 easiest way to rebuild and deploy [development, is default] and [production]
-  mvn clean install && ./glassfish7/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
+  mvn clean install && ./glassfish8/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
 
-  mvn clean install -Pproduction && ./glassfish7/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
+  mvn clean install -Pproduction && ./glassfish8/bin/asadmin deploy --force=true target/crescente-1.0-SNAPSHOT.war
 
 
 If there are no users in the database, DatabaseSetup singleton EJB creates a user 'admin' with 'admin' password and administration rights,
@@ -277,6 +284,24 @@ Also h2/bin/h2.sh starts admin console to which we can connect with a browser to
 TODO:
 Q: should we use 'cargo' maven plugin to deploy application via maven? see tutorial examples (topmost pom file)
 
+
+<note>
+Upgrade from GF 7.0.21 to GF 8
+    unzip ~/Downloads/glassfish-8.0.0-M9.zip
+    cp -r glassfish7/h2 glassfish8
+    cp glassfish7/glassfish/modules/h2.jar glassfish8/glassfish/modules
+    cp -r glassfish7/glassfish/domains/domain1/config/deploy glassfish8/glassfish/domains/domain1/config/
+    <apply GF settings via asadmin as described above>
+</note>
+
+
+# Debugging in IDEA
+While it should be possible right-away if a Glassfish Debug configuration will be used,
+I couldn't find it and used just the normal 'remote debug configuration', it works perfectly fine, maybe even better,
+but I think one needs to add to Glassfish JVM options in config/domain.xml the options which IDEA suggests, say, under Xmx
+        <jvm-options>-Xmx512m</jvm-options>
+add
+        <jvm-options>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</jvm-options>
 
   Books:
 ========
