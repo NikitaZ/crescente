@@ -145,7 +145,7 @@ public class LoginPageBean implements Serializable {
             userBean.loginUser(userAccount);
             return "About";
         } else {
-            return "Newcommer";
+            return "Newcomer";
         }
     }
 

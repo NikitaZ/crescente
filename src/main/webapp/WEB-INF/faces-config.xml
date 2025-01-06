@@ -58,7 +58,7 @@
     <navigation-rule>
         <!--        <from-view-id>/Login.xhtml</from-view-id>-->
         <navigation-case>
-            <from-outcome>Newcommer</from-outcome>
+            <from-outcome>Newcomer</from-outcome>
             <to-view-id>/UserEdit.xhtml</to-view-id>
             <redirect>
                 <view-param>

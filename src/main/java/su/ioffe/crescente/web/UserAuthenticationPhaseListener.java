@@ -100,12 +100,12 @@ public class UserAuthenticationPhaseListener implements PhaseListener {
 //                                // this doesn't work due to "<if>#{not userBean.loggedIn}</if><to-view-id>/Login.xhtml</to-view-id>" rule
 ////                                facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null,
 ////                                        "UserEdit?faces-redirect=true&logIntoOnSave=true&userName=" + principalName);
-//                                // see faces-config.xml for the Newcommer trick
+//                                // see faces-config.xml for the Newcomer trick
 ////                                final Instance<LoginPageBean> select = CDI.current().select(LoginPageBean.class);
 ////                                final LoginPageBean loginPageBean = select.iterator().next();
 ////                                loginPageBean.setUserName(principalName);
 ////                                facesContext.getApplication().getNavigationHandler().handleNavigation(facesContext, null,
-////                                        "Newcommer");
+////                                        "Newcomer");
 //                            }
 //                        }
 //                    }
