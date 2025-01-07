@@ -291,7 +291,13 @@ Upgrade from GF 7.0.21 to GF 8
     cp -r glassfish7/h2 glassfish8
     cp glassfish7/glassfish/modules/h2.jar glassfish8/glassfish/modules
     cp -r glassfish7/glassfish/domains/domain1/config/deploy glassfish8/glassfish/domains/domain1/config/
-    <apply GF settings via asadmin as described above>
+    # <apply GF settings via asadmin as described above>
+    # (or in case of a minor update just
+    #  cp glassfish8_jdk23/glassfish/domains/domain1/config/domain.xml glassfish8/glassfish/domains/domain1/config)
+    # Always compare default domain.xml's first, even 7->8 difference was minor, 8->8jdk24 -> just last identifier which is unimportant
+    # so it maybe easier just to fix domain.xml manually
+    # This id at the very end of file <secure-admin special-admin-indicator="73c57722-45c1-40c7-b9aa-230e970a41f2">
+    # seems to be different from GF build to GF build, so it always differs, not sure if it is worth keeping.
 </note>
 
 
