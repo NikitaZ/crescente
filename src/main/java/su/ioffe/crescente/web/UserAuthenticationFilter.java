@@ -1,6 +1,5 @@
 package su.ioffe.crescente.web;
 
-import jakarta.annotation.ManagedBean;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import jakarta.ws.rs.container.ContainerRequestContext;
@@ -13,7 +12,6 @@ import java.util.logging.Logger;
 // this works but only for 'rest' part of the application
 // for JSF we use a phase listener instead
 // at least it allows to access the logged in username
-@ManagedBean
 public class UserAuthenticationFilter implements ContainerRequestFilter {
 
     private static final Logger LOGGER = Logger.getLogger(UserAuthenticationFilter.class.getName());

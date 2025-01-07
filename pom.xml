@@ -4,8 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-<!--    todo should be su.ioffe -->
-    <groupId>com.example</groupId>
+    <groupId>su.ioffe</groupId>
     <artifactId>crescente</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>crescente</name>
@@ -14,7 +13,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>23</maven.compiler.target>
         <maven.compiler.source>23</maven.compiler.source>
-        <junit.version>5.8.2</junit.version>
+        <junit.version>5.11.4</junit.version>
     </properties>
     <profiles>
         <profile>
@@ -37,20 +36,29 @@
         <dependency>
             <groupId>jakarta.platform</groupId>
             <artifactId>jakarta.jakartaee-api</artifactId>
-            <version>9.1.0</version>
+            <version>11.0.0-M4</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>jakarta.mvc</groupId>
-            <artifactId>jakarta.mvc-api</artifactId>
-            <version>2.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>jakarta.xml.ws</groupId>
-            <artifactId>jakarta.xml.ws-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
-        </dependency>
+<!--        TODO: learn this technology maybe sometimes it is more suitable than JSF,
+        commented out as it is not used in the project yet, might be part of jakarta 10-11 already-->
+<!--        <dependency>-->
+<!--            <groupId>jakarta.mvc</groupId>-->
+<!--            <artifactId>jakarta.mvc-api</artifactId>-->
+<!--            <version>2.1.0</version>-->
+<!--        should it be <scope>provided</scope> as well? -->
+<!--&lt;!&ndash;            This one is currently not used, but is a promising tech, 2.1.0 is for Jakarta 10, need to upgrade -->
+<!--            to 3.0 at some point (Jakarta 11) which is still under development and is not on Maven Central yet&ndash;&gt;-->
+<!--        </dependency>-->
+
+<!--        It seems to be working w/o this -->
+<!--        TODO check what changed recently -->
+<!--        https://central.sonatype.com/namespace/jakarta.xml.ws -->
+<!--        <dependency>-->
+<!--            <groupId>jakarta.xml.ws</groupId>-->
+<!--            <artifactId>jakarta.xml.ws-api</artifactId>-->
+<!--            <version>4.0.2</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -70,19 +78,23 @@
 <!--            <version>3.0.3</version>-->
 <!--            <scope>provided</scope>-->
 <!--        </dependency>-->
+<!--        h2 is 'provided' in glassfish/modules, but we may need it (always) for unit tests -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>2.1.212</version>
+            <version>2.3.232</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
+<!--                https://central.sonatype.com/artifact/org.apache.maven.plugins/maven-war-plugin-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>3.3.2</version>
+<!--                todo what changed since 3.3.2? -->
+                <version>3.4.0</version>
                 <configuration>
                     <nonFilteredFileExtensions>
                         <nonFilteredFileExtension>gif</nonFilteredFileExtension>

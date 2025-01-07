@@ -4,7 +4,6 @@ import su.ioffe.crescente.data.exceptions.UserNotFoundException;
 import su.ioffe.crescente.data.info.UserAccountSummary;
 import su.ioffe.crescente.data.services.UserManagerLocal;
 import su.ioffe.crescente.data.services.UserService;
-import jakarta.annotation.ManagedBean;
 import jakarta.ejb.EJB;
 import jakarta.ws.rs.Path;
 
@@ -14,7 +13,6 @@ import java.util.List;
  * Exports UserManagerBean through a JAX-RS service.
  */
 @Path("/userService")
-@ManagedBean
 public class UserServiceImpl implements UserService {
 
     @EJB

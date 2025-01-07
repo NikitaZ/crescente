@@ -309,6 +309,9 @@ but I think one needs to add to Glassfish JVM options in config/domain.xml the o
 add
         <jvm-options>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005</jvm-options>
 
+# IDEA plugins
+Install JSF and EJB plugins from Jetbrains - it should suggest them, there's also Batch API plugin, it won't do any harm
+
   Books:
 ========
 - this one has been republished recently with Jakarta EE 10 in mind!

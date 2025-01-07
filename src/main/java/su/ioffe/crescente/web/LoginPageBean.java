@@ -27,14 +27,11 @@ import static jakarta.security.enterprise.AuthenticationStatus.SEND_FAILURE;
 import static jakarta.security.enterprise.AuthenticationStatus.SUCCESS;
 import static jakarta.security.enterprise.authentication.mechanism.http.AuthenticationParameters.withParams;
 
-//import jakarta.annotation.ManagedBean;
-
 /**
  * @author nikita.zinoviev@gmail.com
  */
 @Named("loginPageBean")
 @RequestScoped
-//@ManagedBean("loginPageBean") // does not work instead of @Named at least in case of JSF version="2.2" in faces-config.xml
 public class LoginPageBean implements Serializable {
     private static final Logger LOGGER = Logger.getLogger(LoginPageBean.class.getName());
 
