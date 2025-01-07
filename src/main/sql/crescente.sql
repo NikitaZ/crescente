@@ -30,7 +30,7 @@ ALTER TABLE "PUBLIC"."USERACCOUNT" ADD CONSTRAINT "PUBLIC"."CONSTRAINT_C4" PRIMA
 -- 4 +/- SELECT COUNT(*) FROM PUBLIC.USERACCOUNT;              
 INSERT INTO "PUBLIC"."USERACCOUNT" VALUES
 (501, '#FF0050', 'nikita.zinoviev@gmail.com', 'Nikita Zinoviev', 'nikita', 'https://sun9-18.userapi.com/s/v1/if1/MMIobvqFpc_S-CNkLZX2pq_JUrnTbkvZghxVf6_TXdJbkHU1RMD0liBpFl5kB-QmY20f4ObU.jpg?size=1178x1472&quality=96&type=album', 'PBKDF2WithHmacSHA512:3072:peWQ3Eu9zndyU3U42xBWymB/pqXTkJWLgxjpr237BeNk+h0bwWH4zLLMCSH04scEMRPbCJCrMsAripdYphA3Gw==:zy6vqeTbNtsVJkPlyhvhsk8laX4gpKGbogtPOrBPg3w='),
-(603, '#00FF00', 'sasha@ioffe.su', 'Alexander Ioffe', 'sasha', 'www.sun.com', 'PBKDF2WithHmacSHA512:3072:cFJ3OSN8ZwnzLCvqeqfNGfOkAtZKCtq74nLlb01Xb0H98Q7VnW5iYrfgxQGAxk/Kk1cHTijb0D8dliC60zzeZg==:fgLaSVglJRb1Dz/P/dVH6LnbAHJVc2TuDWcKkKln0PU='),
+(603, '#00FF00', 'sasha@ioffe.su', 'Alexander Ioffe', 'sasha', '', 'PBKDF2WithHmacSHA512:3072:cFJ3OSN8ZwnzLCvqeqfNGfOkAtZKCtq74nLlb01Xb0H98Q7VnW5iYrfgxQGAxk/Kk1cHTijb0D8dliC60zzeZg==:fgLaSVglJRb1Dz/P/dVH6LnbAHJVc2TuDWcKkKln0PU='),
 (2701, '#FFFFFF', 'some more', 'A. N. Z.', 'Nastya', '', 'PBKDF2WithHmacSHA512:3072:CCDMAnF2/zhBrkR+8KvRv56AP+ZmDCmXIUVGlP0mQyZjwy9lqIGZXkwq7dzCazchX9iuOIHdGfoxMkpraDKnKg==:+uXwQ4/zqSbs/QYJheYoTMfV68qCiKL2wlRKUZiieaU='),
 (2951, '#FFFFFF', 'aaa', 'Andrey K.', 'andrey', '', 'PBKDF2WithHmacSHA512:3072:CCDMAnF2/zhBrkR+8KvRv56AP+ZmDCmXIUVGlP0mQyZjwy9lqIGZXkwq7dzCazchX9iuOIHdGfoxMkpraDKnKg==:+uXwQ4/zqSbs/QYJheYoTMfV68qCiKL2wlRKUZiieaU=');      
 ALTER TABLE "PUBLIC"."SECURITYGROUPLINK" ADD CONSTRAINT "PUBLIC"."UNQ_SECURITYGROUPLINK_0" UNIQUE("GROUPNAME", "USERACCOUNTNAME");             
